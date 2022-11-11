@@ -69,6 +69,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Adresa.cs" />
+    <Compile Include="Models\Cas.cs" />
+    <Compile Include="Models\EPol.cs" />
+    <Compile Include="Models\Profesor.cs" />
+    <Compile Include="Models\RegistrovaniKorisnik.cs" />
+    <Compile Include="Models\Skola.cs" />
+    <Compile Include="Models\StatusCasa.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\TipRegKorisnika.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
