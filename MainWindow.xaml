@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:SR30_2021_POP2022"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid/>
 </Window>

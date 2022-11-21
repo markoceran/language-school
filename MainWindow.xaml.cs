@@ -23,6 +23,8 @@ namespace SR30_2021_POP2022
         public MainWindow()
         {
             InitializeComponent();
+            
+            
         }
     }
 }

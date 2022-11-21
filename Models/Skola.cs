@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace SR30_2021_POP2022.Models
 {
-    class Skola
+    public class Skola
     {
         private int id;
         private string naziv;
@@ -23,6 +23,14 @@ namespace SR30_2021_POP2022.Models
             this.jezici = jezici;
         }
 
+        public Skola()
+        {
+            this.id = 0;
+            this.naziv = "";
+            this.adresa = new Adresa();
+            this.jezici = new List<string>();
+        }
+
         public int Id { get => id; set => id = value; }
         public string Naziv { get => naziv; set => naziv = value; }
         public List<string> Jezici { get => jezici; set => jezici = value; }
@@ -31,6 +39,11 @@ namespace SR30_2021_POP2022.Models
         public override string ToString()
         {
             return "ID: " + Id + "Naziv: " + Naziv + " Adresa: " + Adresa + " Jezici: " + Jezici;
+        }
+
+        public string SkolaZaUpisUFajl()
+        {
+            return Id + ";" + Naziv + ";" + Adresa.Id + ";" + Jezici;
         }
     }
 }

@@ -6,21 +6,32 @@ using System.Threading.Tasks;
 
 namespace SR30_2021_POP2022.Models
 {
-    class Student:RegistrovaniKorisnik
+    public class Student:RegistrovaniKorisnik
     {
         private List<Cas> rezervisaniCasovi = new List<Cas>();
 
-        public Student(string ime, string prezime, string jmbg, EPol pol, Adresa adresa, string email, string lozinka, TipRegKorisnika tipKorisnika, List<Cas> rezervisaniCasovi) : base(ime, prezime, jmbg, pol, adresa, email, lozinka, tipKorisnika)
+
+        internal List<Cas> RezervisaniCasovi { get => rezervisaniCasovi; set => rezervisaniCasovi = value; }
+
+        public Student(string ime, string prezime, string jmbg, EPol pol, Adresa adresa, string email, string lozinka, ETipRegKorisnika tipKorisnika, bool aktivan, List<Cas> rezervisaniCasovi) : base(ime, prezime, jmbg, pol, adresa, email, lozinka, tipKorisnika, aktivan)
         {
             this.rezervisaniCasovi = rezervisaniCasovi;
         }
 
-        internal List<Cas> RezervisaniCasovi { get => rezervisaniCasovi; set => rezervisaniCasovi = value; }
+        public Student()
+        {
+            this.rezervisaniCasovi = new List<Cas>();
+        }
 
         public override string ToString()
         {
             return "Ime: " + Ime + " Prezime: " + Prezime + " JMBG: " + Jmbg + " Pol: " + Pol + " Adresa: " + Adresa + " Email: " + Email + " Lozinka: " + Lozinka + " Tip korisnika: " + TipKorisnika
-                + "Rezervisani casovi: " + RezervisaniCasovi;
+                + "Rezervisani casovi: " + RezervisaniCasovi + "Aktivan: " + Aktivan;
+        }
+
+        public string StudentZaUpisUFajl()
+        {
+            return Ime + ";" + Prezime + ";" + Jmbg + ";" + Pol + ";" + Adresa.Id + ";" + Email + ";" + Lozinka + ";" + TipKorisnika + ";" + RezervisaniCasovi + ";" + Aktivan;
         }
     }
 }

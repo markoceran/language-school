@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SR30_2021_POP2022.Models
 {
-    class Adresa
+    public class Adresa
     {
         private int id;
         private string ulica;
@@ -23,6 +23,15 @@ namespace SR30_2021_POP2022.Models
             this.drzava = drzava;
         }
 
+        public Adresa()
+        {
+            this.id = 0;
+            this.ulica = "";
+            this.broj = 0;
+            this.grad = "";
+            this.drzava = "";
+        }
+
         public int Id { get => id; set => id = value; }
         public string Ulica { get => ulica; set => ulica = value; }
         public int Broj { get => broj; set => broj = value; }
@@ -35,7 +44,10 @@ namespace SR30_2021_POP2022.Models
             return "ID: " + Id +  "Ulica: " + Ulica + " Broj: " + Broj + " Grad: " + Grad + " Drzava: " + Drzava;
         }
 
-
+        public string AdresaZaUpisUFajl()
+        {
+            return Id + ";" + Ulica + ";" + Broj + ";" + Grad + ";" + Drzava ;
+        }
 
     }
 }

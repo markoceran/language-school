@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -71,13 +72,14 @@
   <ItemGroup>
     <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\Cas.cs" />
+    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EPol.cs" />
     <Compile Include="Models\Profesor.cs" />
     <Compile Include="Models\RegistrovaniKorisnik.cs" />
     <Compile Include="Models\Skola.cs" />
-    <Compile Include="Models\StatusCasa.cs" />
+    <Compile Include="Models\EStatusCasa.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\TipRegKorisnika.cs" />
+    <Compile Include="Models\ETipRegKorisnika.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,6 +104,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\administratori.txt" />
+    <Resource Include="Resources\adrese.txt" />
+    <Resource Include="Resources\casovi.txt" />
+    <Resource Include="Resources\profesori.txt" />
+    <Resource Include="Resources\skole.txt" />
+    <Resource Include="Resources\studenti.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

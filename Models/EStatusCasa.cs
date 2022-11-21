@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SR30_2021_POP2022.Models
 {
-    public enum TipRegKorisnika
+    public enum EStatusCasa
     {
-        ADMINISTRATOR, PROFESOR, STUDENT
+        SLOBODAN, REZERVISAN
     }
 }
