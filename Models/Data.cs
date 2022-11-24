@@ -100,7 +100,7 @@ namespace SR30_2021_POP2022.Models
         {
                 
 
-                using (StreamReader file = new StreamReader(@"../../../Resources/" + filename))
+                using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
                 {
                     string line;
 
@@ -146,7 +146,7 @@ namespace SR30_2021_POP2022.Models
         {
 
 
-            using (StreamReader file = new StreamReader(@"../../../Resources/" + filename))
+            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
             {
                 string line;
 
@@ -162,7 +162,17 @@ namespace SR30_2021_POP2022.Models
                     string adresaId = korisnikIzFajla[4];
                     string skolaId = korisnikIzFajla[8];
 
-                    Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
+                    Adresa a = new Adresa();
+
+                    foreach(Adresa ad in Adrese)
+                    {
+                        if(ad.Id.ToString() == adresaId)
+                        {
+                            a = ad;
+                        }
+                    }
+
+                    //Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
                     Skola s = Skole.ToList().Find(k => k.Id.ToString().Contains(skolaId));
 
                     Profesor profesor = new Profesor
@@ -195,7 +205,7 @@ namespace SR30_2021_POP2022.Models
         {
 
 
-            using (StreamReader file = new StreamReader(@"../../../Resources/" + filename))
+            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
             {
                 string line;
 
@@ -242,7 +252,7 @@ namespace SR30_2021_POP2022.Models
         {
 
 
-            using (StreamReader file = new StreamReader(@"../../../Resources/" + filename))
+            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
             {
                 string line;
 
@@ -286,7 +296,7 @@ namespace SR30_2021_POP2022.Models
         {
 
 
-            using (StreamReader file = new StreamReader(@"../../../Resources/" + filename))
+            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
             {
                 string line;
 
@@ -321,7 +331,7 @@ namespace SR30_2021_POP2022.Models
         {
 
 
-            using (StreamReader file = new StreamReader(@"../../../Resources/" + filename))
+            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
             {
                 string line;
 

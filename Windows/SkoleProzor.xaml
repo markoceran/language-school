@@ -1,0 +1,18 @@
+﻿<Window x:Class="SR30_2021_POP2022.Windows.SkoleProzor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
+        mc:Ignorable="d"
+        Title="Škole" Height="450" Width="800">
+    <Grid>
+        <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="800">
+            <MenuItem Name="miDodajSkolu" Header="Dodaj školu" Click="miDodajSkolu_Click"/>
+            <MenuItem Name="miIzmeniSkolu" Header="Izmeni školu" Click="miIzmeniSkolu_Click"/>
+            <MenuItem Name="miObrisiSkolu" Header="Obriši školu" Click="miObrisiSkolu_Click"/>
+        </Menu>
+        <DataGrid  Name="dgSkole" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780" />
+
+    </Grid>
+</Window>

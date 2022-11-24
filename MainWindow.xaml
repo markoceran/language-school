@@ -5,6 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+        Title="Prijava korisnika" Height="356" Width="676">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="119*"/>
+            <ColumnDefinition Width="195*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="195*"/>
+            <ColumnDefinition Width="119*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="89*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="118*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="2" Content="PRIJAVI SE KAO &#xD;&#xA;POSTOJEĆI KORISNIK" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="83" Width="195" Click="Button_Click_1"/>
+        <Button Grid.Column="4" Content="PRIJAVI SE KAO GOST" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="83" Width="194"/>
+        <Button Grid.Column="5" Content="Registruj se" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="98"/>
+    </Grid>
 </Window>

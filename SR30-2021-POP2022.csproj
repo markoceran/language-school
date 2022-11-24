@@ -55,6 +55,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\AdminProzor.xaml.cs">
+      <DependentUpon>AdminProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CasoviProzor.xaml.cs">
+      <DependentUpon>CasoviProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DodajIzmeniStudentaProzor.xaml.cs">
+      <DependentUpon>DodajIzmeniStudentaProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ProfesoriProzor.xaml.cs">
+      <DependentUpon>ProfesoriProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SkoleProzor.xaml.cs">
+      <DependentUpon>SkoleProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StudentiProzor.xaml.cs">
+      <DependentUpon>StudentiProzor.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +86,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\AdminProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CasoviProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DodajIzmeniStudentaProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProfesoriProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SkoleProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StudentiProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Adresa.cs" />
