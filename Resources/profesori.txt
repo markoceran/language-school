@@ -1,2 +1,0 @@
-marko;markovic;13245;MUSKI;1;marko@gmail.com;12345;PROFESOR;1;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];False
-filip;zoric;13245;MUSKI;1;filip@gmail.com;12345;PROFESOR;1;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True
