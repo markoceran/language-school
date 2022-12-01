@@ -9,8 +9,8 @@ namespace SR30_2021_POP2022.Models
     public class Profesor : RegistrovaniKorisnik
     {
         private Skola skola;
-        private List<string> jezici = new List<string>();
-        private List<Cas> casovi = new List<Cas>();
+        private List<string> jezici;
+        private List<Cas> casovi;
 
         public Profesor(string ime, string prezime, string jmbg, EPol pol, Adresa adresa, string email, string lozinka, ETipRegKorisnika tipKorisnika, bool aktivan, Skola skola, List<string> jezici, List<Cas> casovi) : base(ime, prezime, jmbg, pol, adresa, email, lozinka, tipKorisnika, aktivan)
         {
@@ -28,8 +28,8 @@ namespace SR30_2021_POP2022.Models
         }
 
         public List<string> Jezici { get => jezici; set => jezici = value; }
-        internal Skola Skola { get => skola; set => skola = value; }
-        internal List<Cas> Casovi { get => casovi; set => casovi = value; }
+        public Skola Skola { get => skola; set => skola = value; }
+        public List<Cas> Casovi { get => casovi; set => casovi = value; }
 
         public override string ToString()
         {

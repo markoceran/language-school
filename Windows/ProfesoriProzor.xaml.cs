@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SR30_2021_POP2022.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,25 +21,95 @@ namespace SR30_2021_POP2022.Windows
     /// </summary>
     public partial class ProfesoriProzor : Window
     {
+        ICollectionView view;
+
         public ProfesoriProzor()
         {
             InitializeComponent();
 
-            dgProfesori.ItemsSource = Models.Data.Profesori;
+            view = CollectionViewSource.GetDefaultView(Data.Profesori);
+            view.Filter = Filter;
+            dgProfesori.ItemsSource = view;
+        }
+
+        private bool Filter(object obj)
+        {
+            Profesor p = obj as Profesor;
+            if (p.Aktivan)
+            {
+                return true;
+            }
+            return false;
+
         }
 
         private void miDodajProfesora_Click(object sender, RoutedEventArgs e)
         {
-
+            Profesor p = new Profesor();
+            DodajIzmeniProfesoraProzor dodajIzmeniProfesoraProzor = new DodajIzmeniProfesoraProzor(p)
+            {
+                Title = "Dodaj"
+            };
+            dodajIzmeniProfesoraProzor.ShowDialog();
+            view.Refresh();
         }
 
         private void miIzmeniProfesora_Click(object sender, RoutedEventArgs e)
         {
+            if (dgProfesori.SelectedItem == null)
+            {
+                MessageBox.Show("Korisnik nije selektovan!", "Greška");
+            }
+            else
+            {
+                Profesor p = (Profesor)dgProfesori.SelectedItem;
+
+                Profesor profesorKopija = new Profesor();
+                profesorKopija.Ime = p.Ime;
+                profesorKopija.Prezime = p.Prezime;
+                profesorKopija.Jmbg = p.Jmbg;
+                profesorKopija.Pol = p.Pol;
+                profesorKopija.Adresa = p.Adresa;
+                profesorKopija.Email = p.Email;
+                profesorKopija.Lozinka = p.Lozinka;
+                profesorKopija.TipKorisnika = p.TipKorisnika;
+                profesorKopija.Aktivan = p.Aktivan;
+                profesorKopija.Skola = p.Skola;
+                profesorKopija.Jezici = p.Jezici;
+                profesorKopija.Casovi = p.Casovi;
+
+                DodajIzmeniProfesoraProzor dodajIzmeniProfesoraProzor = new DodajIzmeniProfesoraProzor(p)
+                {
+                    Title = "Izmeni"
+                };
+                dodajIzmeniProfesoraProzor.txtSkola.IsEnabled = false;
+                dodajIzmeniProfesoraProzor.txtAdresa.IsEnabled = false;
+
+                if ((bool)!dodajIzmeniProfesoraProzor.ShowDialog())
+                {
+                    int index = Data.Profesori.ToList().FindIndex(po => po.Email.Equals(p.Email));
+                    Data.Profesori[index] = profesorKopija;
+                }
+                view.Refresh();
+
+            }
 
         }
         private void miObrisiProfesora_Click(object sender, RoutedEventArgs e)
         {
+            if (dgProfesori.SelectedItem == null)
+            {
+                MessageBox.Show("Korisnik nije selektovan!", "Greška");
+            }
+            else
+            {
 
+                Profesor p = (Profesor)dgProfesori.SelectedItem;
+
+                Data.ObrisiProfesora(p.Email);
+                view.Refresh();
+
+            }
         }
     }
 }

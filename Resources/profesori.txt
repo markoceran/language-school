@@ -1,0 +1,5 @@
+milan;markovic;1216546506;MUSKI;1;milan@gmail.com;123456;PROFESOR;1;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True
+filip;petrovic;1216546506;MUSKI;1;filip@gmail.com;123456;PROFESOR;1;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True
+test;test;1216546506;MUSKI;2;test@gmail.com;123456;PROFESOR;2;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];False
+test3;test3;564654;ZENSKI;2;test2@gmail.com;12345;PROFESOR;2;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True
+sdfsd;sdfsd;54654678;MUSKI;1;dfdjashfia@gmail.com;654456789;PROFESOR;1;System.Collections.Generic.List`1[System.String];System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];False

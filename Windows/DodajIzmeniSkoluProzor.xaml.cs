@@ -16,23 +16,19 @@ using System.Windows.Shapes;
 namespace SR30_2021_POP2022.Windows
 {
     /// <summary>
-    /// Interaction logic for DodajIzmeniStudentaProzor.xaml
+    /// Interaction logic for DodajIzmeniSkoluProzor.xaml
     /// </summary>
-    public partial class DodajIzmeniStudentaProzor : Window
+    public partial class DodajIzmeniSkoluProzor : Window
     {
-        private Student selektovaniStudent;
+        private Skola selektovanaSkola;
 
-        public DodajIzmeniStudentaProzor(Student student)
-        {   
+        public DodajIzmeniSkoluProzor(Skola skola)
+        {
             InitializeComponent();
 
-            selektovaniStudent = student;
+            selektovanaSkola = skola;
 
-            this.DataContext = student;
-
-            cmbPol.ItemsSource = Enum.GetValues(typeof(EPol));
-
- 
+            this.DataContext = skola;
 
         }
 
@@ -45,19 +41,22 @@ namespace SR30_2021_POP2022.Windows
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (this.Title.Equals("Dodaj")){
+            if (this.Title.Equals("Dodaj"))
+            {
 
-                selektovaniStudent.TipKorisnika = ETipRegKorisnika.STUDENT;
-                selektovaniStudent.Aktivan = true;
-                Data.Studenti.Add(selektovaniStudent);                         
-               
+                Adresa a = Data.Adrese.ToList().Find(k => k.Id.ToString().Contains(txtAdresa.Text));
+
+                selektovanaSkola.Adresa = a;
+            
+                selektovanaSkola.Obrisana = false;
+                Data.Skole.Add(selektovanaSkola);
+
             }
-           
-            Data.SacuvajStudenta("studenti.txt");
+
+            Data.SacuvajSkolu("skole.txt");
             this.DialogResult = true;
             this.Close();
         }
-
     }
+    
 }

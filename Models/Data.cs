@@ -40,7 +40,7 @@ namespace SR30_2021_POP2022.Models
 
         public static void SacuvajProfesora(string filename)
         {
-            using (StreamWriter file = new StreamWriter(@"../../../Resources/" + filename))
+            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
             {
                 foreach (Profesor profesor in Profesori)
                 {
@@ -51,7 +51,7 @@ namespace SR30_2021_POP2022.Models
 
         public static void SacuvajStudenta(string filename)
         {
-            using (StreamWriter file = new StreamWriter(@"../../../Resources/" + filename))
+            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
             {
                 foreach (Student student in Studenti)
                 {
@@ -62,7 +62,7 @@ namespace SR30_2021_POP2022.Models
 
         public static void SacuvajAdresu(string filename)
         {
-            using (StreamWriter file = new StreamWriter(@"../../../Resources/" + filename))
+            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
             {
                 foreach (Adresa adresa in Adrese)
                 {
@@ -73,7 +73,7 @@ namespace SR30_2021_POP2022.Models
 
         public static void SacuvajCas(string filename)
         {
-            using (StreamWriter file = new StreamWriter(@"../../../Resources/" + filename))
+            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
             {
                 foreach (Cas cas in Casovi)
                 {
@@ -84,7 +84,7 @@ namespace SR30_2021_POP2022.Models
 
         public static void SacuvajSkolu(string filename)
         {
-            using (StreamWriter file = new StreamWriter(@"../../../Resources/" + filename))
+            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
             {
                 foreach (Skola skola in Skole)
                 {
@@ -219,10 +219,18 @@ namespace SR30_2021_POP2022.Models
                     Boolean.TryParse(korisnikIzFajla[9], out Boolean aktivan);
 
                     string adresaId = korisnikIzFajla[4];
-                    string skolaId = korisnikIzFajla[8];
 
-                    Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
-                    
+                    Adresa a = new Adresa();
+                    foreach (Adresa ad in Adrese)
+                    {
+                        if (ad.Id.ToString() == adresaId)
+                        {
+                            a = ad;
+                        }
+                    }
+
+                    //Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
+
 
                     Student student = new Student
                     {
@@ -308,6 +316,7 @@ namespace SR30_2021_POP2022.Models
                     string adresaId = korisnikIzFajla[2];                    
 
                     Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
+                    Boolean.TryParse(korisnikIzFajla[4], out Boolean obrisana);
 
                     Skola skola = new Skola
                     {
@@ -315,8 +324,9 @@ namespace SR30_2021_POP2022.Models
                         Id = Int32.Parse(korisnikIzFajla[0]),
                         Naziv = korisnikIzFajla[1],
                         Adresa = a,
-                        Jezici = new List<string>()
-                        
+                        Jezici = new List<string>(),
+                        Obrisana = obrisana
+
 
                     };
 
@@ -371,6 +381,7 @@ namespace SR30_2021_POP2022.Models
                  throw new UserNotFoundException($"Ne postoji taj korisnik sa email adresom {email}");
              }
              p.Aktivan = false;
+            SacuvajProfesora("profesori.txt");
         }
 
         public static void ObrisiStudenta(string email)
@@ -381,6 +392,18 @@ namespace SR30_2021_POP2022.Models
                 throw new UserNotFoundException($"Ne postoji taj korisnik sa email adresom {email}");
             }
             s.Aktivan = false;
+            SacuvajStudenta("studenti.txt");
+        }
+
+        public static void ObrisiSkolu(int id)
+        {
+            Skola s = Skole.ToList().Find(sk => sk.Id == id);
+            if (s == null)
+            {
+                throw new UserNotFoundException($"Ne postoji skola sa id {id}");
+            }
+            s.Obrisana = true;
+            SacuvajSkolu("skole.txt");
         }
 
         public static void ObrisiCas(int id)
@@ -391,9 +414,10 @@ namespace SR30_2021_POP2022.Models
                 throw new UserNotFoundException($"Ne postoji taj korisnik koji ima id {id}");
             }
             c.Status = EStatusCasa.SLOBODAN;
+            SacuvajCas("casovi.txt");
         }
 
-
+        //---------------------------------------------------------------------------------------------------------
 
 
     }

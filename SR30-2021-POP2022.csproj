@@ -61,6 +61,12 @@
     <Compile Include="Windows\CasoviProzor.xaml.cs">
       <DependentUpon>CasoviProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DodajIzmeniProfesoraProzor.xaml.cs">
+      <DependentUpon>DodajIzmeniProfesoraProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DodajIzmeniSkoluProzor.xaml.cs">
+      <DependentUpon>DodajIzmeniSkoluProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DodajIzmeniStudentaProzor.xaml.cs">
       <DependentUpon>DodajIzmeniStudentaProzor.xaml</DependentUpon>
     </Compile>
@@ -91,6 +97,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\CasoviProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DodajIzmeniProfesoraProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DodajIzmeniSkoluProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

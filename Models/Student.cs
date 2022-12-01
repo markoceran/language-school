@@ -8,10 +8,10 @@ namespace SR30_2021_POP2022.Models
 {
     public class Student:RegistrovaniKorisnik
     {
-        private List<Cas> rezervisaniCasovi = new List<Cas>();
+        private List<Cas> rezervisaniCasovi;
 
 
-        internal List<Cas> RezervisaniCasovi { get => rezervisaniCasovi; set => rezervisaniCasovi = value; }
+        public List<Cas> RezervisaniCasovi { get => rezervisaniCasovi; set => rezervisaniCasovi = value; }
 
         public Student(string ime, string prezime, string jmbg, EPol pol, Adresa adresa, string email, string lozinka, ETipRegKorisnika tipKorisnika, bool aktivan, List<Cas> rezervisaniCasovi) : base(ime, prezime, jmbg, pol, adresa, email, lozinka, tipKorisnika, aktivan)
         {

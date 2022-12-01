@@ -16,7 +16,7 @@ namespace SR30_2021_POP2022.Models
         private string email;
         private string lozinka;
         private ETipRegKorisnika tipKorisnika;
-        bool aktivan;
+        private bool aktivan;
 
         public RegistrovaniKorisnik(string ime, string prezime, string jmbg, EPol pol, Adresa adresa, string email, string lozinka, ETipRegKorisnika tipKorisnika, bool aktivan)
         {
@@ -52,7 +52,7 @@ namespace SR30_2021_POP2022.Models
         public string Email { get => email; set => email = value; }
         public string Lozinka { get => lozinka; set => lozinka = value; }
         public ETipRegKorisnika TipKorisnika { get => tipKorisnika; set => tipKorisnika = value; }
-        internal Adresa Adresa { get => adresa; set => adresa = value; }
+        public Adresa Adresa { get => adresa; set => adresa = value; }
         public bool Aktivan { get => aktivan; set => aktivan = value; }
 
         public override string ToString()
