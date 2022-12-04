@@ -272,6 +272,7 @@ namespace SR30_2021_POP2022.Models
                     
                     Enum.TryParse(korisnikIzFajla[5], out EStatusCasa status);
                     DateTime.TryParse(korisnikIzFajla[2], out DateTime datum);
+                    Boolean.TryParse(korisnikIzFajla[7], out Boolean obrisan);
 
                     string profesorEmail = korisnikIzFajla[1];
                     string studentEmail = korisnikIzFajla[6];
@@ -288,7 +289,8 @@ namespace SR30_2021_POP2022.Models
                         VremePocetka = korisnikIzFajla[3],
                         Trajanje = Int32.Parse(korisnikIzFajla[4]),
                         Status = status,
-                        Student = s
+                        Student = s,
+                        Obrisan = obrisan
 
 
                     };
@@ -411,9 +413,9 @@ namespace SR30_2021_POP2022.Models
             Cas c = Casovi.ToList().Find(k => k.Id == (id));
             if (c == null)
             {
-                throw new UserNotFoundException($"Ne postoji taj korisnik koji ima id {id}");
+                throw new UserNotFoundException($"Ne postoji taj cas koji ima id {id}");
             }
-            c.Status = EStatusCasa.SLOBODAN;
+            c.Obrisan = true;
             SacuvajCas("casovi.txt");
         }
 

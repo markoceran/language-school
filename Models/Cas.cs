@@ -19,8 +19,9 @@ namespace SR30_2021_POP2022.Models
         private int trajanje;
         private EStatusCasa status;
         private Student student;
+        private bool obrisan;
 
-        public Cas(int id, Profesor profesor, DateTime datumOdrzavanja, string vremePocetka, int trajanje, EStatusCasa status, Student student)
+        public Cas(int id, Profesor profesor, DateTime datumOdrzavanja, string vremePocetka, int trajanje, EStatusCasa status, Student student, bool obrisan)
         {
             this.id = id;
             this.profesor = profesor;
@@ -29,6 +30,7 @@ namespace SR30_2021_POP2022.Models
             this.trajanje = trajanje;
             this.status = status;
             this.student = student;
+            this.Obrisan = obrisan;
         }
 
         public Cas()
@@ -40,6 +42,7 @@ namespace SR30_2021_POP2022.Models
             this.trajanje = 0;
             this.status = EStatusCasa.SLOBODAN;
             this.student = new Student();
+            this.Obrisan = false;
 
         }
 
@@ -49,17 +52,18 @@ namespace SR30_2021_POP2022.Models
         public string VremePocetka { get => vremePocetka; set => vremePocetka = value; }
         public int Trajanje { get => trajanje; set => trajanje = value; }
         public EStatusCasa Status { get => status; set => status = value; }
-        internal Profesor Profesor { get => profesor; set => profesor = value; }
-        internal Student Student { get => student; set => student = value; }
+        public Profesor Profesor { get => profesor; set => profesor = value; }
+        public Student Student { get => student; set => student = value; }
+        public bool Obrisan { get => obrisan; set => obrisan = value; }
 
         public override string ToString()
         {
-            return " ID: " + Id  + " Profesor: " + Profesor + " Datum: " + DatumOdrzavanja + " Vreme: " + VremePocetka + "Trajanje: " + Trajanje + "Status: " + Status + "Student: " + Student;
+            return " ID: " + Id  + " Profesor: " + Profesor + " Datum: " + DatumOdrzavanja + " Vreme: " + VremePocetka + "Trajanje: " + Trajanje + "Status: " + Status + "Student: " + Student + "Obrisan: " + Obrisan;
         }
 
         public string CasZaUpisUFajl()
         {
-            return Id + ";" + Profesor.Email + ";" + DatumOdrzavanja+ ";" + VremePocetka  + ";" + Trajanje+ ";" + Status + ";" + Student.Email;
+            return Id + ";" + Profesor.Email + ";" + DatumOdrzavanja+ ";" + VremePocetka  + ";" + Trajanje+ ";" + Status + ";" + Student.Email + ";" + Obrisan;
         }
     }
 }

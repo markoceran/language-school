@@ -47,9 +47,6 @@ namespace SR30_2021_POP2022.Windows
             if (this.Title.Equals("Dodaj"))
             {
 
-                
-
-
                 Adresa a = Data.Adrese.ToList().Find(k => k.Id.ToString().Contains(txtAdresa.Text));
                 Skola sk = Data.Skole.ToList().Find(s => s.Id.ToString().Contains(txtSkola.Text));
                 selektovaniProfesor.Adresa = a;
