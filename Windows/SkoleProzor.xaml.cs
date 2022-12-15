@@ -68,7 +68,13 @@ namespace SR30_2021_POP2022.Windows
                 Skola skolaKopija = new Skola();
                 skolaKopija.Id = sk.Id;
                 skolaKopija.Naziv = sk.Naziv;
-                skolaKopija.Adresa = sk.Adresa;
+
+                skolaKopija.Adresa.Id = sk.Adresa.Id;
+                skolaKopija.Adresa.Ulica = sk.Adresa.Ulica;
+                skolaKopija.Adresa.Broj = sk.Adresa.Broj;
+                skolaKopija.Adresa.Grad = sk.Adresa.Grad;
+                skolaKopija.Adresa.Drzava = sk.Adresa.Drzava;
+
                 skolaKopija.Jezici = sk.Jezici;
                 skolaKopija.Obrisana = sk.Obrisana;
 
@@ -76,9 +82,10 @@ namespace SR30_2021_POP2022.Windows
                 DodajIzmeniSkoluProzor dodajIzmeniSkoluProzor = new DodajIzmeniSkoluProzor(sk)
                 {
                     Title = "Izmeni"
+                    
                 };
+                dodajIzmeniSkoluProzor.txtId.IsEnabled = false;
                 
-                dodajIzmeniSkoluProzor.txtAdresa.IsEnabled = false;
 
                 if ((bool)!dodajIzmeniSkoluProzor.ShowDialog())
                 {

@@ -44,15 +44,38 @@ namespace SR30_2021_POP2022.Windows
             if (this.Title.Equals("Dodaj"))
             {
 
-                Adresa a = Data.Adrese.ToList().Find(k => k.Id.ToString().Contains(txtAdresa.Text));
+                if (!Data.Adrese.Count.Equals(0))
+                {
+                    selektovanaSkola.Adresa.Id = Data.Adrese.Last().Id + 1;
 
-                selektovanaSkola.Adresa = a;
+                }
+                else
+                {
+                    selektovanaSkola.Adresa.Id = 1;
+                }
             
                 selektovanaSkola.Obrisana = false;
+                Data.Adrese.Add(selektovanaSkola.Adresa);
+                Data.SacuvajAdresu("adrese.txt");
                 Data.Skole.Add(selektovanaSkola);
 
             }
 
+            //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
+            if (this.Title.Equals("Izmeni"))
+            {
+
+                Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovanaSkola.Adresa.Id));
+                ad.Drzava = txtDrzava.Text;
+                ad.Ulica = txtUlica.Text;
+                ad.Broj = int.Parse(txtBroj.Text);
+                ad.Grad = txtGrad.Text;
+                Data.SacuvajAdresu("adrese.txt");
+
+            }
+
+
+            //Data.SacuvajAdresu("adrese.txt");
             Data.SacuvajSkolu("skole.txt");
             this.DialogResult = true;
             this.Close();

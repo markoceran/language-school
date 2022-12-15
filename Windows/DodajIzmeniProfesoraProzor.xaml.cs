@@ -46,18 +46,51 @@ namespace SR30_2021_POP2022.Windows
 
             if (this.Title.Equals("Dodaj"))
             {
+                if (!Data.Adrese.Count.Equals(0))
+                {
+                    selektovaniProfesor.Adresa.Id = Data.Adrese.Last().Id + 1;
 
-                Adresa a = Data.Adrese.ToList().Find(k => k.Id.ToString().Contains(txtAdresa.Text));
-                Skola sk = Data.Skole.ToList().Find(s => s.Id.ToString().Contains(txtSkola.Text));
-                selektovaniProfesor.Adresa = a;
-                selektovaniProfesor.Skola = sk;
-
+                }
+                else
+                {
+                    selektovaniProfesor.Adresa.Id = 1;
+                }
+             
                 selektovaniProfesor.TipKorisnika = ETipRegKorisnika.PROFESOR;
                 selektovaniProfesor.Aktivan = true;
+                Data.Adrese.Add(selektovaniProfesor.Adresa);
+                Data.SacuvajAdresu("adrese.txt");
                 Data.Profesori.Add(selektovaniProfesor);
 
             }
 
+            //Mogucnost kad profesoru jos uvek nije pridruzena skola
+            if (this.Title.Equals("Izmeni"))
+            {
+                if (txtSkola.Text.Equals("") || txtSkola.Text.Equals("0"))
+                {
+                   
+                    selektovaniProfesor.Skola = new Skola();
+
+                }
+                else
+                {
+                    Skola sk = Data.Skole.ToList().Find(pr => pr.Id.ToString().Equals(txtSkola.Text));
+                    selektovaniProfesor.Skola = sk;
+
+                }
+                
+                //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
+                Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniProfesor.Adresa.Id));
+                ad.Drzava = txtDrzava.Text;
+                ad.Ulica = txtUlica.Text;
+                ad.Broj = int.Parse(txtBroj.Text);
+                ad.Grad = txtGrad.Text;
+                Data.SacuvajAdresu("adrese.txt");
+
+            }
+                 
+            //Data.SacuvajAdresu("adrese.txt");
             Data.SacuvajProfesora("profesori.txt");
             this.DialogResult = true;
             this.Close();

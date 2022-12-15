@@ -41,7 +41,7 @@ namespace SR30_2021_POP2022.Models
 
         public override string ToString()
         {
-            return "ID: " + Id +  "Ulica: " + Ulica + " Broj: " + Broj + " Grad: " + Grad + " Drzava: " + Drzava;
+            return "ID: " + Id +  " Ulica: " + Ulica + " Broj: " + Broj + " Grad: " + Grad + " Drzava: " + Drzava;
         }
 
         public string AdresaZaUpisUFajl()

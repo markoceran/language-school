@@ -83,12 +83,15 @@ namespace SR30_2021_POP2022.Windows
                 {
                     Title = "Izmeni"
                 };
-                
+                dodajIzmeniCasProzor.txtId.IsEnabled = false;
+
+
 
                 if ((bool)!dodajIzmeniCasProzor.ShowDialog())
                 {
-                    int index = Data.Casovi.ToList().FindIndex(ca => ca.Id.Equals(c.Id));
+                    int index = Data.Casovi.ToList().FindIndex(ca => ca.Id.Equals(c.Id));      
                     Data.Casovi[index] = casKopija;
+                    
                 }
                 view.Refresh();
 

@@ -186,13 +186,21 @@ namespace SR30_2021_POP2022.Models
                         Email = korisnikIzFajla[5],
                         Lozinka = korisnikIzFajla[6],
                         TipKorisnika = tip,
-                        Skola = s,
                         Jezici = new List<string>(),
                         Casovi = new List<Cas>(),
                         Aktivan = aktivan
 
 
                     };
+
+                    if (!skolaId.Equals("0"))
+                    {
+
+                        Skola sk = Skole.ToList().Find(k => k.Id.ToString().Equals(skolaId));
+                        profesor.Skola = sk;
+
+
+                    }
 
                     Profesori.Add(profesor);
                 }
@@ -277,23 +285,36 @@ namespace SR30_2021_POP2022.Models
                     string profesorEmail = korisnikIzFajla[1];
                     string studentEmail = korisnikIzFajla[6];
 
-                    Profesor p = Profesori.ToList().Find(k => k.Email.Contains(profesorEmail));
-                    Student s = Studenti.ToList().Find(k => k.Email.Contains(studentEmail));
-
                     Cas cas = new Cas
                     {
 
                         Id = Int32.Parse(korisnikIzFajla[0]),
-                        Profesor = p,
                         DatumOdrzavanja = datum,
                         VremePocetka = korisnikIzFajla[3],
                         Trajanje = Int32.Parse(korisnikIzFajla[4]),
-                        Status = status,
-                        Student = s,
+                        Status = status,                    
                         Obrisan = obrisan
 
 
                     };
+
+
+                    if (!profesorEmail.Equals(""))
+                    {
+                        
+                        Profesor p = Profesori.ToList().Find(k => k.Email.Contains(profesorEmail));
+                        cas.Profesor = p;
+
+
+                    }
+
+
+                    if (!studentEmail.Equals(""))
+                    {
+                        Student s = Studenti.ToList().Find(k => k.Email.Contains(studentEmail));
+                        cas.Student = s;
+
+                    }                    
 
                     Casovi.Add(cas);
                 }

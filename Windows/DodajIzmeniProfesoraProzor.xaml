@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="" Height="622" Width="400">
+        Title="" Height="897" Width="400">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,6 +26,11 @@
             <RowDefinition Height="55*"/>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="55*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="55*"/>
         </Grid.RowDefinitions>
 
         <Label Content="Ime :" Name="lblIme" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128"/>
@@ -33,24 +38,32 @@
         <Label Content="JMBG :" Name="lblJmbg" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="2"/>
         <Label Content="Pol :" Name="lblPol" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="3"/>
         <Label Content="Adresa :" Name="lblAdresa" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="4"/>
-        <Label Content="Email :" Name="lblEmail" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="5"/>
-        <Label Content="Lozinka :" Name="lblLozinka" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="6"/>
-        <Label Content="Škola :" Name="lblSkola" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="7"/>
-        <Label Content="Jezici :" Name="lblJezici" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="8"/>
-        <Label Content="Časovi :" Name="lblCasovi" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="9"/>
+        <Label Content="Email :" Name="lblEmail" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="10"/>
+        <Label Content="Lozinka :" Name="lblLozinka" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="128" Grid.Row="11" Margin="0,4,0,0"/>
+        <Label Content="Škola :" Name="lblSkola" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="12"/>
+        <Label Content="Jezici :" Name="lblJezici" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="13"/>
+        <Label Content="Časovi :" Name="lblCasovi" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="14"/>
+        <Label Content="Država :" Name="lblDrzava" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="5"/>
+        <Label Content="Grad :" Name="lblGrad" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="6"/>
+        <Label Content="Ulica :" Name="lblUlica" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="7"/>
+        <Label Content="Broj :" Name="lblBroj" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="8"/>
+
 
         <TextBox Name="txtIme" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Text="{Binding Path=Ime}"/>
         <TextBox Name="txtPrezime" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="1" Text="{Binding Path=Prezime}"/>
         <TextBox Name="txtJmbg" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="2" Text="{Binding Path=Jmbg}"/>
-        <TextBox Name="txtEmail" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="5" Text="{Binding Path=Email}"/>
-        <TextBox Name="txtLozinka" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="6" Text="{Binding Path=Lozinka}"/>
-        <TextBox Name="txtAdresa" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="4" Text="{Binding Path=Adresa.Id}"/>
-        <TextBox Name="txtSkola" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="7" Text="{Binding Path=Skola.Id}"/>
+        <TextBox Name="txtEmail" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="10" Text="{Binding Path=Email}"/>
+        <TextBox Name="txtLozinka" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Top" Width="168" Grid.Row="11" Text="{Binding Path=Lozinka}" Margin="0,4,0,0"/>
         
+        <TextBox Name="txtSkola" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="12" Text="{Binding Path=Skola.Id}"/>
+        <TextBox Name="txtDrzava" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="5" Text="{Binding Path=Adresa.Drzava}" />
+        <TextBox Name="txtGrad" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="6" Text="{Binding Path=Adresa.Grad}" />
+        <TextBox Name="txtUlica" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="7" Text="{Binding Path=Adresa.Ulica}" />
+        <TextBox Name="txtBroj" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="8" Text="{Binding Path=Adresa.Broj}" />
         <ComboBox Name="cmbPol" Grid.Column="1" HorizontalAlignment="Left" Height="35" Grid.Row="3" VerticalAlignment="Center" Width="168" SelectedItem="{Binding Path=Pol}"/>
 
-        <Button Content="Odustani" Name="btnOdustani" HorizontalAlignment="Center" Height="25" Grid.Row="10" VerticalAlignment="Center" Width="96" Click="btnOdustani_Click"/>
-        <Button Content="Sačuvaj" Name="btnSacuvaj" HorizontalAlignment="Left" Height="25" Grid.Row="10" VerticalAlignment="Center" Width="96" Click="btnSacuvaj_Click" Grid.Column="1" Margin="36,0,0,0"/>
+        <Button Content="Odustani" Name="btnOdustani" HorizontalAlignment="Center" Height="25" Grid.Row="15" VerticalAlignment="Top" Width="96" Click="btnOdustani_Click" Margin="0,10,0,0"/>
+        <Button Content="Sačuvaj" Name="btnSacuvaj" HorizontalAlignment="Left" Height="25" Grid.Row="15" VerticalAlignment="Top" Width="96" Click="btnSacuvaj_Click" Grid.Column="1" Margin="36,10,0,0"/>
 
 
     </Grid>

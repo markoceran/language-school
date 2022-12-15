@@ -69,12 +69,19 @@ namespace SR30_2021_POP2022.Windows
                 profesorKopija.Prezime = p.Prezime;
                 profesorKopija.Jmbg = p.Jmbg;
                 profesorKopija.Pol = p.Pol;
-                profesorKopija.Adresa = p.Adresa;
+
+                profesorKopija.Adresa.Id = p.Adresa.Id;
+                profesorKopija.Adresa.Ulica = p.Adresa.Ulica;
+                profesorKopija.Adresa.Broj = p.Adresa.Broj;
+                profesorKopija.Adresa.Grad = p.Adresa.Grad;
+                profesorKopija.Adresa.Drzava = p.Adresa.Drzava;
+
                 profesorKopija.Email = p.Email;
                 profesorKopija.Lozinka = p.Lozinka;
                 profesorKopija.TipKorisnika = p.TipKorisnika;
                 profesorKopija.Aktivan = p.Aktivan;
-                profesorKopija.Skola = p.Skola;
+
+                
                 profesorKopija.Jezici = p.Jezici;
                 profesorKopija.Casovi = p.Casovi;
 
@@ -82,8 +89,7 @@ namespace SR30_2021_POP2022.Windows
                 {
                     Title = "Izmeni"
                 };
-                dodajIzmeniProfesoraProzor.txtSkola.IsEnabled = false;
-                dodajIzmeniProfesoraProzor.txtAdresa.IsEnabled = false;
+                
 
                 if ((bool)!dodajIzmeniProfesoraProzor.ShowDialog())
                 {

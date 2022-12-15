@@ -74,7 +74,13 @@ namespace SR30_2021_POP2022.Windows
                 studentKopija.Prezime = s.Prezime;
                 studentKopija.Jmbg = s.Jmbg;
                 studentKopija.Pol = s.Pol;
-                studentKopija.Adresa = s.Adresa;
+
+                studentKopija.Adresa.Id = s.Adresa.Id;
+                studentKopija.Adresa.Ulica = s.Adresa.Ulica;
+                studentKopija.Adresa.Broj = s.Adresa.Broj;
+                studentKopija.Adresa.Grad = s.Adresa.Grad;
+                studentKopija.Adresa.Drzava = s.Adresa.Drzava;
+
                 studentKopija.Email = s.Email;
                 studentKopija.Lozinka = s.Lozinka;
                 studentKopija.TipKorisnika = s.TipKorisnika;
@@ -85,12 +91,13 @@ namespace SR30_2021_POP2022.Windows
                 {
                     Title = "Izmeni"
                 };
-                dodajIzmeniStudentaProzor.txtAdresa.IsEnabled = false;
+                
 
                 if ((bool)!dodajIzmeniStudentaProzor.ShowDialog())
                 {
-                    int index = Data.Studenti.ToList().FindIndex(so => so.Email.Equals(s.Email));
+                    int index = Data.Studenti.ToList().FindIndex(so => so.Email.Equals(s.Email));                
                     Data.Studenti[index] = studentKopija;
+
                 }
                 view.Refresh();
 

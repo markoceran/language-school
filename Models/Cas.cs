@@ -58,7 +58,7 @@ namespace SR30_2021_POP2022.Models
 
         public override string ToString()
         {
-            return " ID: " + Id  + " Profesor: " + Profesor + " Datum: " + DatumOdrzavanja + " Vreme: " + VremePocetka + "Trajanje: " + Trajanje + "Status: " + Status + "Student: " + Student + "Obrisan: " + Obrisan;
+            return " ID: " + Id  + " Profesor: " + Profesor + " Datum: " + DatumOdrzavanja + " Vreme: " + VremePocetka + " Trajanje: " + Trajanje + " Status: " + Status + " Student: " + Student + " Obrisan: " + Obrisan;
         }
 
         public string CasZaUpisUFajl()
