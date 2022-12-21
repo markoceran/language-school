@@ -45,45 +45,62 @@ namespace SR30_2021_POP2022.Windows
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (this.Title.Equals("Dodaj")){
-
-                if (!Data.Adrese.Count.Equals(0))
-                {
-                    selektovaniStudent.Adresa.Id = Data.Adrese.Last().Id + 1;
-
-                }
-                else
-                {
-                    selektovaniStudent.Adresa.Id =  1;
-                }
-                
-                selektovaniStudent.TipKorisnika = ETipRegKorisnika.STUDENT;
-                selektovaniStudent.Aktivan = true;
-                Data.Adrese.Add(selektovaniStudent.Adresa);
-                Data.SacuvajAdresu("adrese.txt");
-                Data.Studenti.Add(selektovaniStudent);                         
-               
-            }
-
-            //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
-            if (this.Title.Equals("Izmeni"))
+            if (Data.Profesori.ToList().Find(so => so.Email.Equals(selektovaniStudent.Email)) != null && this.Title.Equals("Dodaj"))
             {
-                
-                Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniStudent.Adresa.Id));
-                ad.Drzava = txtDrzava.Text;
-                ad.Ulica = txtUlica.Text;
-                ad.Broj = int.Parse(txtBroj.Text);
-                ad.Grad = txtGrad.Text;
-                Data.SacuvajAdresu("adrese.txt");
+                selektovaniStudent.IsValid = false;
 
             }
-            
 
-            //Data.SacuvajAdresu("adrese.txt");
-            Data.SacuvajStudenta("studenti.txt");
-            this.DialogResult = true;
-            this.Close();
+            if (selektovaniStudent.IsValid) {
+
+
+                if (this.Title.Equals("Dodaj"))
+                {
+
+                    if (!Data.Adrese.Count.Equals(0))
+                    {
+                        selektovaniStudent.Adresa.Id = Data.Adrese.Last().Id + 1;
+
+                    }
+                    else
+                    {
+                        selektovaniStudent.Adresa.Id = 1;
+                    }
+
+                    selektovaniStudent.TipKorisnika = ETipRegKorisnika.STUDENT;
+                    selektovaniStudent.Aktivan = true;
+                    Data.Adrese.Add(selektovaniStudent.Adresa);
+                    Data.SacuvajAdresu("adrese.txt");
+                    Data.Studenti.Add(selektovaniStudent);
+
+                }
+
+                //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
+                if (this.Title.Equals("Izmeni"))
+                {
+
+                    Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniStudent.Adresa.Id));
+                    ad.Drzava = txtDrzava.Text;
+                    ad.Ulica = txtUlica.Text;
+                    ad.Broj = int.Parse(txtBroj.Text);
+                    ad.Grad = txtGrad.Text;
+                    Data.SacuvajAdresu("adrese.txt");
+
+                }
+
+
+                //Data.SacuvajAdresu("adrese.txt");
+                Data.SacuvajStudenta("studenti.txt");
+                this.DialogResult = true;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(selektovaniStudent.Error, "Greska");
+
+            }
+
+
         }
 
     }

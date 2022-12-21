@@ -96,8 +96,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\AdminProzor.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\CasoviProzor.xaml">
       <SubType>Designer</SubType>

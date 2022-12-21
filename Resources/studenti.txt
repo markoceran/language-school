@@ -1,2 +1,1 @@
-ghb;dfgd;gdfgd;MUSKI;1;hgdfhd;65456;STUDENT;System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True
-sss;sss;dfgd;MUSKI;2;sdfsd;11111;STUDENT;System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True
+Ivan;Milosevic;1526354932554;MUSKI;7;ivan@gmail.com;12345;STUDENT;System.Collections.Generic.List`1[SR30_2021_POP2022.Models.Cas];True

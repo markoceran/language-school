@@ -92,7 +92,7 @@ namespace SR30_2021_POP2022.Windows
                 {
                     Title = "Izmeni"
                 };
-                
+                dodajIzmeniStudentaProzor.txtEmail.IsReadOnly = true;
 
                 if ((bool)!dodajIzmeniStudentaProzor.ShowDialog())
                 {
