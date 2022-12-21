@@ -31,6 +31,8 @@ namespace SR30_2021_POP2022.Windows
             view = CollectionViewSource.GetDefaultView(Data.Casovi);
             view.Filter = Filter;
             dgCasovi.ItemsSource = view;
+            dgCasovi.IsReadOnly = true;
+              
         }
 
         private bool Filter(object obj)

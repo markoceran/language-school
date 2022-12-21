@@ -49,14 +49,14 @@
         <Label Content="Broj :" Name="lblBroj" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="8"/>
 
 
-        <TextBox Name="txtIme" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Text="{Binding Path=Ime}"/>
-        <TextBox Name="txtPrezime" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="1" Text="{Binding Path=Prezime}"/>
-        <TextBox Name="txtJmbg" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="2" Text="{Binding Path=Jmbg}"/>
-        <TextBox Name="txtEmail" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="10" Text="{Binding Path=Email}"/>
-        <TextBox Name="txtLozinka" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Top" Width="168" Grid.Row="11" Text="{Binding Path=Lozinka}" Margin="0,4,0,0"/>
-        
-        <TextBox Name="txtSkola" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="12" Text="{Binding Path=Skola.Id}"/>
-        <TextBox Name="txtDrzava" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="5" Text="{Binding Path=Adresa.Drzava}" />
+        <TextBox Name="txtIme" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Text="{Binding Path=Ime , ValidatesOnDataErrors=True}"/>
+        <TextBox Name="txtPrezime" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="1" Text="{Binding Path=Prezime, ValidatesOnDataErrors=True}"/>
+        <TextBox Name="txtJmbg" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="2" Text="{Binding Path=Jmbg, ValidatesOnDataErrors=True}"/>
+        <TextBox Name="txtEmail" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="10" Text="{Binding Path=Email, ValidatesOnDataErrors=True}"/>
+        <TextBox Name="txtLozinka" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Top" Width="168" Grid.Row="11" Text="{Binding Path=Lozinka, ValidatesOnDataErrors=True}" Margin="0,4,0,0"/>
+
+        <ComboBox Name="cmbSkola" Grid.Column="1" HorizontalAlignment="Left" Height="35" VerticalAlignment="Center" Width="168" Grid.Row="12" SelectedItem="{Binding Path=Skola}"/>
+        <TextBox Name="txtDrzava" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="5"  Text="{Binding Path=Adresa.Drzava}" />
         <TextBox Name="txtGrad" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="6" Text="{Binding Path=Adresa.Grad}" />
         <TextBox Name="txtUlica" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="7" Text="{Binding Path=Adresa.Ulica}" />
         <TextBox Name="txtBroj" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="8" Text="{Binding Path=Adresa.Broj}" />

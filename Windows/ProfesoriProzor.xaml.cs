@@ -30,6 +30,9 @@ namespace SR30_2021_POP2022.Windows
             view = CollectionViewSource.GetDefaultView(Data.Profesori);
             view.Filter = Filter;
             dgProfesori.ItemsSource = view;
+            dgProfesori.IsReadOnly = true;
+           
+
         }
 
         private bool Filter(object obj)
@@ -81,7 +84,7 @@ namespace SR30_2021_POP2022.Windows
                 profesorKopija.TipKorisnika = p.TipKorisnika;
                 profesorKopija.Aktivan = p.Aktivan;
 
-                
+                profesorKopija.Skola = p.Skola;
                 profesorKopija.Jezici = p.Jezici;
                 profesorKopija.Casovi = p.Casovi;
 
@@ -89,7 +92,7 @@ namespace SR30_2021_POP2022.Windows
                 {
                     Title = "Izmeni"
                 };
-                
+                dodajIzmeniProfesoraProzor.txtEmail.IsReadOnly = true;
 
                 if ((bool)!dodajIzmeniProfesoraProzor.ShowDialog())
                 {

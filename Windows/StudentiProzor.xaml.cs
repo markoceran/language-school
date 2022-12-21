@@ -31,6 +31,7 @@ namespace SR30_2021_POP2022.Windows
             view = CollectionViewSource.GetDefaultView(Data.Studenti);
             view.Filter = Filter;
             dgStudenti.ItemsSource = view;
+            dgStudenti.IsReadOnly = true;
         }
 
         private bool Filter(object obj)

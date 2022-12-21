@@ -41,5 +41,7 @@ namespace SR30_2021_POP2022.Models
         {
             return Ime + ";" + Prezime + ";" + Jmbg + ";" + Pol + ";" + Adresa.Id + ";" + Email + ";" + Lozinka + ";" + TipKorisnika + ";" + Skola.Id + ";" + Jezici + ";" + Casovi + ";" + Aktivan;
         }
+      
+    
     }
 }
