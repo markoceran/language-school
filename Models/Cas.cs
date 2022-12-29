@@ -37,7 +37,7 @@ namespace SR30_2021_POP2022.Models
         {
             this.id = 0;
             this.profesor = new Profesor();
-            this.datumOdrzavanja = new DateTime();
+            this.datumOdrzavanja = DateTime.Now;
             this.vremePocetka = "";
             this.trajanje = 0;
             this.status = EStatusCasa.SLOBODAN;

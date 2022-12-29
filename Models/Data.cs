@@ -341,13 +341,16 @@ namespace SR30_2021_POP2022.Models
                     Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
                     Boolean.TryParse(korisnikIzFajla[4], out Boolean obrisana);
 
+                   
+
+
                     Skola skola = new Skola
                     {
 
                         Id = Int32.Parse(korisnikIzFajla[0]),
                         Naziv = korisnikIzFajla[1],
                         Adresa = a,
-                        Jezici = new List<string>(),
+                        Jezici = new List<string>(korisnikIzFajla[3].Split(',').ToList()),
                         Obrisana = obrisana
 
 

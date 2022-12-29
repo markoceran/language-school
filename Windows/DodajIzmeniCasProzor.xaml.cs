@@ -31,6 +31,11 @@ namespace SR30_2021_POP2022.Windows
             this.DataContext = cas;
 
             cmbStatus.ItemsSource = Enum.GetValues(typeof(EStatusCasa));
+            cmbProfesor.ItemsSource = Data.Profesori;
+            cmbStudent.ItemsSource = Data.Studenti;
+          
+            pickerDatum.DisplayDateStart = DateTime.Now;
+            
         }
 
         private void btnOdustani_Click(object sender, RoutedEventArgs e)
@@ -45,16 +50,6 @@ namespace SR30_2021_POP2022.Windows
 
             if (this.Title.Equals("Dodaj"))
             {
-                if (!txtProfesor.Text.Equals(""))
-                {
-                    Profesor p = Data.Profesori.ToList().Find(pr => pr.Email.Contains(txtProfesor.Text));
-                    selektovaniCas.Profesor = p;
-
-
-                }
-                
-               
-                selektovaniCas.Student = new Student();
                 
                 selektovaniCas.Status = EStatusCasa.SLOBODAN;
                 selektovaniCas.Obrisan = false;
@@ -62,37 +57,7 @@ namespace SR30_2021_POP2022.Windows
 
             }
 
-            if (this.Title.Equals("Izmeni"))
-            {
-                if (!txtProfesor.Text.Equals(""))
-                {
-                    Profesor p = Data.Profesori.ToList().Find(pr => pr.Email.Contains(txtProfesor.Text));
-                    selektovaniCas.Profesor = p;
-
-                }
-                else
-                {
-                    selektovaniCas.Profesor = new Profesor();
-                    
-                }
-
-                if (!txtStudent.Text.Equals(""))
-                {
-                    Student s = Data.Studenti.ToList().Find(pr => pr.Email.Contains(txtStudent.Text));
-                    selektovaniCas.Student = s;
-
-
-                }
-                else
-                {
-                    selektovaniCas.Student = new Student();
-                   
-                }
-                    
-           
-
-            }
-
+            
             Data.SacuvajCas("casovi.txt");
             this.DialogResult = true;
             this.Close();

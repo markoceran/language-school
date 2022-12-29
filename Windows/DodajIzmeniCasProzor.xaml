@@ -38,12 +38,12 @@
 
         <TextBox Name="txtId" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Text="{Binding Path=Id}"/>
 
-        <TextBox Name="txtDatum" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="1" Text="{Binding Path=DatumOdrzavanja}"/>
+        <DatePicker Name="pickerDatum" Grid.Column="1" HorizontalAlignment="Left" Height="35" VerticalAlignment="Center" Width="168" Grid.Row="1" SelectedDate="{Binding Path=DatumOdrzavanja , StringFormat='dd/MM/yyyy'}" FirstDayOfWeek="Monday" SelectedDateFormat="Short"/>
 
         <TextBox Name="txtVreme" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="2" Text="{Binding Path=VremePocetka}"/>
         <TextBox Name="txtTrajanje" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="3" Text="{Binding Path=Trajanje}"/>
-        <TextBox Name="txtProfesor" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="4" Text="{Binding Path=Profesor.Email}"/>
-        <TextBox Name="txtStudent" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="5" Text="{Binding Path=Student.Email}"/>
+        <ComboBox Name="cmbProfesor" Grid.Column="1" HorizontalAlignment="Left" Height="35"  VerticalAlignment="Center" Width="168" Grid.Row="4" SelectedItem="{Binding Path=Profesor}"/>
+        <ComboBox Name="cmbStudent" Grid.Column="1" HorizontalAlignment="Left" Height="35"   VerticalAlignment="Center" Width="168" Grid.Row="5" SelectedItem="{Binding Path=Student}"/>
 
         <ComboBox Name="cmbStatus" Grid.Column="1" HorizontalAlignment="Left" Height="35" Grid.Row="6" VerticalAlignment="Center" Width="168" SelectedItem="{Binding Path=Status}"/>
 

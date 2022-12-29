@@ -54,7 +54,7 @@ namespace SR30_2021_POP2022.Windows
                 Title = "Dodaj"
             };
 
-            dodajIzmeniCasProzor.txtStudent.IsEnabled = false;
+            
             dodajIzmeniCasProzor.cmbStatus.IsEnabled = false;
             dodajIzmeniCasProzor.ShowDialog();
             view.Refresh();

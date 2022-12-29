@@ -39,15 +39,62 @@ namespace SR30_2021_POP2022.Models
         public List<string> Jezici { get => jezici; set => jezici = value; }
         public Adresa Adresa { get => adresa; set => adresa = value; }
         public bool Obrisana { get => obrisana; set => obrisana = value; }
+        public bool IsValid { get; set; }
 
         public override string ToString()
         {
-            return "ID: " + Id + " Naziv: " + Naziv + " Adresa: " + Adresa + " Jezici: " + Jezici + " Obrisana: " + Obrisana;
+            return " Naziv: " + Naziv + " Adresa: " + Adresa + " Jezici: " + Jezici;
         }
 
         public string SkolaZaUpisUFajl()
+        { 
+            string i = "";
+
+            foreach(string j in Jezici)
+            {
+                i = i + j + ",";
+                
+            }
+            i = i.Substring(0, i.Length - 1);
+
+            return Id + ";" + Naziv + ";" + Adresa.Id + ";" + i + ";" + Obrisana;
+        }
+
+
+
+
+        public string Error
         {
-            return Id + ";" + Naziv + ";" + Adresa.Id + ";" + Jezici + ";" + Obrisana;
+            get
+            {
+                if (string.IsNullOrEmpty(Naziv))
+                {
+                    return "Naziv mora biti unet!";
+                }
+               
+                           
+
+                return "";
+            }
+        }
+
+        public string this[string columnName]
+        {
+
+            get
+            {
+                IsValid = true;
+
+                if (columnName == "Naziv" && string.IsNullOrEmpty(Naziv))
+                {
+                    IsValid = false;
+                    return "Naziv mora biti unet!";
+                }
+                
+
+
+                return "";
+            }
         }
     }
 }
