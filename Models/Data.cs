@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -21,187 +23,291 @@ namespace SR30_2021_POP2022.Models
         public static ObservableCollection<Cas> Casovi = new ObservableCollection<Cas>();
         public static ObservableCollection<Skola> Skole = new ObservableCollection<Skola>();
 
-        
-
-//---------------------------------------------------------------------------------------------------------
-
-       /* public static void SacuvajAdmina(string filename)
-         {
-                using (StreamWriter file = new StreamWriter(@"../../../Resources/" + filename))
-                {
-                    foreach (RegistrovaniKorisnik registrovaniKorisnik in Administratori)
-                    {
-                        file.WriteLine(registrovaniKorisnik.KorisnikZaUpisUFajl());
-                    }
-                }
-         }
-       */
+        public static readonly string CONNECTION_STRING = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\FTN PREDAVANJA I MATERIJAL\\Platforme za objektno programiranje\\SR30-2021-POP2022\\Database.mdf\";Integrated Security=True;Connect Timeout=30";
 
 
-        public static void SacuvajProfesora(string filename)
+        //---------------------------------------------------------------------------------------------------------
+
+
+        public static int SacuvajProfesora(Profesor profesor)
         {
-            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                foreach (Profesor profesor in Profesori)
-                {
-                    file.WriteLine(profesor.ProfesorZaUpisUFajl());
-                }
+                conn.Open();
+
+                string users = "select * from Profesor";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                dataAdapter.Fill(ds, "Profesor");
+
+               
+                DataRow newRow = ds.Tables["Profesor"].NewRow();            
+                newRow["Ime"] = profesor.Ime;
+                newRow["Prezime"] = profesor.Prezime;
+                newRow["Jmbg"] = profesor.Jmbg;
+                newRow["Email"] = profesor.Email;
+                newRow["Lozinka"] = profesor.Lozinka;
+                newRow["AdresaId"] = profesor.Adresa.Id;
+                newRow["SkolaId"] = profesor.Skola.Id;
+                newRow["Pol"] = profesor.Pol;
+                newRow["TipKorisnika"] = profesor.TipKorisnika;
+                newRow["Aktivan"] = profesor.Aktivan;
+
+                ds.Tables["Profesor"].Rows.Add(newRow);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Update(ds.Tables["Profesor"]);
+
+                return Profesori.Count + 1; //vracam id kao povratnu vrednost
             }
         }
 
-        public static void SacuvajStudenta(string filename)
+
+        public static void IzmeniProfesora(Profesor profesor)
         {
-            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
+            
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                foreach (Student student in Studenti)
-                {
-                    file.WriteLine(student.StudentZaUpisUFajl());
-                }
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"update dbo.Profesor
+                set Ime = @Ime,Prezime = @Prezime,Jmbg = @Jmbg,Email = @Email,Lozinka = @Lozinka,
+                    AdresaId = @AdresaId, SkolaId = @SkolaId, Pol = @Pol,TipKorisnika = @TipKorisnika,Aktivan=@Aktivan
+                    where Email = @Email";
+
+                Enum.TryParse("" + profesor.Pol + "", out EPol pol);
+               
+                
+                command.Parameters.Add(new SqlParameter("Ime", profesor.Ime));
+                command.Parameters.Add(new SqlParameter("Prezime", profesor.Prezime));
+                command.Parameters.Add(new SqlParameter("Jmbg", profesor.Jmbg));
+                command.Parameters.Add(new SqlParameter("Email", profesor.Email));
+                command.Parameters.Add(new SqlParameter("Lozinka", profesor.Lozinka));
+                command.Parameters.Add(new SqlParameter("AdresaId", profesor.Adresa.Id));
+                command.Parameters.Add(new SqlParameter("SkolaId", profesor.Skola.Id));
+                command.Parameters.Add(new SqlParameter("Pol", pol.ToString()));
+                command.Parameters.Add(new SqlParameter("TipKorisnika", ETipRegKorisnika.PROFESOR.ToString()));
+                command.Parameters.Add(new SqlParameter("Aktivan", profesor.Aktivan));
+                command.ExecuteScalar();
             }
         }
 
-        public static void SacuvajAdresu(string filename)
+        public static void IzmeniAdresu(Adresa adresa)
         {
-            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                foreach (Adresa adresa in Adrese)
-                {
-                    file.WriteLine(adresa.AdresaZaUpisUFajl());
-                }
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"update dbo.Adresa
+                set Id = @Id, Drzava = @Drzava, Grad = @Grad,Ulica = @Ulica,Broj = @Broj where Id = @Id";
+
+                command.Parameters.Add(new SqlParameter("Id", adresa.Id));
+                command.Parameters.Add(new SqlParameter("Drzava", adresa.Drzava));
+                command.Parameters.Add(new SqlParameter("Grad", adresa.Grad));
+                command.Parameters.Add(new SqlParameter("Ulica", adresa.Ulica));
+                command.Parameters.Add(new SqlParameter("Broj", adresa.Broj));
+                command.ExecuteScalar();
             }
         }
 
-        public static void SacuvajCas(string filename)
+
+        public static int SacuvajStudenta(Student student)
         {
-            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
+            using(SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                foreach (Cas cas in Casovi)
-                {
-                    file.WriteLine(cas.CasZaUpisUFajl());
-                }
+                conn.Open();
+
+                string users = "select * from Student";
+                DataSet ds = new DataSet();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                dataAdapter.Fill(ds, "Student");
+
+                DataRow newRow = ds.Tables["Student"].NewRow();
+                newRow["Ime"] = student.Ime;
+                newRow["Prezime"] = student.Prezime;
+                newRow["Jmbg"] = student.Jmbg;
+                newRow["Email"] = student.Email;
+                newRow["Lozinka"] = student.Lozinka;
+                newRow["AdresaId"] = student.Adresa.Id;
+                newRow["Pol"] = student.Pol;
+                newRow["TipKorisnika"] = student.TipKorisnika;
+                newRow["Aktivan"] = student.Aktivan;
+
+                ds.Tables["Student"].Rows.Add(newRow);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Update(ds.Tables["Student"]);
+
+                return Studenti.Count + 1;
+                
             }
         }
 
-        public static void SacuvajSkolu(string filename)
+        public static int SacuvajAdresu(Adresa adresa)
         {
-            using (StreamWriter file = new StreamWriter(@"../../Resources/" + filename))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                foreach (Skola skola in Skole)
-                {
-                    file.WriteLine(skola.SkolaZaUpisUFajl());
-                }
+                conn.Open();
+
+                string users = "select * from Adresa";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                dataAdapter.Fill(ds, "Adresa");
+
+
+                DataRow newRow = ds.Tables["Adresa"].NewRow();
+                newRow["Id"] = adresa.Id;
+                newRow["Drzava"] = adresa.Drzava;
+                newRow["Grad"] = adresa.Grad;
+                newRow["Ulica"] = adresa.Ulica;
+                newRow["Broj"] = adresa.Broj;
+                
+
+                ds.Tables["Adresa"].Rows.Add(newRow);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Update(ds.Tables["Adresa"]);
+
+                return Adrese.Count + 1; //vracam id kao povratnu vrednost
+            }
+        }
+
+        public static int SacuvajCas(Cas cas)
+        {
+            using(SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                DataSet ds = new DataSet();
+                string users = "select * from Cas"; 
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                dataAdapter.Fill(ds, "Cas");
+
+                DataRow newRow = ds.Tables["Cas"].NewRow();
+                newRow["Id"] = cas.Id;
+                newRow["ProfesorEmail"] = cas.Profesor.Email;
+                newRow["StudentEmail"] = cas.Student.Email;
+                newRow["DatumOdrzavanja"] = cas.DatumOdrzavanja;
+                newRow["VremePocetka"] = cas.VremePocetka;
+                newRow["Trajanje"] = cas.Trajanje;
+                newRow["Status"] = cas.Status;
+                newRow["Obrisan"] = cas.Obrisan;
+
+                ds.Tables["Cas"].Rows.Add(newRow);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Update(ds.Tables["Cas"]);
+
+                return Casovi.Count + 1;
+            }
+        }
+
+        public static int SacuvajSkolu(Skola skola)
+        {
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+
+                string users = "select * from Skola";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                dataAdapter.Fill(ds, "Skola");
+
+
+                DataRow newRow = ds.Tables["Skola"].NewRow();
+                newRow["Id"] = skola.Id;
+                newRow["Naziv"] = skola.Naziv;
+                newRow["AdresaId"] = skola.Adresa.Id;
+                newRow["Obrisana"] = skola.Obrisana;
+                
+
+
+                ds.Tables["Skola"].Rows.Add(newRow);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Update(ds.Tables["Skola"]);
+
+                return Skole.Count + 1; //vracam id kao povratnu vrednost
             }
         }
 
 
         //---------------------------------------------------------------------------------------------------------
 
-        public static void UcitajAdmina(string filename)
+        public static void UcitajAdmina()
         {
-                
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                DataSet ds = new DataSet();
 
-                using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
+                string selectedUser = @"select * from Administrator";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
+                dataAdapter.Fill(ds, "Administrator");
+
+                foreach (DataRow dataRow in ds.Tables["Administrator"].Rows)
                 {
-                    string line;
+                    Enum.TryParse(dataRow["Pol"].ToString(), out EPol pol);
+                    Enum.TryParse(dataRow["TipKorisnika"].ToString(), out ETipRegKorisnika tip);
 
-                    while ((line = file.ReadLine()) != null)
+                    RegistrovaniKorisnik admin = new RegistrovaniKorisnik
                     {
-                        string[] korisnikIzFajla = line.Split(';');
+                        Ime = dataRow["Ime"].ToString(),
+                        Prezime = dataRow["Prezime"].ToString(),
+                        Jmbg = dataRow["Jmbg"].ToString(),
+                        Email = dataRow["Email"].ToString(),
+                        Lozinka = dataRow["Lozinka"].ToString(),
+                        Adresa = Adrese.ToList().Find(a => a.Id.ToString().Equals(dataRow["AdresaId"].ToString())),                       
+                        Pol = pol,
+                        TipKorisnika = tip,
+                        Aktivan = (bool)dataRow["Aktivan"]
 
 
-                        Enum.TryParse(korisnikIzFajla[3], out EPol pol);
-                        Enum.TryParse(korisnikIzFajla[7], out ETipRegKorisnika tip);
-                        Boolean.TryParse(korisnikIzFajla[8], out Boolean aktivan);
-
-                        string adresaId = korisnikIzFajla[4];
-
-
-                        Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
-                    
-
-                        RegistrovaniKorisnik admin = new RegistrovaniKorisnik
-                        {
-
-                                Ime = korisnikIzFajla[0],
-                                Prezime = korisnikIzFajla[1],
-                                Jmbg = korisnikIzFajla[2],
-                                Pol = pol,
-                                Adresa = a,
-                                Email = korisnikIzFajla[5],
-                                Lozinka = korisnikIzFajla[6],
-                                TipKorisnika = tip,
-                                Aktivan = aktivan
- 
-                            
-                        };
-
-                        Administratori.Add(admin);
-                    }
+                    };
+                    Administratori.Add(admin);
                 }
+            }
 
         }
 
 
-        public static void UcitajProfesora(string filename)
+        public static void UcitajProfesora()
         {
-
-
-            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                string line;
+                conn.Open();
+                DataSet ds = new DataSet();
 
-                while ((line = file.ReadLine()) != null)
+                string selectedUser = @"select * from Profesor";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
+                dataAdapter.Fill(ds, "Profesor");
+
+                foreach (DataRow dataRow in ds.Tables["Profesor"].Rows)
                 {
-                    string[] korisnikIzFajla = line.Split(';');
-
-
-                    Enum.TryParse(korisnikIzFajla[3], out EPol pol);
-                    Enum.TryParse(korisnikIzFajla[7], out ETipRegKorisnika tip);
-                    Boolean.TryParse(korisnikIzFajla[11], out Boolean aktivan);
-
-                    string adresaId = korisnikIzFajla[4];
-                    string skolaId = korisnikIzFajla[8];
-
-                    Adresa a = new Adresa();
-
-                    foreach(Adresa ad in Adrese)
-                    {
-                        if(ad.Id.ToString() == adresaId)
-                        {
-                            a = ad;
-                        }
-                    }
-
-                    //Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
-                    Skola s = Skole.ToList().Find(k => k.Id.ToString().Contains(skolaId));
+                    Enum.TryParse(dataRow["Pol"].ToString(), out EPol pol);
+                    Enum.TryParse(dataRow["TipKorisnika"].ToString(), out ETipRegKorisnika tip);
 
                     Profesor profesor = new Profesor
                     {
-
-                        Ime = korisnikIzFajla[0],
-                        Prezime = korisnikIzFajla[1],
-                        Jmbg = korisnikIzFajla[2],
+                        Ime = dataRow["Ime"].ToString(),
+                        Prezime = dataRow["Prezime"].ToString(),
+                        Jmbg = dataRow["Jmbg"].ToString(),
+                        Email = dataRow["Email"].ToString(),
+                        Lozinka = dataRow["Lozinka"].ToString(),
+                        Adresa = Adrese.ToList().Find(a => a.Id.ToString().Equals(dataRow["AdresaId"].ToString())),
+                        Skola = Skole.ToList().Find(s => s.Id.ToString().Equals(dataRow["SkolaId"].ToString())),                    
                         Pol = pol,
-                        Adresa = a,
-                        Email = korisnikIzFajla[5],
-                        Lozinka = korisnikIzFajla[6],
                         TipKorisnika = tip,
-                        Jezici = new List<string>(),
-                        Casovi = new List<Cas>(),
-                        Aktivan = aktivan
-
-
+                        Aktivan = (bool)dataRow["Aktivan"]
+                        
+                        
                     };
-
-                    if (!skolaId.Equals("0"))
-                    {
-
-                        Skola sk = Skole.ToList().Find(k => k.Id.ToString().Equals(skolaId));
-                        profesor.Skola = sk;
-
-
-                    }
-
                     Profesori.Add(profesor);
                 }
             }
@@ -209,54 +315,36 @@ namespace SR30_2021_POP2022.Models
         }
 
 
-        public static void UcitajStudenta(string filename)
+        public static void UcitajStudenta()
         {
-
-
-            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                string line;
+                conn.Open();
+                DataSet ds = new DataSet();
 
-                while ((line = file.ReadLine()) != null)
+                string selectedUser = @"select * from Student";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
+                dataAdapter.Fill(ds, "Student");
+
+                foreach (DataRow dataRow in ds.Tables["Student"].Rows)
                 {
-                    string[] korisnikIzFajla = line.Split(';');
-
-
-                    Enum.TryParse(korisnikIzFajla[3], out EPol pol);
-                    Enum.TryParse(korisnikIzFajla[7], out ETipRegKorisnika tip);
-                    Boolean.TryParse(korisnikIzFajla[9], out Boolean aktivan);
-
-                    string adresaId = korisnikIzFajla[4];
-
-                    Adresa a = new Adresa();
-                    foreach (Adresa ad in Adrese)
-                    {
-                        if (ad.Id.ToString() == adresaId)
-                        {
-                            a = ad;
-                        }
-                    }
-
-                    //Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
-
+                    Enum.TryParse(dataRow["Pol"].ToString(), out EPol pol);
+                    Enum.TryParse(dataRow["TipKorisnika"].ToString(), out ETipRegKorisnika tip);
 
                     Student student = new Student
                     {
-
-                        Ime = korisnikIzFajla[0],
-                        Prezime = korisnikIzFajla[1],
-                        Jmbg = korisnikIzFajla[2],
+                        Ime = dataRow["Ime"].ToString(),
+                        Prezime = dataRow["Prezime"].ToString(),
+                        Jmbg = dataRow["Jmbg"].ToString(),
+                        Email = dataRow["Email"].ToString(),
+                        Lozinka = dataRow["Lozinka"].ToString(),
+                        Adresa = Adrese.ToList().Find(a => a.Id.ToString().Equals(dataRow["AdresaId"].ToString())),                       
                         Pol = pol,
-                        Adresa = a,
-                        Email = korisnikIzFajla[5],
-                        Lozinka = korisnikIzFajla[6],
                         TipKorisnika = tip,
-                        RezervisaniCasovi = new List<Cas>(),
-                        Aktivan = aktivan
+                        Aktivan = (bool)dataRow["Aktivan"]
 
 
                     };
-
                     Studenti.Add(student);
                 }
             }
@@ -264,58 +352,36 @@ namespace SR30_2021_POP2022.Models
         }
 
 
-        public static void UcitajCasove(string filename)
+        public static void UcitajCasove()
         {
 
-
-            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                string line;
+                conn.Open();
+                DataSet ds = new DataSet();
 
-                while ((line = file.ReadLine()) != null)
+                string selectedUser = @"select * from Cas";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
+                dataAdapter.Fill(ds, "Cas");
+
+                foreach (DataRow dataRow in ds.Tables["Cas"].Rows)
                 {
-                    string[] korisnikIzFajla = line.Split(';');
-
-
-                    
-                    Enum.TryParse(korisnikIzFajla[5], out EStatusCasa status);
-                    DateTime.TryParse(korisnikIzFajla[2], out DateTime datum);
-                    Boolean.TryParse(korisnikIzFajla[7], out Boolean obrisan);
-
-                    string profesorEmail = korisnikIzFajla[1];
-                    string studentEmail = korisnikIzFajla[6];
+                   
+                    Enum.TryParse(dataRow["Status"].ToString(), out EStatusCasa status);
 
                     Cas cas = new Cas
                     {
-
-                        Id = Int32.Parse(korisnikIzFajla[0]),
-                        DatumOdrzavanja = datum,
-                        VremePocetka = korisnikIzFajla[3],
-                        Trajanje = Int32.Parse(korisnikIzFajla[4]),
-                        Status = status,                    
-                        Obrisan = obrisan
-
+                        Id = int.Parse(dataRow["Id"].ToString()),
+                        Profesor = Profesori.ToList().Find(p => p.Email.Equals(dataRow["ProfesorEmail"].ToString())),
+                        Student = Studenti.ToList().Find(s => s.Email.Equals(dataRow["StudentEmail"].ToString())),
+                        DatumOdrzavanja = DateTime.Parse(dataRow["DatumOdrzavanja"].ToString()),
+                        VremePocetka = dataRow["VremePocetka"].ToString(),
+                        Trajanje = int.Parse(dataRow["Trajanje"].ToString()),
+                        Status = status,
+                        Obrisan = (bool)dataRow["Obrisan"]
+                        
 
                     };
-
-
-                    if (!profesorEmail.Equals(""))
-                    {
-                        
-                        Profesor p = Profesori.ToList().Find(k => k.Email.Contains(profesorEmail));
-                        cas.Profesor = p;
-
-
-                    }
-
-
-                    if (!studentEmail.Equals(""))
-                    {
-                        Student s = Studenti.ToList().Find(k => k.Email.Contains(studentEmail));
-                        cas.Student = s;
-
-                    }                    
-
                     Casovi.Add(cas);
                 }
             }
@@ -323,39 +389,29 @@ namespace SR30_2021_POP2022.Models
         }
 
 
-        public static void UcitajSkole(string filename)
+        public static void UcitajSkole()
         {
-
-
-            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                string line;
+                conn.Open();
+                DataSet ds = new DataSet();
 
-                while ((line = file.ReadLine()) != null)
+                string selectedUser = @"select * from Skola";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
+                dataAdapter.Fill(ds, "Skola");
+
+                foreach (DataRow dataRow in ds.Tables["Skola"].Rows)
                 {
-                    string[] korisnikIzFajla = line.Split(';');
-                 
-      
-                    string adresaId = korisnikIzFajla[2];                    
-
-                    Adresa a = Adrese.ToList().Find(k => k.Id.ToString().Contains(adresaId));
-                    Boolean.TryParse(korisnikIzFajla[4], out Boolean obrisana);
-
-                   
-
 
                     Skola skola = new Skola
                     {
-
-                        Id = Int32.Parse(korisnikIzFajla[0]),
-                        Naziv = korisnikIzFajla[1],
-                        Adresa = a,
-                        Jezici = new List<string>(korisnikIzFajla[3].Split(',').ToList()),
-                        Obrisana = obrisana
+                        Id = int.Parse(dataRow["Id"].ToString()),
+                        Naziv = dataRow["Naziv"].ToString(),
+                        Adresa = Adrese.ToList().Find(a => a.Id.ToString().Equals(dataRow["AdresaId"].ToString())),                      
+                        Obrisana = (bool)dataRow["Obrisana"]
 
 
                     };
-
                     Skole.Add(skola);
                 }
             }
@@ -363,31 +419,30 @@ namespace SR30_2021_POP2022.Models
         }
 
 
-        public static void UcitajAdrese(string filename)
+        public static void UcitajAdrese()
         {
-
-
-            using (StreamReader file = new StreamReader(@"../../Resources/" + filename))
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
-                string line;
+                conn.Open();
+                DataSet ds = new DataSet();
 
-                while ((line = file.ReadLine()) != null)
+                string selectedUser = @"select * from Adresa";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
+                dataAdapter.Fill(ds, "Adresa");
+
+                foreach (DataRow dataRow in ds.Tables["Adresa"].Rows)
                 {
-                    string[] korisnikIzFajla = line.Split(';');
-                
 
                     Adresa adresa = new Adresa
                     {
-
-                        Id = Int32.Parse(korisnikIzFajla[0]),
-                        Ulica = korisnikIzFajla[1],
-                        Broj = Int32.Parse(korisnikIzFajla[2]),
-                        Grad = korisnikIzFajla[3],
-                        Drzava = korisnikIzFajla[4]
+                        Id = int.Parse(dataRow["Id"].ToString()),
+                        Drzava = dataRow["Drzava"].ToString(),
+                        Grad = dataRow["Grad"].ToString(),
+                        Ulica = dataRow["Ulica"].ToString(),
+                        Broj = int.Parse(dataRow["Broj"].ToString())
 
 
                     };
-
                     Adrese.Add(adresa);
                 }
             }
@@ -399,7 +454,7 @@ namespace SR30_2021_POP2022.Models
         //---------------------------------------------------------------------------------------------------------
 
 
-        public static void ObrisiProfesora(string email)
+        /*public static void ObrisiProfesora(string email)
         {
              Profesor p = Profesori.ToList().Find(k => k.Email.Contains(email));
              if (p == null)
@@ -442,7 +497,7 @@ namespace SR30_2021_POP2022.Models
             c.Obrisan = true;
             SacuvajCas("casovi.txt");
         }
-
+        */
         //---------------------------------------------------------------------------------------------------------
 
 

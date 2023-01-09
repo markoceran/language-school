@@ -111,7 +111,7 @@ namespace SR30_2021_POP2022.Windows
 
                 Cas c = (Cas)dgCasovi.SelectedItem;
 
-                Data.ObrisiCas(c.Id);
+                //Data.ObrisiCas(c.Id);
                 view.Refresh();
 
             }

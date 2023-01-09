@@ -52,7 +52,7 @@ namespace SR30_2021_POP2022.Windows
             DodajIzmeniProfesoraProzor dodajIzmeniProfesoraProzor = new DodajIzmeniProfesoraProzor(p)
             {
                 Title = "Dodaj"
-            };
+            };                   
             dodajIzmeniProfesoraProzor.ShowDialog();
             view.Refresh();
         }
@@ -115,7 +115,7 @@ namespace SR30_2021_POP2022.Windows
 
                 Profesor p = (Profesor)dgProfesori.SelectedItem;
 
-                Data.ObrisiProfesora(p.Email);
+                //Data.ObrisiProfesora(p.Email);
                 view.Refresh();
 
             }

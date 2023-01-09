@@ -58,7 +58,7 @@ namespace SR30_2021_POP2022.Windows
             }
 
             
-            Data.SacuvajCas("casovi.txt");
+            Data.SacuvajCas(selektovaniCas);
             this.DialogResult = true;
             this.Close();
 

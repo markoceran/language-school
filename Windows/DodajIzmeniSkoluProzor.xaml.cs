@@ -71,7 +71,7 @@ namespace SR30_2021_POP2022.Windows
 
                     selektovanaSkola.Obrisana = false;
                     Data.Adrese.Add(selektovanaSkola.Adresa);
-                    Data.SacuvajAdresu("adrese.txt");
+                    Data.SacuvajAdresu(selektovanaSkola.Adresa);
                     Data.Skole.Add(selektovanaSkola);
 
                     if (listBoxJezici.SelectedItems.Count > 0)
@@ -94,7 +94,7 @@ namespace SR30_2021_POP2022.Windows
                     ad.Ulica = txtUlica.Text;
                     ad.Broj = int.Parse(txtBroj.Text);
                     ad.Grad = txtGrad.Text;
-                    Data.SacuvajAdresu("adrese.txt");
+                    Data.SacuvajAdresu(selektovanaSkola.Adresa);
 
                     selektovanaSkola.Jezici.Clear();
 
@@ -110,7 +110,7 @@ namespace SR30_2021_POP2022.Windows
 
 
                 //Data.SacuvajAdresu("adrese.txt");
-                Data.SacuvajSkolu("skole.txt");
+                Data.SacuvajSkolu(selektovanaSkola);
                 this.DialogResult = true;
                 this.Close();
 

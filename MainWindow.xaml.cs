@@ -29,12 +29,12 @@ namespace SR30_2021_POP2022
             InitializeComponent();
 
 
-            Data.UcitajAdrese("adrese.txt");
-            Data.UcitajSkole("skole.txt");
-            Data.UcitajAdmina("administratori.txt");
-            Data.UcitajProfesora("profesori.txt");
-            Data.UcitajStudenta("studenti.txt");
-            Data.UcitajCasove("casovi.txt");
+            Data.UcitajAdrese();
+            Data.UcitajSkole();
+            Data.UcitajAdmina();
+            Data.UcitajProfesora();
+            Data.UcitajStudenta();
+            Data.UcitajCasove();
 
             
         }

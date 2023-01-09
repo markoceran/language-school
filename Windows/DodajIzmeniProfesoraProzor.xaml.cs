@@ -65,9 +65,12 @@ namespace SR30_2021_POP2022.Windows
 
                     selektovaniProfesor.TipKorisnika = ETipRegKorisnika.PROFESOR;
                     selektovaniProfesor.Aktivan = true;
+
                     Data.Adrese.Add(selektovaniProfesor.Adresa);
-                    Data.SacuvajAdresu("adrese.txt");
+                    Data.SacuvajAdresu(selektovaniProfesor.Adresa);
+                 
                     Data.Profesori.Add(selektovaniProfesor);
+                    Data.SacuvajProfesora(selektovaniProfesor);                  
 
                 }
 
@@ -78,17 +81,18 @@ namespace SR30_2021_POP2022.Windows
                     /*Skola sk = Data.Skole.ToList().Find(pr => pr.Id.ToString().Equals(txtSkola.Text));
                     selektovaniProfesor.Skola = sk;*/
                     //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
-                    Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniProfesor.Adresa.Id));
+                    /*Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniProfesor.Adresa.Id));
                     ad.Drzava = txtDrzava.Text;
                     ad.Ulica = txtUlica.Text;
                     ad.Broj = int.Parse(txtBroj.Text);
-                    ad.Grad = txtGrad.Text;
-                    Data.SacuvajAdresu("adrese.txt");
+                    ad.Grad = txtGrad.Text;*/
+                    Data.IzmeniAdresu(selektovaniProfesor.Adresa);
+                    Data.IzmeniProfesora(selektovaniProfesor);
 
                 }
 
-                //Data.SacuvajAdresu("adrese.txt");
-                Data.SacuvajProfesora("profesori.txt");
+               //Data.SacuvajAdresu(selektovaniProfesor.Adresa);
+               //Data.SacuvajProfesora(selektovaniProfesor);
                 this.DialogResult = true;
                 this.Close();
 

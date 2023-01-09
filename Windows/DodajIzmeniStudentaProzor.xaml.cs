@@ -70,7 +70,7 @@ namespace SR30_2021_POP2022.Windows
                     selektovaniStudent.TipKorisnika = ETipRegKorisnika.STUDENT;
                     selektovaniStudent.Aktivan = true;
                     Data.Adrese.Add(selektovaniStudent.Adresa);
-                    Data.SacuvajAdresu("adrese.txt");
+                    Data.SacuvajAdresu(selektovaniStudent.Adresa);
                     Data.Studenti.Add(selektovaniStudent);
 
                 }
@@ -84,13 +84,13 @@ namespace SR30_2021_POP2022.Windows
                     ad.Ulica = txtUlica.Text;
                     ad.Broj = int.Parse(txtBroj.Text);
                     ad.Grad = txtGrad.Text;
-                    Data.SacuvajAdresu("adrese.txt");
+                    Data.SacuvajAdresu(selektovaniStudent.Adresa);
 
                 }
 
 
                 //Data.SacuvajAdresu("adrese.txt");
-                Data.SacuvajStudenta("studenti.txt");
+                Data.SacuvajStudenta(selektovaniStudent);
                 this.DialogResult = true;
                 this.Close();
             }

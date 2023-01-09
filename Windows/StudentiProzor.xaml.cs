@@ -117,7 +117,7 @@ namespace SR30_2021_POP2022.Windows
 
                 Student s = (Student)dgStudenti.SelectedItem;
                     
-                Data.ObrisiStudenta(s.Email);
+                //Data.ObrisiStudenta(s.Email);
                 view.Refresh();
 
             }
