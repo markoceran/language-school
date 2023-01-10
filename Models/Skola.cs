@@ -36,7 +36,7 @@ namespace SR30_2021_POP2022.Models
 
         public int Id { get => id; set => id = value; }
         public string Naziv { get => naziv; set => naziv = value; }
-        public List<string> Jezici { get => jezici; set => jezici = value; }
+        public string Jezici { get => jezici; set => jezici = value; }
         public Adresa Adresa { get => adresa; set => adresa = value; }
         public bool Obrisana { get => obrisana; set => obrisana = value; }
         public bool IsValid { get; set; }
