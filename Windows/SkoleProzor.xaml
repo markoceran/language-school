@@ -7,12 +7,37 @@
         mc:Ignorable="d"
         Title="Škole" Height="450" Width="800">
     <Grid>
+        
         <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="800">
             <MenuItem Name="miDodajSkolu" Header="Dodaj školu" Click="miDodajSkolu_Click"/>
             <MenuItem Name="miIzmeniSkolu" Header="Izmeni školu" Click="miIzmeniSkolu_Click"/>
             <MenuItem Name="miObrisiSkolu" Header="Obriši školu" Click="miObrisiSkolu_Click"/>
         </Menu>
-        <DataGrid  Name="dgSkole" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780" />
+        
+        
+        <DataGrid  Name="dgSkole" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780">
 
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Path=Naziv}" />
+                <DataGridTextColumn Header="Adresa" Binding="{Binding Path=Adresa}" />
+                <DataGridTextColumn Header="Obrisana" Binding="{Binding Path=Obrisana}" />
+
+                <DataGridTemplateColumn Header="Jezici">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListBox ItemsSource="{Binding Path=Jezici}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+            
+            
+
+        </DataGrid>
+
+        
     </Grid>
 </Window>

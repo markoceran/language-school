@@ -32,7 +32,7 @@ namespace SR30_2021_POP2022.Windows
             view.Filter = Filter;
             dgCasovi.ItemsSource = view;
             dgCasovi.IsReadOnly = true;
-              
+            
         }
 
         private bool Filter(object obj)
@@ -85,7 +85,7 @@ namespace SR30_2021_POP2022.Windows
                 {
                     Title = "Izmeni"
                 };
-                dodajIzmeniCasProzor.txtId.IsEnabled = false;
+                
 
 
 
@@ -111,7 +111,7 @@ namespace SR30_2021_POP2022.Windows
 
                 Cas c = (Cas)dgCasovi.SelectedItem;
 
-                //Data.ObrisiCas(c.Id);
+                Data.ObrisiCas(c.Id);
                 view.Refresh();
 
             }

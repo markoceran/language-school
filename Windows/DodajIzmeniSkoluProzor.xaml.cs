@@ -2,7 +2,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +26,8 @@ namespace SR30_2021_POP2022.Windows
     public partial class DodajIzmeniSkoluProzor : Window
     {
         private Skola selektovanaSkola;
+        ICollectionView viewJezici;
+     
 
         public DodajIzmeniSkoluProzor(Skola skola)
         {
@@ -31,12 +37,10 @@ namespace SR30_2021_POP2022.Windows
 
             this.DataContext = skola;
 
-            //Vec zadani jezici
+            viewJezici = CollectionViewSource.GetDefaultView(Data.Jezici);
+            listBoxJezici.ItemsSource = viewJezici;
 
-            listBoxJezici.Items.Add("engleski");
-            listBoxJezici.Items.Add("nemacki");
-            listBoxJezici.Items.Add("turski");
-            listBoxJezici.Items.Add("ruski");        
+            
 
         }
 
@@ -69,55 +73,86 @@ namespace SR30_2021_POP2022.Windows
                         selektovanaSkola.Adresa.Id = 1;
                     }
 
+                    if (!Data.Skole.Count.Equals(0))
+                    {
+                        selektovanaSkola.Id = Data.Skole.Last().Id + 1;
+
+                    }
+                    else
+                    {
+                        selektovanaSkola.Id = 1;
+                    }
+
                     selektovanaSkola.Obrisana = false;
+
+
+
                     Data.Adrese.Add(selektovanaSkola.Adresa);
                     Data.SacuvajAdresu(selektovanaSkola.Adresa);
+
                     Data.Skole.Add(selektovanaSkola);
+                    Data.SacuvajSkolu(selektovanaSkola);
+
 
                     if (listBoxJezici.SelectedItems.Count > 0)
                     {
-                        foreach (string str in listBoxJezici.SelectedItems)
+
+                        foreach (string i in listBoxJezici.SelectedItems)
                         {
-                            selektovanaSkola.Jezici.Add(str);
+                            using (SqlConnection conn = new SqlConnection(Data.CONNECTION_STRING))
+                            {
+                                conn.Open();
+
+                                string users = "select * from JezikSkola";
+
+                                DataSet ds = new DataSet();
+                                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                                dataAdapter.Fill(ds, "JezikSkola");
+
+
+                                DataRow newRow = ds.Tables["JezikSkola"].NewRow();
+                                newRow["SkolaId"] = selektovanaSkola.Id;
+                                newRow["Jezik"] = i;
+
+                                ds.Tables["JezikSkola"].Rows.Add(newRow);
+
+                                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                                dataAdapter.Update(ds.Tables["JezikSkola"]);
+
+
+                            }
+
+                            selektovanaSkola.Jezici.Add(i);
 
                         }
+
                     }
+                   
 
                 }
 
-                //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
+                
                 if (this.Title.Equals("Izmeni"))
-                {
+                {                                    
 
-                    Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovanaSkola.Adresa.Id));
-                    ad.Drzava = txtDrzava.Text;
-                    ad.Ulica = txtUlica.Text;
-                    ad.Broj = int.Parse(txtBroj.Text);
-                    ad.Grad = txtGrad.Text;
-                    Data.SacuvajAdresu(selektovanaSkola.Adresa);
-
-                    selektovanaSkola.Jezici.Clear();
-
-                    if (listBoxJezici.SelectedItems.Count > 0)
+                    if(listBoxJezici.SelectedItems.Count > 0)
                     {
-                        foreach (string str in listBoxJezici.SelectedItems)
-                        {
-                            selektovanaSkola.Jezici.Add(str);
-                        }
+                        Data.IzmeniJezik(selektovanaSkola, listBoxJezici.SelectedItems);
+
                     }
 
+                    /*else
+                    {                                            
+                        selektovanaSkola.Jezici = Data.Skole.ToList().Find(s => s.Id.Equals(selektovanaSkola.Id)).Jezici;
+                    }*/
+
+                    Data.IzmeniAdresu(selektovanaSkola.Adresa);
+                    Data.IzmeniSkolu(selektovanaSkola);
+
                 }
-
-
-                //Data.SacuvajAdresu("adrese.txt");
-                Data.SacuvajSkolu(selektovanaSkola);
+           
                 this.DialogResult = true;
                 this.Close();
-
-
-            
-                
-
 
         }
             
@@ -127,8 +162,28 @@ namespace SR30_2021_POP2022.Windows
            
             if (txtDodajNoviJezik.Text != "")
             {
-                listBoxJezici.Items.Add(txtDodajNoviJezik.Text);
-                txtDodajNoviJezik.Text = "";
+                using (SqlConnection conn = new SqlConnection(Data.CONNECTION_STRING))
+                {
+                    conn.Open();
+                    DataSet ds = new DataSet();
+
+                    string users = "select * from Jezik";
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                    dataAdapter.Fill(ds, "Jezik");
+
+                    DataRow newRow = ds.Tables["Jezik"].NewRow();
+                    newRow["Naziv"] = txtDodajNoviJezik.Text;
+                   
+                    ds.Tables["Jezik"].Rows.Add(newRow);
+
+                    SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    dataAdapter.Update(ds.Tables["Jezik"]);
+                   
+                }
+
+                Data.Jezici.Add(txtDodajNoviJezik.Text);
+                viewJezici.Refresh();
+                txtDodajNoviJezik.Text = "";              
             }
             
         }

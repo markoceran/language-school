@@ -31,6 +31,8 @@ namespace SR30_2021_POP2022.Windows
             view.Filter = Filter;
             dgSkole.ItemsSource = view;
             dgSkole.IsReadOnly = true;
+
+
         }
 
         private bool Filter(object obj)
@@ -85,8 +87,8 @@ namespace SR30_2021_POP2022.Windows
                     Title = "Izmeni"
                     
                 };
-                dodajIzmeniSkoluProzor.txtId.IsEnabled = false;
                 
+
 
                 if ((bool)!dodajIzmeniSkoluProzor.ShowDialog())
                 {
@@ -108,7 +110,7 @@ namespace SR30_2021_POP2022.Windows
 
                 Skola s = (Skola)dgSkole.SelectedItem;
 
-                //Data.ObrisiSkolu(s.Id);
+                Data.ObrisiSkolu(s.Id);
                 view.Refresh();
 
             }

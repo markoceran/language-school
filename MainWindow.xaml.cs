@@ -35,6 +35,7 @@ namespace SR30_2021_POP2022
             Data.UcitajProfesora();
             Data.UcitajStudenta();
             Data.UcitajCasove();
+            Data.UcitajJezike();
 
             
         }

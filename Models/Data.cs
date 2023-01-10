@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using SR30_2021_POP2022.Exceptions;
-
+using System.Collections;
 
 namespace SR30_2021_POP2022.Models
 {
@@ -23,46 +23,12 @@ namespace SR30_2021_POP2022.Models
         public static ObservableCollection<Cas> Casovi = new ObservableCollection<Cas>();
         public static ObservableCollection<Skola> Skole = new ObservableCollection<Skola>();
 
+        public static ObservableCollection<string> Jezici = new ObservableCollection<string>();
+
         public static readonly string CONNECTION_STRING = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\FTN PREDAVANJA I MATERIJAL\\Platforme za objektno programiranje\\SR30-2021-POP2022\\Database.mdf\";Integrated Security=True;Connect Timeout=30";
 
 
         //---------------------------------------------------------------------------------------------------------
-
-
-        public static int SacuvajProfesora(Profesor profesor)
-        {
-
-            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
-            {
-                conn.Open();
-
-                string users = "select * from Profesor";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
-                dataAdapter.Fill(ds, "Profesor");
-
-               
-                DataRow newRow = ds.Tables["Profesor"].NewRow();            
-                newRow["Ime"] = profesor.Ime;
-                newRow["Prezime"] = profesor.Prezime;
-                newRow["Jmbg"] = profesor.Jmbg;
-                newRow["Email"] = profesor.Email;
-                newRow["Lozinka"] = profesor.Lozinka;
-                newRow["AdresaId"] = profesor.Adresa.Id;
-                newRow["SkolaId"] = profesor.Skola.Id;
-                newRow["Pol"] = profesor.Pol;
-                newRow["TipKorisnika"] = profesor.TipKorisnika;
-                newRow["Aktivan"] = profesor.Aktivan;
-
-                ds.Tables["Profesor"].Rows.Add(newRow);
-
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-                dataAdapter.Update(ds.Tables["Profesor"]);
-
-                return Profesori.Count + 1; //vracam id kao povratnu vrednost
-            }
-        }
 
 
         public static void IzmeniProfesora(Profesor profesor)
@@ -95,6 +61,35 @@ namespace SR30_2021_POP2022.Models
             }
         }
 
+        public static void IzmeniStudenta(Student student)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"update dbo.Student
+                set Ime = @Ime,Prezime = @Prezime,Jmbg = @Jmbg,Email = @Email,Lozinka = @Lozinka,
+                    AdresaId = @AdresaId, Pol = @Pol,TipKorisnika = @TipKorisnika,Aktivan=@Aktivan
+                    where Email = @Email";
+
+
+                Enum.TryParse("" + student.Pol + "", out EPol pol);
+
+                command.Parameters.Add(new SqlParameter("Ime", student.Ime));
+                command.Parameters.Add(new SqlParameter("Prezime", student.Prezime));
+                command.Parameters.Add(new SqlParameter("Jmbg", student.Jmbg));
+                command.Parameters.Add(new SqlParameter("Email", student.Email));
+                command.Parameters.Add(new SqlParameter("Lozinka", student.Lozinka));
+                command.Parameters.Add(new SqlParameter("AdresaId", student.Adresa.Id));             
+                command.Parameters.Add(new SqlParameter("Pol", pol.ToString()));
+                command.Parameters.Add(new SqlParameter("TipKorisnika", ETipRegKorisnika.STUDENT.ToString()));
+                command.Parameters.Add(new SqlParameter("Aktivan", student.Aktivan));
+                command.ExecuteScalar();
+            }
+        }
+
         public static void IzmeniAdresu(Adresa adresa)
         {
 
@@ -115,6 +110,130 @@ namespace SR30_2021_POP2022.Models
             }
         }
 
+        public static void IzmeniSkolu(Skola skola)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"update dbo.Skola
+                set Id = @Id, Naziv = @Naziv, AdresaId = @AdresaId, Obrisana = @Obrisana
+                where Id = @Id";
+
+                command.Parameters.Add(new SqlParameter("Id", skola.Id));
+                command.Parameters.Add(new SqlParameter("Naziv", skola.Naziv));
+                command.Parameters.Add(new SqlParameter("AdresaId", skola.Adresa.Id));
+                command.Parameters.Add(new SqlParameter("Obrisana", skola.Obrisana));              
+                command.ExecuteScalar();
+            }
+        }
+
+        public static void IzmeniCas(Cas cas)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"update dbo.Cas
+                set Id = @Id, ProfesorEmail = @ProfesorEmail, StudentEmail = @StudentEmail, DatumOdrzavanja = @DatumOdrzavanja,
+                VremePocetka = @VremePocetka, Trajanje = @Trajanje, Status = @Status, Obrisan = @Obrisan
+                where Id = @Id";
+
+                Enum.TryParse("" + cas.Status + "", out EStatusCasa status);
+
+                command.Parameters.Add(new SqlParameter("Id", cas.Id));
+                command.Parameters.Add(new SqlParameter("ProfesorEmail", cas.Profesor.Email));
+                command.Parameters.Add(new SqlParameter("StudentEmail", cas.Student.Email));
+                command.Parameters.Add(new SqlParameter("DatumOdrzavanja", cas.DatumOdrzavanja));
+                command.Parameters.Add(new SqlParameter("VremePocetka", cas.VremePocetka));
+                command.Parameters.Add(new SqlParameter("Trajanje", cas.Trajanje));
+                command.Parameters.Add(new SqlParameter("Status", status.ToString()));
+                command.Parameters.Add(new SqlParameter("Obrisan", cas.Obrisan));
+                command.ExecuteScalar();
+            }
+        }
+
+        public static void IzmeniJezik(Skola skola,IList selektovaniJezici)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+            
+                command.CommandText = @"delete from dbo.JezikSkola
+                where SkolaId = @SkolaId";
+          
+                command.Parameters.Add(new SqlParameter("SkolaId", skola.Id));
+                command.ExecuteScalar(); 
+                skola.Jezici.Clear();
+
+                foreach (string j in selektovaniJezici)
+                {
+                    string users = "select * from JezikSkola";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                    dataAdapter.Fill(ds, "JezikSkola");
+
+
+                    DataRow newRow = ds.Tables["JezikSkola"].NewRow();
+                    newRow["SkolaId"] = skola.Id;
+                    newRow["Jezik"] = j;
+
+                    ds.Tables["JezikSkola"].Rows.Add(newRow);
+
+                    SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    dataAdapter.Update(ds.Tables["JezikSkola"]);
+
+                    skola.Jezici.Add(j);
+                }
+
+               
+                
+                
+            }
+        }
+        //---------------------------------------------------------------------------------------------------------
+
+        public static int SacuvajProfesora(Profesor profesor)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+
+                string users = "select * from Profesor";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                dataAdapter.Fill(ds, "Profesor");
+
+
+                DataRow newRow = ds.Tables["Profesor"].NewRow();
+                newRow["Ime"] = profesor.Ime;
+                newRow["Prezime"] = profesor.Prezime;
+                newRow["Jmbg"] = profesor.Jmbg;
+                newRow["Email"] = profesor.Email;
+                newRow["Lozinka"] = profesor.Lozinka;
+                newRow["AdresaId"] = profesor.Adresa.Id;
+                newRow["SkolaId"] = profesor.Skola.Id;
+                newRow["Pol"] = profesor.Pol;
+                newRow["TipKorisnika"] = profesor.TipKorisnika;
+                newRow["Aktivan"] = profesor.Aktivan;
+
+                ds.Tables["Profesor"].Rows.Add(newRow);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Update(ds.Tables["Profesor"]);
+
+                return Profesori.Count + 1; //vracam id kao povratnu vrednost
+            }
+        }
 
         public static int SacuvajStudenta(Student student)
         {
@@ -400,8 +519,14 @@ namespace SR30_2021_POP2022.Models
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
                 dataAdapter.Fill(ds, "Skola");
 
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"select Jezik from dbo.JezikSkola
+                where SkolaId = @SkId";
+
+
                 foreach (DataRow dataRow in ds.Tables["Skola"].Rows)
                 {
+                    command.Parameters.Clear();
 
                     Skola skola = new Skola
                     {
@@ -412,10 +537,25 @@ namespace SR30_2021_POP2022.Models
 
 
                     };
+                    
+                    command.Parameters.Add(new SqlParameter("SkId", skola.Id));
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            skola.Jezici.Add(reader[0].ToString());
+                        }
+                        //Console.WriteLine(String.Format("{0}", reader["Jezik"]));
+                        
+                    }
+                    
+                   
+
                     Skole.Add(skola);
                 }
             }
-
+            
         }
 
 
@@ -450,54 +590,132 @@ namespace SR30_2021_POP2022.Models
         }
 
 
+        public static void UcitajJezike()
+        {
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                DataSet ds = new DataSet();
+            
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"select * from dbo.Jezik";
+
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                     while (reader.Read())
+                     {
+                            Jezici.Add(reader[0].ToString());
+                     }     
+
+                }
+                
+            }
+
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
 
-        /*public static void ObrisiProfesora(string email)
+        public static void ObrisiProfesora(string email)
         {
-             Profesor p = Profesori.ToList().Find(k => k.Email.Contains(email));
-             if (p == null)
-             {
-                 throw new UserNotFoundException($"Ne postoji taj korisnik sa email adresom {email}");
-             }
-             p.Aktivan = false;
-            SacuvajProfesora("profesori.txt");
+            Profesor profesor = Profesori.ToList().Find(k => k.Email.Contains(email));
+            if (profesor == null)
+            {
+                throw new UserNotFoundException($"Ne postoji taj korisnik");
+            }
+            profesor.Aktivan = false;
+            
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update Profesor
+                                        set Aktivan = @Aktivan
+                                        where Email = @Email";
+                command.Parameters.Add(new SqlParameter("Aktivan", profesor.Aktivan));
+                command.Parameters.Add(new SqlParameter("Email", profesor.Email));
+
+                command.ExecuteNonQuery();
+
+            }
         }
 
         public static void ObrisiStudenta(string email)
         {
-            Student s = Studenti.ToList().Find(k => k.Email.Contains(email));
-            if (s == null)
+            Student student = Studenti.ToList().Find(k => k.Email.Contains(email));
+            if (student == null)
             {
-                throw new UserNotFoundException($"Ne postoji taj korisnik sa email adresom {email}");
+                throw new UserNotFoundException($"Ne postoji taj korisnik");
             }
-            s.Aktivan = false;
-            SacuvajStudenta("studenti.txt");
+            student.Aktivan = false;
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update Student
+                                        set Aktivan = @Aktivan
+                                        where Email = @Email";
+                command.Parameters.Add(new SqlParameter("Aktivan", student.Aktivan));
+                command.Parameters.Add(new SqlParameter("Email", student.Email));
+
+                command.ExecuteNonQuery();
+
+            }
         }
 
-        public static void ObrisiSkolu(int id)
+        public static void ObrisiSkolu(int Id)
         {
-            Skola s = Skole.ToList().Find(sk => sk.Id == id);
-            if (s == null)
+            Skola skola = Skole.ToList().Find(k => k.Id.Equals(Id));
+            if (skola == null)
             {
-                throw new UserNotFoundException($"Ne postoji skola sa id {id}");
+                throw new UserNotFoundException($"Ne postoji ta skola");
             }
-            s.Obrisana = true;
-            SacuvajSkolu("skole.txt");
+            skola.Obrisana = true;
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update Skola
+                                        set Obrisana = @Obrisana
+                                        where Id = @Id";
+                command.Parameters.Add(new SqlParameter("Obrisana", skola.Obrisana));
+                command.Parameters.Add(new SqlParameter("Id", skola.Id));
+
+                command.ExecuteNonQuery();
+
+            }
         }
 
-        public static void ObrisiCas(int id)
+        public static void ObrisiCas(int Id)
         {
-            Cas c = Casovi.ToList().Find(k => k.Id == (id));
-            if (c == null)
+            Cas cas = Casovi.ToList().Find(k => k.Id.Equals(Id));
+            if (cas == null)
             {
-                throw new UserNotFoundException($"Ne postoji taj cas koji ima id {id}");
+                throw new UserNotFoundException($"Ne postoji taj cas");
             }
-            c.Obrisan = true;
-            SacuvajCas("casovi.txt");
+            cas.Obrisan = true;
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update Cas
+                                        set Obrisan = @Obrisan
+                                        where Id = @Id";
+                command.Parameters.Add(new SqlParameter("Obrisan", cas.Obrisan));
+                command.Parameters.Add(new SqlParameter("Id", cas.Id));
+
+                command.ExecuteNonQuery();
+
+            }
         }
-        */
+
+
+
+
         //---------------------------------------------------------------------------------------------------------
 
 

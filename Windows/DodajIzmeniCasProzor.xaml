@@ -27,16 +27,14 @@
 
         </Grid.RowDefinitions>
 
-        <Label Content="Id :" Name="lblId" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128"/>
+        
         <Label Content="Datum održavanja :" Name="lblDatum" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="1"/>
         <Label Content="Vreme početka :" Name="lblVreme" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="2"/>
         <Label Content="Trajanje :" Name="lblTrajanje" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="3"/>
         <Label Content="Profesor :" Name="lblProfesor" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="4"/>
         <Label Content="Student :" Name="lblStudent" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="5"/>
         <Label Content="Status :" Name="lblStatus" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="6"/>
-        
-
-        <TextBox Name="txtId" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Text="{Binding Path=Id}"/>
+      
 
         <DatePicker Name="pickerDatum" Grid.Column="1" HorizontalAlignment="Left" Height="35" VerticalAlignment="Center" Width="168" Grid.Row="1" SelectedDate="{Binding Path=DatumOdrzavanja , StringFormat='dd/MM/yyyy'}" FirstDayOfWeek="Monday" SelectedDateFormat="Short"/>
 

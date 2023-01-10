@@ -29,7 +29,7 @@
             <RowDefinition Height="18*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Id :" Name="lblId" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128"/>
+        
         <Label Content="Naziv :" Name="lblNaziv" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="1"/>
         <Label Content="Adresa :" Name="lblAdresa" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="2"/>
         <Label Content="Jezici :" Name="lblJezici" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="128" Grid.Row="9" Margin="0,10,0,0"/>
@@ -38,7 +38,7 @@
         <Label Content="Ulica :" Name="lblUlica" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="5"/>
         <Label Content="Broj :" Name="lblBroj" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="128" Grid.Row="6"/>
 
-        <TextBox Name="txtId" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Text="{Binding Path=Id}"/>
+        
         <TextBox Name="txtNaziv" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="1" Text="{Binding Path=Naziv , ValidatesOnDataErrors=True}"/>
         <TextBox Name="txtDrzava" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="3" Text="{Binding Path=Adresa.Drzava}" />
         <TextBox Name="txtGrad" Grid.Column="1" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="168" Grid.Row="4" Text="{Binding Path=Adresa.Grad}" />

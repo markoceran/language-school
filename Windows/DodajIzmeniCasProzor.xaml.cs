@@ -50,18 +50,32 @@ namespace SR30_2021_POP2022.Windows
 
             if (this.Title.Equals("Dodaj"))
             {
-                
+                if (!Data.Casovi.Count.Equals(0))
+                {
+                    selektovaniCas.Id = Data.Casovi.Last().Id + 1;
+
+                }
+                else
+                {
+                    selektovaniCas.Id = 1;
+                }
+
                 selektovaniCas.Status = EStatusCasa.SLOBODAN;
                 selektovaniCas.Obrisan = false;
+
                 Data.Casovi.Add(selektovaniCas);
+                Data.SacuvajCas(selektovaniCas);
 
             }
 
-            
-            Data.SacuvajCas(selektovaniCas);
+            if (this.Title.Equals("Izmeni"))
+            {             
+                Data.IzmeniCas(selektovaniCas);
+
+            }
+
             this.DialogResult = true;
             this.Close();
-
 
         }
     }

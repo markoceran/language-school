@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace SR30_2021_POP2022.Models
 {
@@ -36,17 +38,20 @@ namespace SR30_2021_POP2022.Models
 
         public int Id { get => id; set => id = value; }
         public string Naziv { get => naziv; set => naziv = value; }
-        public string Jezici { get => jezici; set => jezici = value; }
+        public List<string> Jezici { get => jezici; set => jezici = value; }
         public Adresa Adresa { get => adresa; set => adresa = value; }
         public bool Obrisana { get => obrisana; set => obrisana = value; }
         public bool IsValid { get; set; }
 
+
+        
+
         public override string ToString()
-        {
+        {  
             return " Naziv: " + Naziv + " Adresa: " + Adresa + " Jezici: " + Jezici;
         }
 
-        public string SkolaZaUpisUFajl()
+        /*public string SkolaZaUpisUFajl()
         { 
             string i = "";
 
@@ -58,7 +63,7 @@ namespace SR30_2021_POP2022.Models
             i = i.Substring(0, i.Length - 1);
 
             return Id + ";" + Naziv + ";" + Adresa.Id + ";" + i + ";" + Obrisana;
-        }
+        }*/
 
 
 
