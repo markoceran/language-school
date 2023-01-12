@@ -12,7 +12,35 @@
             <MenuItem Name="miIzmeniStudenta" Header="Izmeni studenta" Click="miIzmeniStudenta_Click"/>
             <MenuItem Name="miObrisiStudenta" Header="Obriši studenta" Click="miObrisiStudenta_Click"/>
         </Menu>
-        <DataGrid  Name="dgStudenti" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780" />
+
+
+        <DataGrid  Name="dgStudenti" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Ime" Binding="{Binding Path=Ime}"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Path=Prezime}" />
+                <DataGridTextColumn Header="Jmbg" Binding="{Binding Path=Jmbg}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" />
+                <DataGridTextColumn Header="Lozinka" Binding="{Binding Path=Lozinka}" />
+                <DataGridTextColumn Header="Pol" Binding="{Binding Path=Pol}" />
+                <DataGridTextColumn Header="Adresa" Binding="{Binding Path=Adresa}" />
+                <DataGridTextColumn Header="Tip korisnika" Binding="{Binding Path=TipKorisnika}" />
+                <DataGridTextColumn Header="Aktivan" Binding="{Binding Path=Aktivan}" />
+
+                <DataGridTemplateColumn Header="Rezervisani casovi">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListBox ItemsSource="{Binding Path=RezervisaniCasovi}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+
 
     </Grid>
 </Window>

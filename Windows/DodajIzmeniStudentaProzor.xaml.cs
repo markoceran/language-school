@@ -80,14 +80,7 @@ namespace SR30_2021_POP2022.Windows
 
                
                 if (this.Title.Equals("Izmeni"))
-                {
-
-                    /*Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniStudent.Adresa.Id));
-                    ad.Drzava = txtDrzava.Text;
-                    ad.Ulica = txtUlica.Text;
-                    ad.Broj = int.Parse(txtBroj.Text);
-                    ad.Grad = txtGrad.Text;
-                    Data.SacuvajAdresu(selektovaniStudent.Adresa);*/
+                {                 
                     Data.IzmeniAdresu(selektovaniStudent.Adresa);
                     Data.IzmeniStudenta(selektovaniStudent);
 

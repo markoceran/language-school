@@ -48,7 +48,7 @@ namespace SR30_2021_POP2022.Models
 
         public override string ToString()
         {  
-            return " Naziv: " + Naziv + " Adresa: " + Adresa + " Jezici: " + Jezici;
+            return " Naziv: " + Naziv + " Adresa: " + Adresa + " Obrisana: " + Obrisana;
         }
 
         /*public string SkolaZaUpisUFajl()

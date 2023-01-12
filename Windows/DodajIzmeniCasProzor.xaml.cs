@@ -64,13 +64,23 @@ namespace SR30_2021_POP2022.Windows
                 selektovaniCas.Obrisan = false;
 
                 Data.Casovi.Add(selektovaniCas);
+                selektovaniCas.Profesor.Casovi.Add(selektovaniCas);
+                selektovaniCas.Student.RezervisaniCasovi.Add(selektovaniCas);
                 Data.SacuvajCas(selektovaniCas);
 
             }
 
             if (this.Title.Equals("Izmeni"))
-            {             
+            {   
+                //sinhronizacija izmedju prozora cas i profesor, cas i student
                 Data.IzmeniCas(selektovaniCas);
+                Data.Casovi.Clear();
+                Data.Profesori.Clear();
+                Data.UcitajProfesora();
+                Data.Studenti.Clear();
+                Data.UcitajStudenta();
+                Data.UcitajCasove();
+            
 
             }
 
@@ -78,5 +88,6 @@ namespace SR30_2021_POP2022.Windows
             this.Close();
 
         }
+
     }
 }

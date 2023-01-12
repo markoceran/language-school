@@ -1,6 +1,9 @@
 ﻿using SR30_2021_POP2022.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +24,7 @@ namespace SR30_2021_POP2022.Windows
     public partial class DodajIzmeniProfesoraProzor : Window
     {
         private Profesor selektovaniProfesor;
+        ICollectionView viewJezici;
 
         public DodajIzmeniProfesoraProzor(Profesor profesor)
         {
@@ -32,6 +36,7 @@ namespace SR30_2021_POP2022.Windows
 
             cmbPol.ItemsSource = Enum.GetValues(typeof(EPol));
             cmbSkola.ItemsSource = Data.Skole;
+              
 
         }
 
@@ -70,29 +75,63 @@ namespace SR30_2021_POP2022.Windows
                     Data.SacuvajAdresu(selektovaniProfesor.Adresa);
                  
                     Data.Profesori.Add(selektovaniProfesor);
-                    Data.SacuvajProfesora(selektovaniProfesor);                  
+                    Data.SacuvajProfesora(selektovaniProfesor);
 
+                    if (listBoxJezici.SelectedItems.Count > 0)
+                    {
+
+                        foreach (string i in listBoxJezici.SelectedItems)
+                        {
+                            using (SqlConnection conn = new SqlConnection(Data.CONNECTION_STRING))
+                            {
+                                conn.Open();
+
+                                string users = "select * from JezikProfesor";
+
+                                DataSet ds = new DataSet();
+                                SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                                dataAdapter.Fill(ds, "JezikProfesor");
+
+
+                                DataRow newRow = ds.Tables["JezikProfesor"].NewRow();
+                                newRow["ProfesorEmail"] = selektovaniProfesor.Email;
+                                newRow["Jezik"] = i;
+
+                                ds.Tables["JezikProfesor"].Rows.Add(newRow);
+
+                                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                                dataAdapter.Update(ds.Tables["JezikProfesor"]);
+
+
+                            }
+
+                            selektovaniProfesor.Jezici.Add(i);
+
+                        }
+
+                    }
                 }
 
                
                 if (this.Title.Equals("Izmeni"))
-                {                  
+                {
+                    if (listBoxJezici.SelectedItems.Count > 0)
+                    {
+                        Data.IzmeniJezikProfesora(selektovaniProfesor, listBoxJezici.SelectedItems);
 
-                    /*Skola sk = Data.Skole.ToList().Find(pr => pr.Id.ToString().Equals(txtSkola.Text));
-                    selektovaniProfesor.Skola = sk;*/
-                    //Zbog nekonzistentnosti upisa u fajl (kada se ide: izmena adrese -> odustani -> izmena adrese -> odustani -> izmena adrese -> sacuvaj)
-                    /*Adresa ad = Data.Adrese.ToList().Find(so => so.Id.Equals(selektovaniProfesor.Adresa.Id));
-                    ad.Drzava = txtDrzava.Text;
-                    ad.Ulica = txtUlica.Text;
-                    ad.Broj = int.Parse(txtBroj.Text);
-                    ad.Grad = txtGrad.Text;*/
+                    }
+
+                    /*else
+                    {                                            
+                        selektovanaSkola.Jezici = Data.Skole.ToList().Find(s => s.Id.Equals(selektovanaSkola.Id)).Jezici;
+                    }*/
+
                     Data.IzmeniAdresu(selektovaniProfesor.Adresa);
                     Data.IzmeniProfesora(selektovaniProfesor);
 
                 }
 
-               //Data.SacuvajAdresu(selektovaniProfesor.Adresa);
-               //Data.SacuvajProfesora(selektovaniProfesor);
+               
                 this.DialogResult = true;
                 this.Close();
 
@@ -103,6 +142,19 @@ namespace SR30_2021_POP2022.Windows
         
             }
           
+        }
+
+        private void cmbSkola_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(cmbSkola.SelectedItem != null)
+            {
+                Skola selektovanaSkola = (Skola)cmbSkola.SelectedItem;
+
+                viewJezici = CollectionViewSource.GetDefaultView(selektovanaSkola.Jezici);
+                listBoxJezici.ItemsSource = viewJezici;
+                viewJezici.Refresh();
+
+            }
         }
     }
 }

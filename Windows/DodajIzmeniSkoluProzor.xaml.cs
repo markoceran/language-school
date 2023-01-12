@@ -137,7 +137,7 @@ namespace SR30_2021_POP2022.Windows
 
                     if(listBoxJezici.SelectedItems.Count > 0)
                     {
-                        Data.IzmeniJezik(selektovanaSkola, listBoxJezici.SelectedItems);
+                        Data.IzmeniJezikSkole(selektovanaSkola, listBoxJezici.SelectedItems);
 
                     }
 

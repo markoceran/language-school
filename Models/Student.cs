@@ -25,7 +25,7 @@ namespace SR30_2021_POP2022.Models
 
         public override string ToString()
         {
-            return "Ime: " + Ime + " Prezime: " + Prezime + " JMBG: " + Jmbg + " Adresa: " + Adresa + " Email: " + Email;
+            return "Ime: " + Ime + " Prezime: " + Prezime + " JMBG: " + Jmbg + " Email: " + Email + " Adresa: " + Adresa  + " Aktivan: " + Aktivan;
         }
 
         public string StudentZaUpisUFajl()

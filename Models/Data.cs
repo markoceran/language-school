@@ -157,7 +157,7 @@ namespace SR30_2021_POP2022.Models
             }
         }
 
-        public static void IzmeniJezik(Skola skola,IList selektovaniJezici)
+        public static void IzmeniJezikSkole(Skola skola,IList selektovaniJezici)
         {
 
             using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
@@ -198,6 +198,50 @@ namespace SR30_2021_POP2022.Models
                 
             }
         }
+
+        public static void IzmeniJezikProfesora(Profesor profesor, IList selektovaniJezici)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"delete from dbo.JezikProfesor
+                where ProfesorEmail = @ProfesorEmail";
+
+                command.Parameters.Add(new SqlParameter("ProfesorEmail", profesor.Email));
+                command.ExecuteScalar();
+                profesor.Jezici.Clear();
+
+                foreach (string j in selektovaniJezici)
+                {
+                    string users = "select * from JezikProfesor";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(users, conn);
+                    dataAdapter.Fill(ds, "JezikProfesor");
+
+
+                    DataRow newRow = ds.Tables["JezikProfesor"].NewRow();
+                    newRow["ProfesorEmail"] = profesor.Email;
+                    newRow["Jezik"] = j;
+
+                    ds.Tables["JezikProfesor"].Rows.Add(newRow);
+
+                    SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    dataAdapter.Update(ds.Tables["JezikProfesor"]);
+
+                    profesor.Jezici.Add(j);
+                }
+
+
+
+
+            }
+        }
+
+
         //---------------------------------------------------------------------------------------------------------
 
         public static int SacuvajProfesora(Profesor profesor)
@@ -407,10 +451,17 @@ namespace SR30_2021_POP2022.Models
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(selectedUser, conn);
                 dataAdapter.Fill(ds, "Profesor");
 
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"select Jezik from dbo.JezikProfesor
+                where ProfesorEmail = @ProfesorEmail";
+
                 foreach (DataRow dataRow in ds.Tables["Profesor"].Rows)
                 {
+
                     Enum.TryParse(dataRow["Pol"].ToString(), out EPol pol);
                     Enum.TryParse(dataRow["TipKorisnika"].ToString(), out ETipRegKorisnika tip);
+
+                    command.Parameters.Clear();
 
                     Profesor profesor = new Profesor
                     {
@@ -427,6 +478,19 @@ namespace SR30_2021_POP2022.Models
                         
                         
                     };
+
+                    command.Parameters.Add(new SqlParameter("ProfesorEmail", profesor.Email));
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            profesor.Jezici.Add(reader[0].ToString());
+                        }
+                        
+
+                    }
+
                     Profesori.Add(profesor);
                 }
             }
@@ -502,6 +566,8 @@ namespace SR30_2021_POP2022.Models
 
                     };
                     Casovi.Add(cas);
+                    cas.Profesor.Casovi.Add(cas);
+                    cas.Student.RezervisaniCasovi.Add(cas);
                 }
             }
 
@@ -712,8 +778,6 @@ namespace SR30_2021_POP2022.Models
 
             }
         }
-
-
 
 
         //---------------------------------------------------------------------------------------------------------
