@@ -25,6 +25,8 @@ namespace SR30_2021_POP2022.Models
 
         public static ObservableCollection<string> Jezici = new ObservableCollection<string>();
 
+        public static List<string> JeziciSvihSkola = new List<string>();
+
         public static readonly string CONNECTION_STRING = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\FTN PREDAVANJA I MATERIJAL\\Platforme za objektno programiranje\\SR30-2021-POP2022\\Database.mdf\";Integrated Security=True;Connect Timeout=30";
 
 

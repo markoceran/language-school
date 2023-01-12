@@ -17,14 +17,16 @@ namespace SR30_2021_POP2022.Models
         private Adresa adresa;
         private List<string> jezici;
         private bool obrisana;
+        private List<Profesor> listaProfesora;
 
-        public Skola(int id, string naziv, Adresa adresa, List<string> jezici, bool obrisana)
+        public Skola(int id, string naziv, Adresa adresa, List<string> jezici, bool obrisana, List<Profesor> listaProfesora)
         {
             this.id = id;
             this.naziv = naziv;
             this.adresa = adresa;
             this.jezici = jezici;
             this.obrisana = obrisana;
+            this.listaProfesora = listaProfesora;
         }
 
         public Skola()
@@ -34,6 +36,7 @@ namespace SR30_2021_POP2022.Models
             this.adresa = new Adresa();
             this.jezici = new List<string>();
             this.obrisana = false;
+            this.listaProfesora = new List<Profesor>();
         }
 
         public int Id { get => id; set => id = value; }
@@ -42,13 +45,13 @@ namespace SR30_2021_POP2022.Models
         public Adresa Adresa { get => adresa; set => adresa = value; }
         public bool Obrisana { get => obrisana; set => obrisana = value; }
         public bool IsValid { get; set; }
+        public List<Profesor> ListaProfesora { get => listaProfesora; set => listaProfesora = value; }
 
 
-        
 
         public override string ToString()
         {  
-            return " Naziv: " + Naziv + " Adresa: " + Adresa + " Obrisana: " + Obrisana;
+            return " Naziv: " + Naziv + " Adresa: " + Adresa;
         }
 
         /*public string SkolaZaUpisUFajl()
@@ -82,6 +85,7 @@ namespace SR30_2021_POP2022.Models
                 return "";
             }
         }
+
 
         public string this[string columnName]
         {
