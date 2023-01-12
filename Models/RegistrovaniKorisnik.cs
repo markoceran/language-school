@@ -102,7 +102,11 @@ namespace SR30_2021_POP2022.Models
                 else if (Data.Studenti.ToList().Find(so => so.Email.Equals(Email)) != null)
                 {
                     return "Student vec postoji!";
-                }              
+                }
+                else if (Data.Administratori.ToList().Find(so => so.Email.Equals(Email)) != null)
+                {
+                    return "Korisnik vec postoji!";
+                }
 
                 return "";
             }

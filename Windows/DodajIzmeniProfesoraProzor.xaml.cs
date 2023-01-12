@@ -48,11 +48,29 @@ namespace SR30_2021_POP2022.Windows
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            if (Data.Profesori.ToList().Find(so => so.Email.Equals(selektovaniProfesor.Email)) != null && this.Title.Equals("Dodaj"))
+
+            foreach (Student s in Data.Studenti)
             {
-                selektovaniProfesor.IsValid = false;
-                
-            }          
+                if (s.Email == selektovaniProfesor.Email && this.Title.Equals("Dodaj"))
+                {
+                    selektovaniProfesor.IsValid = false;
+                }
+            }
+            foreach (Profesor p in Data.Profesori)
+            {
+                if (p.Email == selektovaniProfesor.Email && this.Title.Equals("Dodaj"))
+                {
+                    selektovaniProfesor.IsValid = false;
+                }
+            }
+            foreach (RegistrovaniKorisnik k in Data.Administratori)
+            {
+                if (k.Email == selektovaniProfesor.Email && this.Title.Equals("Dodaj"))
+                {
+                    selektovaniProfesor.IsValid = false;
+                }
+            }
+                 
 
             if (selektovaniProfesor.IsValid) {
 

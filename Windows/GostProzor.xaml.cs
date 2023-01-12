@@ -43,6 +43,16 @@ namespace SR30_2021_POP2022.Windows
 
         private void Pretraga_Click(object sender, RoutedEventArgs e)
         {
+            if (cmbMesto.SelectedItem == null)
+            {
+                MessageBox.Show("Morate uneti mesto!", "Greska");
+            }
+            else if (listBoxJezici.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Morate oznaciti jezike!", "Greska");
+            }
+            
+
             if (cmbMesto.SelectedItem != null && listBoxJezici.SelectedItems.Count > 0)
             {
                 view = CollectionViewSource.GetDefaultView(Data.Skole);

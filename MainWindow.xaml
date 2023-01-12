@@ -23,6 +23,6 @@
         </Grid.RowDefinitions>
         <Button Grid.Column="2" Content="PRIJAVI SE KAO &#xD;&#xA;POSTOJEĆI KORISNIK" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="83" Width="195" Click="Button_Click_1"/>
         <Button Grid.Column="4" Content="PRIJAVI SE KAO GOST" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="83" Width="194" Click="Button_Click"/>
-        <Button Grid.Column="5" Content="Registruj se" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="98"/>
+        <Button Grid.Column="5" Content="Registruj se" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="98" Click="Button_Click_2"/>
     </Grid>
 </Window>

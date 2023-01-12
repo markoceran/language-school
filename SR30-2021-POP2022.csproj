@@ -99,6 +99,9 @@
     <Compile Include="Windows\ProfesoriProzor.xaml.cs">
       <DependentUpon>ProfesoriProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\RegistracijaProzor.xaml.cs">
+      <DependentUpon>RegistracijaProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SkoleProzor.xaml.cs">
       <DependentUpon>SkoleProzor.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ProfesoriProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RegistracijaProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

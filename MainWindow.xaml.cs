@@ -54,5 +54,18 @@ namespace SR30_2021_POP2022
             adminProzor.Show();
 
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Student student = new Student();
+            RegistracijaProzor registracijaProzor = new RegistracijaProzor(student);
+            registracijaProzor.ShowDialog();
+
+            if ((bool)registracijaProzor.DialogResult)
+            {
+                MessageBox.Show("Uspesno ste izvrsili registraciju", "");
+            }
+            
+        }
     }
 }

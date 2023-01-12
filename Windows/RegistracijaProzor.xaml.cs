@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace SR30_2021_POP2022.Windows
 {
     /// <summary>
-    /// Interaction logic for DodajIzmeniStudentaProzor.xaml
+    /// Interaction logic for RegistracijaProzor.xaml
     /// </summary>
-    public partial class DodajIzmeniStudentaProzor : Window
+    public partial class RegistracijaProzor : Window
     {
         private Student selektovaniStudent;
-
-        public DodajIzmeniStudentaProzor(Student student)
-        {   
+        
+        public RegistracijaProzor(Student student)
+        {
             InitializeComponent();
 
             selektovaniStudent = student;
@@ -31,8 +31,6 @@ namespace SR30_2021_POP2022.Windows
             this.DataContext = student;
 
             cmbPol.ItemsSource = Enum.GetValues(typeof(EPol));
-
- 
 
         }
 
@@ -46,34 +44,33 @@ namespace SR30_2021_POP2022.Windows
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
 
-            foreach (Student s in Data.Studenti)
+            foreach(Student s in Data.Studenti)
             {
-                if (s.Email == selektovaniStudent.Email && this.Title.Equals("Dodaj"))
+                if(s.Email == selektovaniStudent.Email)
                 {
                     selektovaniStudent.IsValid = false;
                 }
             }
             foreach (Profesor p in Data.Profesori)
             {
-                if (p.Email == selektovaniStudent.Email && this.Title.Equals("Dodaj"))
+                if (p.Email == selektovaniStudent.Email)
                 {
                     selektovaniStudent.IsValid = false;
                 }
             }
             foreach (RegistrovaniKorisnik k in Data.Administratori)
             {
-                if (k.Email == selektovaniStudent.Email && this.Title.Equals("Dodaj"))
+                if (k.Email == selektovaniStudent.Email)
                 {
                     selektovaniStudent.IsValid = false;
                 }
             }
 
-            if (selektovaniStudent.IsValid) {
 
 
-                if (this.Title.Equals("Dodaj"))
-                {
-
+            if (selektovaniStudent.IsValid)
+            {
+        
                     if (!Data.Adrese.Count.Equals(0))
                     {
                         selektovaniStudent.Adresa.Id = Data.Adrese.Last().Id + 1;
@@ -92,20 +89,9 @@ namespace SR30_2021_POP2022.Windows
 
                     Data.Studenti.Add(selektovaniStudent);
                     Data.SacuvajStudenta(selektovaniStudent);
-
-                }
-
-               
-                if (this.Title.Equals("Izmeni"))
-                {                 
-                    Data.IzmeniAdresu(selektovaniStudent.Adresa);
-                    Data.IzmeniStudenta(selektovaniStudent);
-
-                }
-
-
-                this.DialogResult = true;
-                this.Close();
+                 
+                    this.DialogResult = true;
+                    this.Close();
             }
             else
             {
@@ -115,6 +101,5 @@ namespace SR30_2021_POP2022.Windows
 
 
         }
-
     }
 }
