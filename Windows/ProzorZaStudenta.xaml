@@ -1,0 +1,33 @@
+﻿<Window x:Class="SR30_2021_POP2022.Windows.ProzorZaStudenta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
+        mc:Ignorable="d"
+        Title="" Height="450" Width="794">
+    <Grid>
+
+        <Button Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="662,10,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="-1.066,0.729"/>
+        <Menu HorizontalAlignment="Center" Height="24" VerticalAlignment="Top" Width="726" Margin="0,59,0,0">
+            <MenuItem Name="miZakaziCas" Header="Zakaži čas" Click="miZakaziCas_Click"/>
+            <MenuItem Name="miOtkaziRezervisaniCas" Header="Otkaži rezervisani čas" Click="miOtkaziRezervisaniCas_Click" />
+        </Menu>
+
+        <DataGrid  Name="dgCasovi" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="315" Margin="0,83,0,0" VerticalAlignment="Top" Width="726">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Profesor" Binding="{Binding Path=Profesor}" />
+                <DataGridTextColumn Header="Datum odrzavanja" Binding="{Binding Path=DatumOdrzavanja}" />
+                <DataGridTextColumn Header="Vreme pocetka" Binding="{Binding Path=VremePocetka}" />
+                <DataGridTextColumn Header="Trajanje" Binding="{Binding Path=Trajanje}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" />
+
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</Window>

@@ -567,6 +567,10 @@ namespace SR30_2021_POP2022.Models
                         
 
                     };
+                    if(cas.Student == null)
+                    {
+                        cas.Student = new Student();
+                    }
                     Casovi.Add(cas);
                     cas.Profesor.Casovi.Add(cas);
                     cas.Student.RezervisaniCasovi.Add(cas);

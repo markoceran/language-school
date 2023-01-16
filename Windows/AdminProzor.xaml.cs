@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SR30_2021_POP2022.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace SR30_2021_POP2022.Windows
     /// </summary>
     public partial class AdminProzor : Window
     {
-        public AdminProzor()
+        public AdminProzor(RegistrovaniKorisnik prijavljeniAdmin)
         {
             InitializeComponent();
         }

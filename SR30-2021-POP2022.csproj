@@ -96,8 +96,17 @@
     <Compile Include="Windows\GostProzor.xaml.cs">
       <DependentUpon>GostProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PrijavaProzor.xaml.cs">
+      <DependentUpon>PrijavaProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ProfesoriProzor.xaml.cs">
       <DependentUpon>ProfesoriProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ProzorZaProfesora.xaml.cs">
+      <DependentUpon>ProzorZaProfesora.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ProzorZaStudenta.xaml.cs">
+      <DependentUpon>ProzorZaStudenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\RegistracijaProzor.xaml.cs">
       <DependentUpon>RegistracijaProzor.xaml</DependentUpon>
@@ -107,6 +116,9 @@
     </Compile>
     <Compile Include="Windows\StudentiProzor.xaml.cs">
       <DependentUpon>StudentiProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ZakaziCasProzor.xaml.cs">
+      <DependentUpon>ZakaziCasProzor.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -149,7 +161,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\PrijavaProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ProfesoriProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProzorZaProfesora.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProzorZaStudenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\StudentiProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ZakaziCasProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

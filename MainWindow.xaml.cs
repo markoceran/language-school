@@ -49,9 +49,9 @@ namespace SR30_2021_POP2022
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AdminProzor adminProzor = new AdminProzor();
+            PrijavaProzor prijavaProzor = new PrijavaProzor();
             this.Hide();
-            adminProzor.Show();
+            prijavaProzor.ShowDialog();
 
         }
 
