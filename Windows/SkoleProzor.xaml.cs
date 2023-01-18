@@ -115,5 +115,24 @@ namespace SR30_2021_POP2022.Windows
 
             }
         }
+
+        private void tbSkola_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Filter = Filter2;
+        }
+
+        private bool Filter2(object obj)
+        {
+            Skola skola = (Skola)obj;
+            if ((skola.Naziv.Contains(tbSkola.Text) || skola.Adresa.Drzava.Contains(tbSkola.Text) ||
+                skola.Adresa.Grad.Contains(tbSkola.Text) || skola.Adresa.Ulica.Contains(tbSkola.Text) ||
+                skola.Jezici.Contains(tbSkola.Text)) && skola.Obrisana == false)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
     }
 }

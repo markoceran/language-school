@@ -12,7 +12,9 @@
             <MenuItem Name="miIzmeniCas" Header="Izmeni čas" Click="miIzmeniCas_Click"/>
             <MenuItem Name="miObrisiCas" Header="Obriši čas" Click="miObrisiCas_Click"/>
         </Menu>
-        <DataGrid  Name="dgCasovi" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780" />
+        <DataGrid  Name="dgCasovi" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,93,0,0" VerticalAlignment="Top" Width="780" />
+        <Label Content="Čas :" HorizontalAlignment="Left" Height="26" Margin="626,47,0,0" VerticalAlignment="Top" Width="37"/>
+        <TextBox Name="tbCas" HorizontalAlignment="Left" Height="26" Margin="668,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" KeyUp="tbCas_KeyUp"/>
 
 
     </Grid>

@@ -8,7 +8,7 @@
         Title="" Height="450" Width="794">
     <Grid>
 
-        <Button Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="662,10,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="-1.066,0.729"/>
+        <Button Name="Profil" Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="662,10,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="-1.066,0.729" Click="Profil_Click"/>
         <Menu HorizontalAlignment="Center" Height="24" VerticalAlignment="Top" Width="726" Margin="0,59,0,0">
             <MenuItem Name="miZakaziCas" Header="Zakaži čas" Click="miZakaziCas_Click"/>
             <MenuItem Name="miOtkaziRezervisaniCas" Header="Otkaži rezervisani čas" Click="miOtkaziRezervisaniCas_Click" />

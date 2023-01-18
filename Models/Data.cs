@@ -32,6 +32,34 @@ namespace SR30_2021_POP2022.Models
 
         //---------------------------------------------------------------------------------------------------------
 
+        public static void IzmeniAdmina(RegistrovaniKorisnik admin)
+        {
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+
+                command.CommandText = @"update dbo.Administrator
+                set Ime = @Ime,Prezime = @Prezime,Jmbg = @Jmbg,Email = @Email,Lozinka = @Lozinka,
+                    AdresaId = @AdresaId, Pol = @Pol,TipKorisnika = @TipKorisnika,Aktivan=@Aktivan
+                    where Email = @Email";
+
+
+                Enum.TryParse("" + admin.Pol + "", out EPol pol);
+
+                command.Parameters.Add(new SqlParameter("Ime", admin.Ime));
+                command.Parameters.Add(new SqlParameter("Prezime", admin.Prezime));
+                command.Parameters.Add(new SqlParameter("Jmbg", admin.Jmbg));
+                command.Parameters.Add(new SqlParameter("Email", admin.Email));
+                command.Parameters.Add(new SqlParameter("Lozinka", admin.Lozinka));
+                command.Parameters.Add(new SqlParameter("AdresaId", admin.Adresa.Id));
+                command.Parameters.Add(new SqlParameter("Pol", pol.ToString()));
+                command.Parameters.Add(new SqlParameter("TipKorisnika", ETipRegKorisnika.ADMINISTRATOR.ToString()));
+                command.Parameters.Add(new SqlParameter("Aktivan", admin.Aktivan));
+                command.ExecuteScalar();
+            }
+        }
 
         public static void IzmeniProfesora(Profesor profesor)
         {

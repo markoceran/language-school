@@ -7,11 +7,9 @@
         mc:Ignorable="d"
         Title="Gost" Height="450" Width="995">
     <Grid>
-        <ComboBox Name="cmbMesto" HorizontalAlignment="Left" Height="34" Margin="16,87,0,0" VerticalAlignment="Top" Width="163"/>
-        <ListBox SelectionMode="Multiple" Name="listBoxJezici" HorizontalAlignment="Left" Height="98" Margin="16,185,0,0" VerticalAlignment="Top" Width="163"/>
-        <Label Content="Mesto :" HorizontalAlignment="Left" Height="33" Margin="16,49,0,0" VerticalAlignment="Top" Width="163"/>
-        <Label Content="Jezici :" HorizontalAlignment="Left" Height="30" Margin="16,150,0,0" VerticalAlignment="Top" Width="163"/>
-        <Button Content="Pretraži školu" HorizontalAlignment="Left" Height="36" Margin="16,319,0,0" VerticalAlignment="Top" Width="163" Click="Pretraga_Click"/>
+        <Label Content="Adresa (država ili grad) :" HorizontalAlignment="Left" Height="33" Margin="16,108,0,0" VerticalAlignment="Top" Width="163"/>
+        <Label Content="Jezici :" HorizontalAlignment="Left" Height="30" Margin="16,201,0,0" VerticalAlignment="Top" Width="163"/>
+        <Button Content="Pretraži školu" HorizontalAlignment="Left" Height="36" Margin="16,317,0,0" VerticalAlignment="Top" Width="163" Click="Pretraga_Click"/>
 
 
         <DataGrid  Name="dgPretraga" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="245,49,0,29" Width="710" >
@@ -43,6 +41,11 @@
 
 
         </DataGrid>
+        <TextBox Name="tbMesto" HorizontalAlignment="Left" Height="31" Margin="16,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+        <TextBox Name="tbJezik" HorizontalAlignment="Left" Height="28" Margin="16,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+        <Label Content="Škola :" HorizontalAlignment="Left" Height="29" Margin="762,10,0,0" VerticalAlignment="Top" Width="62"/>
+        <TextBox Name="tbPretraga" HorizontalAlignment="Left" Height="29" Margin="829,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" KeyUp="tbPretraga_KeyUp"/>
+
 
     </Grid>
 </Window>

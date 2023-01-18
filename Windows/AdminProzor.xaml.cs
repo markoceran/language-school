@@ -20,9 +20,13 @@ namespace SR30_2021_POP2022.Windows
     /// </summary>
     public partial class AdminProzor : Window
     {
+        public RegistrovaniKorisnik a;
+
         public AdminProzor(RegistrovaniKorisnik prijavljeniAdmin)
         {
             InitializeComponent();
+
+            a = prijavljeniAdmin;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -47,6 +51,44 @@ namespace SR30_2021_POP2022.Windows
         {
             CasoviProzor casoviProzor = new CasoviProzor();
             casoviProzor.Show();
+        }
+
+        private void Profil_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrovaniKorisnik adminKopija = new RegistrovaniKorisnik();
+            adminKopija.Ime = a.Ime;
+            adminKopija.Prezime = a.Prezime;
+            adminKopija.Jmbg = a.Jmbg;
+            adminKopija.Pol = a.Pol;
+
+            adminKopija.Adresa.Id = a.Adresa.Id;
+            adminKopija.Adresa.Ulica = a.Adresa.Ulica;
+            adminKopija.Adresa.Broj = a.Adresa.Broj;
+            adminKopija.Adresa.Grad = a.Adresa.Grad;
+            adminKopija.Adresa.Drzava = a.Adresa.Drzava;
+
+            adminKopija.Email = a.Email;
+            adminKopija.Lozinka = a.Lozinka;
+            adminKopija.TipKorisnika = a.TipKorisnika;
+            adminKopija.Aktivan = a.Aktivan;         
+
+
+            IzmeniAdmina izmeniAdmina = new IzmeniAdmina(a)
+            {
+                Title = "Izmeni"
+            };
+            izmeniAdmina.txtEmail.IsReadOnly = true;
+            izmeniAdmina.txtJmbg.IsReadOnly = true;
+            //izmeniAdmina.ShowDialog();
+
+            if ((bool)!izmeniAdmina.ShowDialog())
+            {
+                int index = Data.Administratori.ToList().FindIndex(so => so.Email.Equals(a.Email));
+                Data.Administratori[index] = adminKopija;
+                a = adminKopija;
+
+            }
+            
         }
     }
 }

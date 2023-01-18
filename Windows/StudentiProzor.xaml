@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Studenti" Height="450" Width="800">
+        Title="Studenti" Height="468" Width="1031">
     <Grid>
-        <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="800">
+        <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="1031">
             <MenuItem Name="miDodajStudenta" Header="Dodaj studenta" Click="miDodajStudenta_Click"/>
             <MenuItem Name="miIzmeniStudenta" Header="Izmeni studenta" Click="miIzmeniStudenta_Click"/>
             <MenuItem Name="miObrisiStudenta" Header="Obriši studenta" Click="miObrisiStudenta_Click"/>
         </Menu>
 
 
-        <DataGrid  Name="dgStudenti" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="307" Margin="0,45,0,0" VerticalAlignment="Top" Width="780">
+        <DataGrid  Name="dgStudenti" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="303" Margin="0,99,0,0" VerticalAlignment="Top" Width="969">
 
             <DataGrid.Columns>
 
@@ -40,6 +40,8 @@
 
 
         </DataGrid>
+        <Label Content="Student :" HorizontalAlignment="Left" Height="27" Margin="802,51,0,0" VerticalAlignment="Top" Width="62"/>
+        <TextBox Name="tbStudent" HorizontalAlignment="Left" Height="27" Margin="870,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" KeyUp="tbStudent_KeyUp"/>
 
 
     </Grid>

@@ -50,7 +50,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,6 +97,9 @@
     </Compile>
     <Compile Include="Windows\GostProzor.xaml.cs">
       <DependentUpon>GostProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\IzmeniAdmina.xaml.cs">
+      <DependentUpon>IzmeniAdmina.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\PrijavaProzor.xaml.cs">
       <DependentUpon>PrijavaProzor.xaml</DependentUpon>
@@ -158,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\GostProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\IzmeniAdmina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

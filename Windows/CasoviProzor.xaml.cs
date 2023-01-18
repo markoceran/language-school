@@ -117,5 +117,25 @@ namespace SR30_2021_POP2022.Windows
             }
 
         }
+
+        private void tbCas_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Filter = Filter2;
+        }
+
+        private bool Filter2(object obj)
+        {
+            Cas cas = (Cas)obj;
+            if ((cas.Profesor.Email.Contains(tbCas.Text) || cas.Student.Email.Contains(tbCas.Text) ||
+                cas.VremePocetka.Contains(tbCas.Text) || cas.DatumOdrzavanja.ToString().Contains(tbCas.Text) ||
+                cas.Status.ToString().ToLower().Contains(tbCas.Text) ||
+                cas.Profesor.Ime.Contains(tbCas.Text) ||
+                cas.Student.Ime.Contains(tbCas.Text)) && cas.Obrisan == false)
+            {
+                return true;
+            }
+            return false;
+
+        }
     }
 }

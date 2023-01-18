@@ -124,6 +124,23 @@ namespace SR30_2021_POP2022.Windows
 
         }
 
-       
+        private void tbStudent_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Filter = Filter2;
+            
+        }
+
+        private bool Filter2(object obj)
+        {
+            Student student = (Student)obj;
+            if ((student.Ime.Contains(tbStudent.Text) || student.Prezime.Contains(tbStudent.Text) ||
+                student.Adresa.Grad.Contains(tbStudent.Text) || student.Adresa.Drzava.Contains(tbStudent.Text) ||
+                student.Email.Contains(tbStudent.Text))  && student.Aktivan == true)
+            {
+                return true;
+            }
+            return false;
+
+        }
     }
 }

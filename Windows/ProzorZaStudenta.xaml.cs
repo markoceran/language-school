@@ -75,5 +75,41 @@ namespace SR30_2021_POP2022.Windows
             zakaziCasProzor.ShowDialog();
             view.Refresh();
         }
+
+        private void Profil_Click(object sender, RoutedEventArgs e)
+        {
+            Student studentKopija = new Student();
+            studentKopija.Ime = s.Ime;
+            studentKopija.Prezime = s.Prezime;
+            studentKopija.Jmbg = s.Jmbg;
+            studentKopija.Pol = s.Pol;
+
+            studentKopija.Adresa.Id = s.Adresa.Id;
+            studentKopija.Adresa.Ulica = s.Adresa.Ulica;
+            studentKopija.Adresa.Broj = s.Adresa.Broj;
+            studentKopija.Adresa.Grad = s.Adresa.Grad;
+            studentKopija.Adresa.Drzava = s.Adresa.Drzava;
+
+            studentKopija.Email = s.Email;
+            studentKopija.Lozinka = s.Lozinka;
+            studentKopija.TipKorisnika = s.TipKorisnika;
+            studentKopija.Aktivan = s.Aktivan;
+            studentKopija.RezervisaniCasovi = s.RezervisaniCasovi;
+
+            DodajIzmeniStudentaProzor dodajIzmeniStudentaProzor = new DodajIzmeniStudentaProzor(s)
+            {
+                Title = "Izmeni"
+            };
+            dodajIzmeniStudentaProzor.txtEmail.IsReadOnly = true;
+            dodajIzmeniStudentaProzor.txtJmbg.IsReadOnly = true;
+
+            if ((bool)!dodajIzmeniStudentaProzor.ShowDialog())
+            {
+                int index = Data.Studenti.ToList().FindIndex(so => so.Email.Equals(s.Email));
+                Data.Studenti[index] = studentKopija;
+                s = studentKopija;
+
+            }
+        }
     }
 }

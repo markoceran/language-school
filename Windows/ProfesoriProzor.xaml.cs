@@ -120,5 +120,23 @@ namespace SR30_2021_POP2022.Windows
 
             }
         }
+
+        private void tbProfesor_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Filter = Filter2;
+        }
+
+        private bool Filter2(object obj)
+        {
+            Profesor profesor = (Profesor)obj;
+            if ((profesor.Ime.Contains(tbProfesor.Text) || profesor.Prezime.Contains(tbProfesor.Text) ||
+                profesor.Adresa.Grad.Contains(tbProfesor.Text) || profesor.Adresa.Drzava.Contains(tbProfesor.Text) ||
+                profesor.Email.Contains(tbProfesor.Text)) && profesor.Aktivan == true)
+            {
+                return true;
+            }
+            return false;
+
+        }
     }
 }

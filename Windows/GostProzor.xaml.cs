@@ -25,72 +25,80 @@ namespace SR30_2021_POP2022.Windows
 
         public GostProzor()
         {
-            InitializeComponent();
-
-            foreach (Skola s in Data.Skole)
-            {
-                cmbMesto.Items.Add(s.Adresa.Grad);
-
-                foreach (string i in s.Jezici)
-                {
-                    Data.JeziciSvihSkola.Add(i);
-                }
-            }
-
-            listBoxJezici.ItemsSource = Data.JeziciSvihSkola.Distinct();
+            InitializeComponent();  
 
         }
 
         private void Pretraga_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbMesto.SelectedItem == null)
-            {
-                MessageBox.Show("Morate uneti mesto!", "Greska");
-            }
-            else if (listBoxJezici.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Morate oznaciti jezike!", "Greska");
-            }
-            
-
-            if (cmbMesto.SelectedItem != null && listBoxJezici.SelectedItems.Count > 0)
-            {
-                view = CollectionViewSource.GetDefaultView(Data.Skole);
-                view.Filter = Filter;
-                dgPretraga.ItemsSource = view;
-                dgPretraga.IsReadOnly = true;
-                view.Refresh();
-            }
+            tbPretraga.Text = "";
+           
+            view = CollectionViewSource.GetDefaultView(Data.Skole);
+            view.Filter = Filter;
+            dgPretraga.ItemsSource = view;
+            dgPretraga.IsReadOnly = true;
+            //view.Refresh();
 
         }
 
+
         private bool Filter(object obj)
         {
-            
-            Skola s = obj as Skola;
-
-            foreach (string j in listBoxJezici.SelectedItems)
+            Skola skola = (Skola)obj;
+            if ((skola.Adresa.Drzava.Contains(tbMesto.Text) ||
+                skola.Adresa.Grad.Contains(tbMesto.Text)) && skola.Jezici.Contains(tbJezik.Text) && skola.Obrisana == false)
             {
-                if (s.Adresa.Grad.Equals(cmbMesto.SelectedItem) && s.Jezici.Contains(j))
+                foreach (Profesor p in Data.Profesori)
                 {
-                    foreach (Profesor p in Data.Profesori)
+                    if (p.Skola == skola && p.Skola != null)
                     {
-                        if (p.Skola == s && p.Skola != null)
-                        {                         
-                            s.ListaProfesora.Add(p);
-                           
-                        }
-                            
+                        skola.ListaProfesora.Add(p);
+
                     }
 
-                    s.ListaProfesora = s.ListaProfesora.Distinct().ToList();                  
-                    return true;
                 }
-
+                skola.ListaProfesora = skola.ListaProfesora.Distinct().ToList();
+                return true;
             }
             return false;
 
         }
 
+        private bool Filter2(object obj)
+        {
+            Skola skola = (Skola)obj;
+            if ((skola.Naziv.Contains(tbPretraga.Text) || skola.Adresa.Drzava.Contains(tbPretraga.Text) ||
+                skola.Adresa.Grad.Contains(tbPretraga.Text) || skola.Adresa.Ulica.Contains(tbPretraga.Text) ||
+                skola.Jezici.Contains(tbPretraga.Text) || skola.ListaProfesora.Find(p => p.Ime.Contains(tbPretraga.Text)) != null ||
+                skola.ListaProfesora.Find(p => p.Prezime.Contains(tbPretraga.Text)) != null ||
+                skola.ListaProfesora.Find(p => p.Jezici.Contains(tbPretraga.Text)) != null ||
+                skola.ListaProfesora.Find(p => p.Email.Contains(tbPretraga.Text)) != null ||
+                skola.ListaProfesora.Find(p => p.Adresa.Grad.Contains(tbPretraga.Text)) != null ||
+                skola.ListaProfesora.Find(p => p.Adresa.Drzava.Contains(tbPretraga.Text)) != null)  && skola.Obrisana == false)
+            {
+                foreach (Profesor p in Data.Profesori)
+                {
+                    if (p.Skola == skola && p.Skola != null)
+                    {
+                        skola.ListaProfesora.Add(p);
+
+                    }
+
+                }
+                skola.ListaProfesora = skola.ListaProfesora.Distinct().ToList();
+                return true;
+            }
+            return false;
+
+        }
+
+        private void tbPretraga_KeyUp(object sender, KeyEventArgs e)
+        {
+            view = CollectionViewSource.GetDefaultView(Data.Skole);
+            view.Filter = Filter2;
+            dgPretraga.ItemsSource = view;
+            dgPretraga.IsReadOnly = true;
+
+        }
     }
 }
