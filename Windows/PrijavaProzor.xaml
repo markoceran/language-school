@@ -17,9 +17,10 @@
         <Label Content="Email :" HorizontalAlignment="Left" Height="32" Margin="10,48,0,0" VerticalAlignment="Top" Width="85" Grid.ColumnSpan="2" Foreground="White"/>
         <Label Content="Lozinka :" HorizontalAlignment="Left"  Height="32" Margin="10,102,0,0" VerticalAlignment="Top" Width="85" Grid.ColumnSpan="2" Foreground="White"/>
         <TextBox Name="tbEmail" HorizontalAlignment="Left" Height="32" Margin="99,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Grid.Column="1"/>
-        <TextBox Name="tbLozinka" HorizontalAlignment="Left" Height="32" Margin="99,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Grid.Column="1"/>
+
         <Button Name="btnOtkazi" Content="Otkaži" HorizontalAlignment="Left" Height="29" Margin="10,204,0,0" VerticalAlignment="Top" Width="85" Click="btnOtkazi_Click" Grid.ColumnSpan="2" FontFamily="Times New Roman"/>
         <Button Name="btnPrijava" Content="Prijavi se" HorizontalAlignment="Left" Height="29" Margin="145,204,0,0" VerticalAlignment="Top" Width="85" Click="btnPrijava_Click" Grid.Column="1" FontFamily="Times New Roman"/>
+        <PasswordBox Name="tbLozinka" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="99,102,0,0" VerticalAlignment="Top" Width="131"/>
 
     </Grid>
 </Window>

@@ -40,11 +40,11 @@ namespace SR30_2021_POP2022.Windows
         private void btnPrijava_Click(object sender, RoutedEventArgs e)
         {
             
-            if(tbEmail.Text != "" && tbEmail.Text.Contains("@gmail.com") && tbLozinka.Text != "")
+            if(tbEmail.Text != "" && tbEmail.Text.Contains("@gmail.com") && tbLozinka.Password.ToString() != "")
             {
                 foreach(Profesor profesor in Data.Profesori)
                 {
-                    if(profesor.Email == tbEmail.Text && profesor.Lozinka == tbLozinka.Text && profesor.Aktivan == true)
+                    if(profesor.Email == tbEmail.Text && profesor.Lozinka == tbLozinka.Password.ToString() && profesor.Aktivan == true)
                     {
                         prijavljeniProfesor = profesor;
                         ProzorZaProfesora prozorZaProfesora = new ProzorZaProfesora(prijavljeniProfesor);
@@ -59,7 +59,7 @@ namespace SR30_2021_POP2022.Windows
 
                 foreach (Student student in Data.Studenti)
                 {
-                    if (student.Email == tbEmail.Text && student.Lozinka == tbLozinka.Text && student.Aktivan == true)
+                    if (student.Email == tbEmail.Text && student.Lozinka == tbLozinka.Password.ToString() && student.Aktivan == true)
                     {
                         prijavljeniStudent = student;
                         ProzorZaStudenta prozorZaStudenta = new ProzorZaStudenta(prijavljeniStudent);
@@ -73,7 +73,7 @@ namespace SR30_2021_POP2022.Windows
 
                 foreach (RegistrovaniKorisnik admin in Data.Administratori)
                 {
-                    if (admin.Email == tbEmail.Text && admin.Lozinka == tbLozinka.Text && admin.Aktivan == true)
+                    if (admin.Email == tbEmail.Text && admin.Lozinka == tbLozinka.Password.ToString() && admin.Aktivan == true)
                     {
                         prijavljeniAdmin = admin;
                         AdminProzor adminProzor = new AdminProzor(prijavljeniAdmin);
@@ -97,5 +97,6 @@ namespace SR30_2021_POP2022.Windows
             }
 
         }
+
     }
 }
