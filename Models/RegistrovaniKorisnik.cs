@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SR30_2021_POP2022.Windows;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -95,7 +96,7 @@ namespace SR30_2021_POP2022.Models
                 {
                     return "Lozinka mora biti uneta!";
                 }
-                else if (Data.Profesori.ToList().Find(so => so.Email.Equals(Email)) != null)
+                /*else if (Data.Profesori.ToList().Find(so => so.Email.Equals(Email)) != null)
                 {
                     return "Profesor vec postoji!";
                 }
@@ -106,6 +107,10 @@ namespace SR30_2021_POP2022.Models
                 else if (Data.Administratori.ToList().Find(so => so.Email.Equals(Email)) != null)
                 {
                     return "Korisnik vec postoji!";
+                }*/
+                else if (string.IsNullOrEmpty(Adresa.Drzava) || string.IsNullOrEmpty(Adresa.Grad) || string.IsNullOrEmpty(Adresa.Ulica) || Adresa.Broj == 0 || Adresa.Broj.ToString() == "")
+                {
+                    return "Adresa mora biti uneta!";
                 }
 
                 return "";
@@ -144,7 +149,12 @@ namespace SR30_2021_POP2022.Models
                     IsValid = false;
                     return "Email mora biti unet i mora sadrzati @!";
                 }
-                
+                else if (string.IsNullOrEmpty(Adresa.Drzava) || string.IsNullOrEmpty(Adresa.Grad) || string.IsNullOrEmpty(Adresa.Ulica) || Adresa.Broj == 0 || Adresa.Broj.ToString() == "")
+                {
+                    IsValid = false;
+                    return "Adresa mora biti uneta!";
+                }
+
 
                 return "";
             }

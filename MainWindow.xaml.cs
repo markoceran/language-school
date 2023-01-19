@@ -42,16 +42,15 @@ namespace SR30_2021_POP2022
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GostProzor gostProzor = new GostProzor();
-            this.Hide();
+            GostProzor gostProzor = new GostProzor();       
             gostProzor.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             PrijavaProzor prijavaProzor = new PrijavaProzor();
-            this.Hide();
-            prijavaProzor.ShowDialog();
+            this.Close();
+            prijavaProzor.Show();
 
         }
 
@@ -65,7 +64,7 @@ namespace SR30_2021_POP2022
             {
                 MessageBox.Show("Uspesno ste izvrsili registraciju", "");
             }
-            
+           
         }
     }
 }

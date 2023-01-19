@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="" Height="481" Width="972">
+        Title="" Height="481" Width="972" Icon="/Resources/Emblem-person-blue.svg.png">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/learning-education-word-letters-thumbnail.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
     <Grid>
-        <DatePicker Name="datePickerDatum" HorizontalAlignment="Left" Height="132" Margin="33,127,0,0" VerticalAlignment="Top" Width="256"/>
-        <Label Content="Pretraži čas po datumu :" HorizontalAlignment="Left" Height="35" Margin="33,70,0,0" VerticalAlignment="Top" Width="256"/>
+        <DatePicker Name="datePickerDatum" HorizontalAlignment="Left" Height="74" Margin="33,156,0,0" VerticalAlignment="Top" Width="256" Background="White"/>
+        <Label HorizontalContentAlignment="Center" Content="Pretraži čas po datumu :" HorizontalAlignment="Left" Height="35" Margin="33,99,0,0" VerticalAlignment="Top" Width="256" Background="White"/>
         <Button Content="Pretraži" HorizontalAlignment="Left" Height="33" Margin="33,288,0,0" VerticalAlignment="Top" Width="256" Click="Button_Click_Pretrazi"/>
-        <Button Name="Profil" Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="834,10,0,0" VerticalAlignment="Top" Width="98" Click="Profil_Click"/>
+        <Button Name="Profil" Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="720,10,0,0" VerticalAlignment="Top" Width="98" Click="Profil_Click" Background="White"/>
 
         <Menu HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="608" Margin="324,71,0,0">
             <MenuItem Name="miDodajCas" Header="Dodaj čas" Click="miDodajCas_Click"/>
@@ -32,6 +35,7 @@
 
         </DataGrid>
         <Button Content="Svi časovi" HorizontalAlignment="Left" Height="33" Margin="33,362,0,0" VerticalAlignment="Top" Width="256" Click="Button_Click_SviCasovi"/>
+        <Button Name="Odjava" Content="Odjavi se" HorizontalAlignment="Left" Height="26" Margin="827,10,0,0" VerticalAlignment="Top" Width="98" Click="Odjava_Click" Background="#FFF74B4B"/>
 
 
     </Grid>

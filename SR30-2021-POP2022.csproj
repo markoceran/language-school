@@ -278,6 +278,19 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Resource Include="Resources\45962.png" />
+    <Resource Include="Resources\school-9.png" />
+    <Resource Include="Resources\41-410093_circled-user-icon-user-profile-icon-png.jpg" />
+    <Resource Include="Resources\966-9665493_my-profile-icon-blank-profile-image-circle.jpg" />
+    <Resource Include="Resources\1260578.jpg" />
+    <Resource Include="Resources\6617143.png" />
+    <Resource Include="Resources\learning-education-word-letters-thumbnail.jpg" />
+    <Resource Include="Resources\german-language-courses-hero-2.jpg" />
+    <Resource Include="Resources\istockphoto-1032296056-170667a.jpg" />
+    <Resource Include="Resources\Emblem-person-blue.svg.png" />
+    <Resource Include="Resources\world-international-language-icon-thin-line-vector-globe-quote-frames-different-country-speak-concept-linear-pictogram-174303821.jpg" />
+    <Resource Include="Resources\download.png" />
+    <Resource Include="Resources\login-background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

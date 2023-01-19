@@ -21,6 +21,7 @@ namespace SR30_2021_POP2022.Windows
     public partial class DodajIzmeniStudentaProzor : Window
     {
         private Student selektovaniStudent;
+        bool postoji = false;
 
         public DodajIzmeniStudentaProzor(Student student)
         {   
@@ -51,6 +52,8 @@ namespace SR30_2021_POP2022.Windows
                 if (s.Email == selektovaniStudent.Email && this.Title.Equals("Dodaj"))
                 {
                     selektovaniStudent.IsValid = false;
+                    postoji = true;
+                    MessageBox.Show("Korisnik sa unetom email adresom vec postoji!", "Greska");
                 }
             }
             foreach (Profesor p in Data.Profesori)
@@ -58,6 +61,8 @@ namespace SR30_2021_POP2022.Windows
                 if (p.Email == selektovaniStudent.Email && this.Title.Equals("Dodaj"))
                 {
                     selektovaniStudent.IsValid = false;
+                    postoji = true;
+                    MessageBox.Show("Korisnik sa unetom email adresom vec postoji!", "Greska");
                 }
             }
             foreach (RegistrovaniKorisnik k in Data.Administratori)
@@ -65,7 +70,14 @@ namespace SR30_2021_POP2022.Windows
                 if (k.Email == selektovaniStudent.Email && this.Title.Equals("Dodaj"))
                 {
                     selektovaniStudent.IsValid = false;
+                    postoji = true;
+                    MessageBox.Show("Korisnik sa unetom email adresom vec postoji!", "Greska");
                 }
+            }
+
+            if (selektovaniStudent.Error == "" && postoji != true)
+            {
+                selektovaniStudent.IsValid = true;
             }
 
             if (selektovaniStudent.IsValid) {

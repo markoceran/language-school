@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Zakaži čas" Height="516" Width="810">
+        Title="Zakaži čas" Height="516" Width="810" Icon="/Resources/45962.png" Background="#FFFFE1E0">
     <Grid>
         <Label Content="Profesor :" HorizontalAlignment="Left" Height="34" Margin="282,22,0,0" VerticalAlignment="Top" Width="63"/>
         <TextBox Name="tbProfesor" HorizontalAlignment="Left" Height="34" Margin="367,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" KeyUp="TextBox_KeyUp"/>

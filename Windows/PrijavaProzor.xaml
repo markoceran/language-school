@@ -5,14 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Prijava" Height="284" Width="281">
+        Title="Prijava" Height="284" Width="281" Icon="/Resources/download.png">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/login-background.png" Stretch="UniformToFill"/>
+    </Window.Background>
     <Grid>
-        <Label Content="Email :" HorizontalAlignment="Left" Height="32" Margin="10,48,0,0" VerticalAlignment="Top" Width="85"/>
-        <Label Content="Lozinka :" HorizontalAlignment="Left"  Height="32" Margin="10,102,0,0" VerticalAlignment="Top" Width="85"/>
-        <TextBox Name="tbEmail" HorizontalAlignment="Left" Height="32" Margin="114,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
-        <TextBox Name="tbLozinka" HorizontalAlignment="Left" Height="32" Margin="114,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
-        <Button Name="btnOtkazi" Content="Otkaži" HorizontalAlignment="Left" Height="29" Margin="10,204,0,0" VerticalAlignment="Top" Width="85" Click="btnOtkazi_Click"/>
-        <Button Name="btnPrijava" Content="Prijavi se" HorizontalAlignment="Left" Height="29" Margin="160,204,0,0" VerticalAlignment="Top" Width="85" Click="btnPrijava_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="266*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Email :" HorizontalAlignment="Left" Height="32" Margin="10,48,0,0" VerticalAlignment="Top" Width="85" Grid.ColumnSpan="2" Foreground="White"/>
+        <Label Content="Lozinka :" HorizontalAlignment="Left"  Height="32" Margin="10,102,0,0" VerticalAlignment="Top" Width="85" Grid.ColumnSpan="2" Foreground="White"/>
+        <TextBox Name="tbEmail" HorizontalAlignment="Left" Height="32" Margin="99,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Grid.Column="1"/>
+        <TextBox Name="tbLozinka" HorizontalAlignment="Left" Height="32" Margin="99,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Grid.Column="1"/>
+        <Button Name="btnOtkazi" Content="Otkaži" HorizontalAlignment="Left" Height="29" Margin="10,204,0,0" VerticalAlignment="Top" Width="85" Click="btnOtkazi_Click" Grid.ColumnSpan="2" FontFamily="Times New Roman"/>
+        <Button Name="btnPrijava" Content="Prijavi se" HorizontalAlignment="Left" Height="29" Margin="145,204,0,0" VerticalAlignment="Top" Width="85" Click="btnPrijava_Click" Grid.Column="1" FontFamily="Times New Roman"/>
 
     </Grid>
 </Window>

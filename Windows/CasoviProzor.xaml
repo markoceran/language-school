@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Časovi" Height="450" Width="800">
+        Title="Časovi" Height="450" Width="800" Icon="/Resources/world-international-language-icon-thin-line-vector-globe-quote-frames-different-country-speak-concept-linear-pictogram-174303821.jpg" Background="#FFE0EFFF">
     <Grid>
         <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="800">
             <MenuItem Name="miDodajCas" Header="Dodaj čas" Click="miDodajCas_Click"/>
             <MenuItem Name="miIzmeniCas" Header="Izmeni čas" Click="miIzmeniCas_Click"/>
             <MenuItem Name="miObrisiCas" Header="Obriši čas" Click="miObrisiCas_Click"/>
         </Menu>
-        <DataGrid  Name="dgCasovi" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,93,0,0" VerticalAlignment="Top" Width="780" />
+        <DataGrid  Name="dgCasovi" CanUserAddRows="False" AutoGenerateColumns="True" HorizontalAlignment="Center" Height="307" Margin="0,93,0,0" VerticalAlignment="Top" Width="780" Background="#FFE0EFFF" />
         <Label Content="Čas :" HorizontalAlignment="Left" Height="26" Margin="626,47,0,0" VerticalAlignment="Top" Width="37"/>
-        <TextBox Name="tbCas" HorizontalAlignment="Left" Height="26" Margin="668,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" KeyUp="tbCas_KeyUp"/>
+        <TextBox Name="tbCas" HorizontalAlignment="Left" Height="26" Margin="668,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" KeyUp="tbCas_KeyUp" BorderBrush="#FF010512"/>
 
 
     </Grid>

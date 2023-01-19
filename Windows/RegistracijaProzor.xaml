@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Registracija" Height="776" Width="400">
+        Title="Registracija" Height="776" Width="400" Background="#FFB8D1E8" Icon="/Resources/41-410093_circled-user-icon-user-profile-icon-png.jpg">
     
     <Grid>
         <Grid.ColumnDefinitions>

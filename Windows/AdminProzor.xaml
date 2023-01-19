@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="" Height="414" Width="760">
+        Title="" Height="414" Width="760" Icon="/Resources/Emblem-person-blue.svg.png" Background="#FFD6F9FF">
     <Grid Margin="0,0,0,47">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,10 +21,50 @@
             <RowDefinition Height="49*"/>
             <RowDefinition Height="141*"/>
         </Grid.RowDefinitions>
-        <Button Name="Profil" Grid.Column="5" Content="Profil" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="98" Margin="26,0,0,0" Click="Profil_Click"/>
-        <Button Grid.Column="2" Content="Studenti" HorizontalAlignment="Center" Height="72" Margin="0,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="143" Click="Button_Click"/>
-        <Button Grid.Column="4" Content="Profesori" HorizontalAlignment="Center" Height="72" Margin="0,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Click="Button_Click_2"/>
-        <Button Grid.Column="3" Content="Škole" HorizontalAlignment="Center" Height="72" Margin="0,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="143" Click="Button_Click_1"/>
-        <Button Grid.Column="3" Content="Časovi" HorizontalAlignment="Center" Height="57" Grid.Row="3" VerticalAlignment="Top" Width="143" Margin="0,28,0,0" Click="Button_Click_3"/>
+        <Button Name="Profil" Grid.Column="4" Content="Profil" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="98" Click="Profil_Click" Margin="54,0,0,0" Background="White"/>
+        <Button Grid.Column="2" Content="Studenti" HorizontalAlignment="Center" Height="72" Margin="0,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="143" Click="Button_Click" Foreground="Black">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFE0EAE9" Offset="0.207"/>
+                    <GradientStop Color="#FFB5B2B2" Offset="0.182"/>
+                    <GradientStop Color="#FFBFBFBF"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Grid.Column="4" Content="Profesori" HorizontalAlignment="Center" Height="72" Margin="0,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Click="Button_Click_2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFE0EAE9" Offset="0.207"/>
+                    <GradientStop Color="#FFB5B2B2" Offset="0.182"/>
+                    <GradientStop Color="#FFBFBFBF"/>
+                </LinearGradientBrush>
+            </Button.Background>
+
+        </Button>
+        <Button Grid.Column="3" Content="Škole" HorizontalAlignment="Center" Height="72" Margin="0,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="143" Click="Button_Click_1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFE0EAE9" Offset="0.207"/>
+                    <GradientStop Color="#FFB5B2B2" Offset="0.182"/>
+                    <GradientStop Color="#FFBFBFBF"/>
+                </LinearGradientBrush>
+            </Button.Background>
+
+        </Button>
+        <Button Grid.Column="3" Content="Časovi" HorizontalAlignment="Center" Height="57" Grid.Row="3" VerticalAlignment="Top" Width="143" Margin="0,28,0,0" Click="Button_Click_3">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFE0EAE9" Offset="0.207"/>
+                    <GradientStop Color="#FFB5B2B2" Offset="0.182"/>
+                    <GradientStop Color="#FFBFBFBF"/>
+                </LinearGradientBrush>
+            </Button.Background>
+
+        </Button>
+        <Button Name="Odjava" Grid.Column="5" Content="Odjavi se" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="98" Click="Odjava_Click" Background="#FFF74B4B" Margin="8,0,0,0"/>
     </Grid>
 </Window>

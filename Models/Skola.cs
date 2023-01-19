@@ -79,8 +79,12 @@ namespace SR30_2021_POP2022.Models
                 {
                     return "Naziv mora biti unet!";
                 }
-               
-                           
+                else if (string.IsNullOrEmpty(Adresa.Drzava) || string.IsNullOrEmpty(Adresa.Grad) || string.IsNullOrEmpty(Adresa.Ulica) || Adresa.Broj == 0 || Adresa.Broj.ToString() == "")
+                {
+                    return "Adresa mora biti uneta!";
+                }
+
+
 
                 return "";
             }
@@ -99,7 +103,12 @@ namespace SR30_2021_POP2022.Models
                     IsValid = false;
                     return "Naziv mora biti unet!";
                 }
-                
+                else if (string.IsNullOrEmpty(Adresa.Drzava) || string.IsNullOrEmpty(Adresa.Grad) || string.IsNullOrEmpty(Adresa.Ulica) || Adresa.Broj == 0 || Adresa.Broj.ToString() == "")
+                {
+                    IsValid = false;
+                    return "Adresa mora biti uneta!";
+                }
+
 
 
                 return "";

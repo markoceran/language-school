@@ -42,7 +42,13 @@ namespace SR30_2021_POP2022.Windows
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-        
+            if (selektovaniAdmin.Error == "")
+            {
+                selektovaniAdmin.IsValid = true;
+            }
+
+            if (selektovaniAdmin.IsValid)
+            {
 
                 if (this.Title.Equals("Izmeni"))
                 {
@@ -53,8 +59,13 @@ namespace SR30_2021_POP2022.Windows
 
                 this.DialogResult = true;
                 this.Close();
-  
 
+            }
+            else
+            {
+                MessageBox.Show(selektovaniAdmin.Error, "Greska");
+
+            }
         }
 
     }

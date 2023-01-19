@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="" Height="450" Width="794">
+        Title="" Height="450" Width="794" Icon="/Resources/Emblem-person-blue.svg.png">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/learning-education-word-letters-thumbnail.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
     <Grid>
 
-        <Button Name="Profil" Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="662,10,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="-1.066,0.729" Click="Profil_Click"/>
+        <Button Name="Profil" Content="Profil korisnika" HorizontalAlignment="Left" Height="26" Margin="546,10,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="-1.066,0.729" Click="Profil_Click" Background="White"/>
         <Menu HorizontalAlignment="Center" Height="24" VerticalAlignment="Top" Width="726" Margin="0,59,0,0">
             <MenuItem Name="miZakaziCas" Header="Zakaži čas" Click="miZakaziCas_Click"/>
             <MenuItem Name="miOtkaziRezervisaniCas" Header="Otkaži rezervisani čas" Click="miOtkaziRezervisaniCas_Click" />
@@ -28,6 +31,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
+        <Button Name="Odjava" Content="Odjavi se" HorizontalAlignment="Left" Height="26" Margin="652,10,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="-1.066,0.729" Click="Odjava_Click" Background="#FFF74B4B"/>
 
     </Grid>
 </Window>

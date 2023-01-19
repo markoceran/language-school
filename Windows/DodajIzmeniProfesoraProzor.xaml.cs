@@ -25,6 +25,7 @@ namespace SR30_2021_POP2022.Windows
     {
         private Profesor selektovaniProfesor;
         ICollectionView viewJezici;
+        bool postoji = false;
 
         public DodajIzmeniProfesoraProzor(Profesor profesor)
         {
@@ -36,7 +37,7 @@ namespace SR30_2021_POP2022.Windows
 
             cmbPol.ItemsSource = Enum.GetValues(typeof(EPol));
             cmbSkola.ItemsSource = Data.Skole;
-              
+
 
         }
 
@@ -48,29 +49,50 @@ namespace SR30_2021_POP2022.Windows
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            
+            //Validacija skole
+            if (cmbSkola.SelectedItem == null)
+            {
+                selektovaniProfesor.IsValid = false;
+                MessageBox.Show("Skola mora biti uneta!", "Greska");
+
+            }
 
             foreach (Student s in Data.Studenti)
             {
                 if (s.Email == selektovaniProfesor.Email && this.Title.Equals("Dodaj"))
                 {
                     selektovaniProfesor.IsValid = false;
+                    postoji = true;
+                    MessageBox.Show("Korisnik sa unetom email adresom vec postoji!", "Greska");
                 }
+               
             }
             foreach (Profesor p in Data.Profesori)
             {
                 if (p.Email == selektovaniProfesor.Email && this.Title.Equals("Dodaj"))
                 {
                     selektovaniProfesor.IsValid = false;
+                    postoji = true;
+                    MessageBox.Show("Korisnik sa unetom email adresom vec postoji!", "Greska");
                 }
+                
             }
             foreach (RegistrovaniKorisnik k in Data.Administratori)
             {
                 if (k.Email == selektovaniProfesor.Email && this.Title.Equals("Dodaj"))
                 {
                     selektovaniProfesor.IsValid = false;
+                    postoji = true;
+                    MessageBox.Show("Korisnik sa unetom email adresom vec postoji!", "Greska");
                 }
+                
             }
-                 
+            
+            if(selektovaniProfesor.Error == "" && cmbSkola.SelectedItem != null && postoji != true)
+            {
+                selektovaniProfesor.IsValid = true;
+            }
 
             if (selektovaniProfesor.IsValid) {
 
@@ -133,6 +155,7 @@ namespace SR30_2021_POP2022.Windows
                
                 if (this.Title.Equals("Izmeni"))
                 {
+
                     if (listBoxJezici.SelectedItems.Count > 0)
                     {
                         Data.IzmeniJezikProfesora(selektovaniProfesor, listBoxJezici.SelectedItems);

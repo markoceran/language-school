@@ -111,5 +111,13 @@ namespace SR30_2021_POP2022.Windows
 
             }
         }
+
+
+        private void Odjava_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
     }
 }

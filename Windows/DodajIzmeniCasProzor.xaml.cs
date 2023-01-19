@@ -47,45 +47,67 @@ namespace SR30_2021_POP2022.Windows
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-
-            if (this.Title.Equals("Dodaj"))
+            if(cmbProfesor.SelectedItem == null)
             {
-                if (!Data.Casovi.Count.Equals(0))
-                {
-                    selektovaniCas.Id = Data.Casovi.Last().Id + 1;
-
-                }
-                else
-                {
-                    selektovaniCas.Id = 1;
-                }
-
-                selektovaniCas.Status = EStatusCasa.SLOBODAN;
-                selektovaniCas.Obrisan = false;
-
-                Data.Casovi.Add(selektovaniCas);
-                selektovaniCas.Profesor.Casovi.Add(selektovaniCas);
-                selektovaniCas.Student.RezervisaniCasovi.Add(selektovaniCas);
-                Data.SacuvajCas(selektovaniCas);
-
+                selektovaniCas.IsValid = false;
+                MessageBox.Show("Morate uneti profesora!", "Greska");
             }
 
-            if (this.Title.Equals("Izmeni"))
-            {   
-                //sinhronizacija izmedju prozora cas i profesor, cas i student
-                Data.IzmeniCas(selektovaniCas);
-                Data.Casovi.Clear();
-                Data.Profesori.Clear();
-                Data.UcitajProfesora();
-                Data.Studenti.Clear();
-                Data.UcitajStudenta();
-                Data.UcitajCasove();
+            if(selektovaniCas.Error == "" && cmbProfesor.SelectedItem != null)
+            {
+                selektovaniCas.IsValid = true;
+            }
+
+            if (selektovaniCas.IsValid)
+            {
+                if (this.Title.Equals("Dodaj"))
+                {
+                    if (!Data.Casovi.Count.Equals(0))
+                    {
+                        selektovaniCas.Id = Data.Casovi.Last().Id + 1;
+
+                    }
+                    else
+                    {
+                        selektovaniCas.Id = 1;
+                    }
+
+                    selektovaniCas.Status = EStatusCasa.SLOBODAN;
+                    selektovaniCas.Obrisan = false;
+
+                    Data.Casovi.Add(selektovaniCas);
+                    selektovaniCas.Profesor.Casovi.Add(selektovaniCas);
+                    selektovaniCas.Student.RezervisaniCasovi.Add(selektovaniCas);
+                    Data.SacuvajCas(selektovaniCas);
+
+                }
+
+                if (this.Title.Equals("Izmeni"))
+                {   
+                    //sinhronizacija izmedju prozora cas i profesor, cas i student
+                    Data.IzmeniCas(selektovaniCas);
+                    Data.Casovi.Clear();
+                    Data.Profesori.Clear();
+                    Data.UcitajProfesora();
+                    Data.Studenti.Clear();
+                    Data.UcitajStudenta();
+                    Data.UcitajCasove();
             
 
+                }
+
+                this.DialogResult = true;
+                this.Close();
+
+
+            }
+            else
+            {
+                MessageBox.Show(selektovaniCas.Error, "Greska");
+
             }
 
-            this.DialogResult = true;
-            this.Close();
+
 
         }
 

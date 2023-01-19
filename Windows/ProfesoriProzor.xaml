@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Profesori" Height="476" Width="1061">
+        Title="Profesori" Height="476" Width="1061" Icon="/Resources/world-international-language-icon-thin-line-vector-globe-quote-frames-different-country-speak-concept-linear-pictogram-174303821.jpg" Background="#FFE0EFFF">
     <Grid>
         <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="1060">
             <MenuItem Name="miDodajProfesora" Header="Dodaj profesora" Click="miDodajProfesora_Click"/>
@@ -14,7 +14,7 @@
         </Menu>
 
 
-        <DataGrid  Name="dgProfesori" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="307" Margin="0,100,0,0" VerticalAlignment="Top" Width="1008">
+        <DataGrid  Name="dgProfesori" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="307" Margin="0,100,0,0" VerticalAlignment="Top" Width="1008" Background="#FFE0EFFF">
 
             <DataGrid.Columns>
 
@@ -50,7 +50,7 @@
 
 
         </DataGrid>
-        <TextBox Name="tbProfesor" HorizontalAlignment="Left" Height="29" Margin="911,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" KeyUp="tbProfesor_KeyUp"/>
+        <TextBox Name="tbProfesor" HorizontalAlignment="Left" Height="29" Margin="911,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" KeyUp="tbProfesor_KeyUp" BorderBrush="Black"/>
         <Label Content="Profesor :" HorizontalAlignment="Left" Height="29" Margin="840,55,0,0" VerticalAlignment="Top" Width="66"/>
 
 

@@ -59,7 +59,13 @@ namespace SR30_2021_POP2022.Windows
                 
             }  */
 
-            
+            if (selektovanaSkola.Error == "")
+            {
+                selektovanaSkola.IsValid = true;
+            }
+
+            if (selektovanaSkola.IsValid)
+            {
                 if (this.Title.Equals("Dodaj"))
                 {
 
@@ -153,6 +159,16 @@ namespace SR30_2021_POP2022.Windows
            
                 this.DialogResult = true;
                 this.Close();
+
+
+            }
+            else
+            {
+                MessageBox.Show(selektovanaSkola.Error, "Greska");
+
+            }
+
+
 
         }
             

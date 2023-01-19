@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Studenti" Height="468" Width="1031">
+        Title="Studenti" Height="468" Width="1031" Icon="/Resources/world-international-language-icon-thin-line-vector-globe-quote-frames-different-country-speak-concept-linear-pictogram-174303821.jpg" Background="#FFE0EFFF">
     <Grid>
         <Menu HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="1031">
             <MenuItem Name="miDodajStudenta" Header="Dodaj studenta" Click="miDodajStudenta_Click"/>
@@ -14,7 +14,7 @@
         </Menu>
 
 
-        <DataGrid  Name="dgStudenti" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="303" Margin="0,99,0,0" VerticalAlignment="Top" Width="969">
+        <DataGrid  Name="dgStudenti" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="303" Margin="0,99,0,0" VerticalAlignment="Top" Width="969" Background="#FFE0EFFF">
 
             <DataGrid.Columns>
 
@@ -41,7 +41,7 @@
 
         </DataGrid>
         <Label Content="Student :" HorizontalAlignment="Left" Height="27" Margin="802,51,0,0" VerticalAlignment="Top" Width="62"/>
-        <TextBox Name="tbStudent" HorizontalAlignment="Left" Height="27" Margin="870,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" KeyUp="tbStudent_KeyUp"/>
+        <TextBox Name="tbStudent" HorizontalAlignment="Left" Height="27" Margin="870,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" KeyUp="tbStudent_KeyUp" BorderBrush="Black"/>
 
 
     </Grid>

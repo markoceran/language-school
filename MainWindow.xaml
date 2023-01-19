@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022"
         mc:Ignorable="d"
-        Title="Prijava korisnika" Height="356" Width="676">
+        Title="Prijava korisnika" Height="356" Width="676" Icon="/Resources/world-international-language-icon-thin-line-vector-globe-quote-frames-different-country-speak-concept-linear-pictogram-174303821.jpg">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/german-language-courses-hero-2.jpg" Stretch="UniformToFill" TileMode="None"/>
+    </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -23,6 +26,6 @@
         </Grid.RowDefinitions>
         <Button Grid.Column="2" Content="PRIJAVI SE KAO &#xD;&#xA;POSTOJEĆI KORISNIK" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="83" Width="195" Click="Button_Click_1"/>
         <Button Grid.Column="4" Content="PRIJAVI SE KAO GOST" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="83" Width="194" Click="Button_Click"/>
-        <Button Grid.Column="5" Content="Registruj se" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="98" Click="Button_Click_2"/>
+        <Button Grid.Column="5" Content="Registruj se" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="98" Click="Button_Click_2" Background="White"/>
     </Grid>
 </Window>

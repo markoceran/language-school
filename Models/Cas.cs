@@ -55,6 +55,7 @@ namespace SR30_2021_POP2022.Models
         public Profesor Profesor { get => profesor; set => profesor = value; }
         public Student Student { get => student; set => student = value; }
         public bool Obrisan { get => obrisan; set => obrisan = value; }
+        public bool IsValid { get; set; }
 
         public override string ToString()
         {
@@ -64,6 +65,49 @@ namespace SR30_2021_POP2022.Models
         public string CasZaUpisUFajl()
         {
             return Id + ";" + Profesor.Email + ";" + DatumOdrzavanja+ ";" + VremePocetka  + ";" + Trajanje+ ";" + Status + ";" + Student.Email + ";" + Obrisan;
+        }
+
+
+        public string Error
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(VremePocetka))
+                {
+                    return "Vreme pocetka mora biti uneto!";
+                }
+                else if (Trajanje == 0 || Trajanje.ToString() == "")
+                {
+                    return "Trajanje mora biti uneto!";
+                }
+                
+
+                return "";
+            }
+        }
+
+        public string this[string columnName]
+        {
+
+            get
+            {
+                IsValid = true;
+
+                if (string.IsNullOrEmpty(VremePocetka))
+                {
+                    IsValid = false;
+                    return "Vreme pocetka mora biti uneto!";
+                }
+                else if (Trajanje == 0 || Trajanje.ToString() == "")
+                {
+                    IsValid = false;
+                    return "Trajanje mora biti uneto!";
+                }
+                
+
+
+                return "";
+            }
         }
     }
 }

@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR30_2021_POP2022.Windows"
         mc:Ignorable="d"
-        Title="Gost" Height="450" Width="995">
+        Title="Gost" Height="450" Width="995" Icon="/Resources/world-international-language-icon-thin-line-vector-globe-quote-frames-different-country-speak-concept-linear-pictogram-174303821.jpg">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/1260578.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
     <Grid>
-        <Label Content="Adresa (država ili grad) :" HorizontalAlignment="Left" Height="33" Margin="16,108,0,0" VerticalAlignment="Top" Width="163"/>
-        <Label Content="Jezici :" HorizontalAlignment="Left" Height="30" Margin="16,201,0,0" VerticalAlignment="Top" Width="163"/>
-        <Button Content="Pretraži školu" HorizontalAlignment="Left" Height="36" Margin="16,317,0,0" VerticalAlignment="Top" Width="163" Click="Pretraga_Click"/>
+        <Label HorizontalContentAlignment="Center" Content="Adresa (država ili grad) :" HorizontalAlignment="Left" Height="33" Margin="16,108,0,0" VerticalAlignment="Top" Width="163" Background="White"/>
+        <Label HorizontalContentAlignment="Center" Content="Jezici :" HorizontalAlignment="Left" Height="30" Margin="16,201,0,0" VerticalAlignment="Top" Width="163" Background="White"/>
+        <Button Content="Pretraži školu" HorizontalAlignment="Left" Height="36" Margin="16,317,0,0" VerticalAlignment="Top" Width="163" Click="Pretraga_Click" BorderBrush="Black"/>
 
 
         <DataGrid  Name="dgPretraga" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="245,49,0,29" Width="710" >
@@ -41,10 +44,10 @@
 
 
         </DataGrid>
-        <TextBox Name="tbMesto" HorizontalAlignment="Left" Height="31" Margin="16,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
-        <TextBox Name="tbJezik" HorizontalAlignment="Left" Height="28" Margin="16,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
-        <Label Content="Škola :" HorizontalAlignment="Left" Height="29" Margin="762,10,0,0" VerticalAlignment="Top" Width="62"/>
-        <TextBox Name="tbPretraga" HorizontalAlignment="Left" Height="29" Margin="829,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" KeyUp="tbPretraga_KeyUp"/>
+        <TextBox Name="tbMesto" HorizontalAlignment="Left" Height="31" Margin="16,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163" BorderBrush="Black"/>
+        <TextBox Name="tbJezik" HorizontalAlignment="Left" Height="28" Margin="16,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163" BorderBrush="Black"/>
+        <Label Content="Škola :" HorizontalAlignment="Left" Height="29" Margin="762,10,0,0" VerticalAlignment="Top" Width="62" Background ="White"/>
+        <TextBox Name="tbPretraga" HorizontalAlignment="Left" Height="29" Margin="829,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" KeyUp="tbPretraga_KeyUp" BorderBrush="Black"/>
 
 
     </Grid>

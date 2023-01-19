@@ -48,7 +48,7 @@ namespace SR30_2021_POP2022.Windows
                     {
                         prijavljeniProfesor = profesor;
                         ProzorZaProfesora prozorZaProfesora = new ProzorZaProfesora(prijavljeniProfesor);
-                        this.Hide();
+                        this.Close();
                         prozorZaProfesora.Title = prijavljeniProfesor.Email;
                         prozorZaProfesora.Show();
                         
@@ -63,7 +63,7 @@ namespace SR30_2021_POP2022.Windows
                     {
                         prijavljeniStudent = student;
                         ProzorZaStudenta prozorZaStudenta = new ProzorZaStudenta(prijavljeniStudent);
-                        this.Hide();
+                        this.Close();
                         prozorZaStudenta.Title = prijavljeniStudent.Email;
                         prozorZaStudenta.Show();
 
@@ -77,7 +77,7 @@ namespace SR30_2021_POP2022.Windows
                     {
                         prijavljeniAdmin = admin;
                         AdminProzor adminProzor = new AdminProzor(prijavljeniAdmin);
-                        this.Hide();
+                        this.Close();
                         adminProzor.Title = prijavljeniAdmin.Email;
                         adminProzor.Show();
 
