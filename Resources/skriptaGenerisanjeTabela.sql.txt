@@ -1,0 +1,108 @@
+CREATE TABLE [Adresa]
+(
+[Id] INT NOT NULL PRIMARY KEY,
+[Drzava] VARCHAR(20) NOT NULL,
+[Grad] VARCHAR(20) NOT NULL,
+[Ulica] VARCHAR(20) NOT NULL,
+[Broj] INT NOT NULL
+
+)
+
+CREATE TABLE [Skola]
+(
+[Id] INT NOT NULL PRIMARY KEY,
+[Naziv] VARCHAR(20) NOT NULL,
+[AdresaId] INT NOT NULL,
+[Obrisana] BIT NOT NULL,
+
+FOREIGN KEY (AdresaId) REFERENCES Adresa (Id)
+)
+
+CREATE TABLE [Profesor]
+(
+[Ime] VARCHAR(20) NOT NULL,
+[Prezime] VARCHAR(20) NOT NULL,
+[Jmbg] VARCHAR(20) NOT NULL,
+[Email] VARCHAR(20) NOT NULL PRIMARY KEY,
+[Lozinka] VARCHAR(20) NOT NULL,
+[AdresaId] INT NOT NULL,
+[SkolaId] INT NOT NULL,
+[Pol] VARCHAR(20) NOT NULL,
+[TipKorisnika] VARCHAR(20) NOT NULL,
+[Aktivan] BIT NOT NULL,
+
+FOREIGN KEY (AdresaId) REFERENCES Adresa (Id),
+FOREIGN KEY (SkolaId) REFERENCES Skola (Id)
+)
+
+CREATE TABLE [Student]
+(
+[Ime] VARCHAR(20) NOT NULL,
+[Prezime] VARCHAR(20) NOT NULL,
+[Jmbg] VARCHAR(20) NOT NULL,
+[Email] VARCHAR(20) NOT NULL PRIMARY KEY,
+[Lozinka] VARCHAR(20) NOT NULL,
+[AdresaId] INT NOT NULL,
+[Pol] VARCHAR(20) NOT NULL,
+[TipKorisnika] VARCHAR(20) NOT NULL,
+[Aktivan] BIT NOT NULL,
+
+FOREIGN KEY (AdresaId) REFERENCES Adresa (Id)
+)
+
+CREATE TABLE [Administrator]
+(
+[Ime] VARCHAR(20) NOT NULL,
+[Prezime] VARCHAR(20) NOT NULL,
+[Jmbg] VARCHAR(20) NOT NULL,
+[Email] VARCHAR(20) NOT NULL PRIMARY KEY,
+[Lozinka] VARCHAR(20) NOT NULL,
+[AdresaId] INT NOT NULL,
+[Pol] VARCHAR(20) NOT NULL,
+[TipKorisnika] VARCHAR(20) NOT NULL,
+[Aktivan] BIT NOT NULL,
+
+FOREIGN KEY (AdresaId) REFERENCES Adresa (Id)
+)
+
+
+
+CREATE TABLE [Cas]
+(
+[Id] INT NOT NULL PRIMARY KEY,
+[ProfesorEmail] VARCHAR(20) NOT NULL,
+[StudentEmail] VARCHAR(20) NOT NULL,
+[DatumOdrzavanja] DATE NOT NULL,
+[VremePocetka] VARCHAR(20) NOT NULL,
+[Trajanje] INT NOT NULL,
+[Status] VARCHAR(20) NOT NULL,
+[Obrisan] BIT NOT NULL,
+
+FOREIGN KEY (ProfesorEmail) REFERENCES Profesor (Email)
+)
+
+CREATE TABLE [Jezik]
+(
+[Naziv] VARCHAR(20) NOT NULL PRIMARY KEY
+)
+
+CREATE TABLE [JezikSkola]
+(
+[SkolaId] INT NOT NULL,
+[Jezik] VARCHAR(20) NOT NULL,
+
+FOREIGN KEY (SkolaId) REFERENCES Skola (Id),
+FOREIGN KEY (Jezik) REFERENCES Jezik (Naziv)
+
+)
+
+CREATE TABLE [JezikProfesor]
+(
+[ProfesorEmail] VARCHAR(20) NOT NULL,
+[Jezik] VARCHAR(20) NOT NULL,
+
+FOREIGN KEY (ProfesorEmail) REFERENCES Profesor (Email),
+FOREIGN KEY (Jezik) REFERENCES Jezik (Naziv)
+)
+
+

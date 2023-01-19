@@ -37,7 +37,7 @@ namespace SR30_2021_POP2022.Windows
             view.Filter = Filter;
             dgPretraga.ItemsSource = view;
             dgPretraga.IsReadOnly = true;
-            //view.Refresh();
+            view.Refresh();
 
         }
 

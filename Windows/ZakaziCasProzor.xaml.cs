@@ -45,7 +45,11 @@ namespace SR30_2021_POP2022.Windows
             Cas cas = (Cas)obj;
             if ((cas.Profesor.Ime.Contains(tbProfesor.Text) || cas.Profesor.Prezime.Contains(tbProfesor.Text) ||
                 cas.Profesor.Adresa.Grad.Contains(tbProfesor.Text) || cas.Profesor.Adresa.Drzava.Contains(tbProfesor.Text) ||
-                cas.Profesor.Email.Contains(tbProfesor.Text) || cas.Profesor.Jezici.Contains(tbProfesor.Text)) && cas.Status == EStatusCasa.SLOBODAN && cas.Obrisan == false)
+                cas.Profesor.Email.Contains(tbProfesor.Text) || cas.Profesor.Jezici.Contains(tbProfesor.Text) ||
+                cas.Profesor.Skola.Naziv.Contains(tbProfesor.Text) ||
+                cas.Profesor.Skola.Adresa.Drzava.Contains(tbProfesor.Text) ||
+                cas.Profesor.Skola.Adresa.Grad.Contains(tbProfesor.Text) ||
+                cas.Profesor.Skola.Jezici.Contains(tbProfesor.Text)) && cas.Status == EStatusCasa.SLOBODAN && cas.Obrisan == false)
             {
                 return true;
             }
