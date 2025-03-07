@@ -13,9 +13,25 @@ To run this project locally, follow these steps:
    git clone repository-url.
 
 2. Set up the database:
-Create a new database and configure the connection string in the application’s settings file.
+Create a new database and configure the connection string in the Models/Data.cs file.
+Execute Resources/skriptaGenerisanjeTabela.sql for creating tables.
 
 3. Run the application:
-Open the project in Visual Studio.
-Configure any necessary settings in app.config or appsettings.json.
-Build and run the application by pressing F5 or selecting "Start Debugging".
+Build and run the application.
+
+![login](assets/screenshots/prijava.png)
+![register](assets/screenshots/registracija-studenta.png)
+![login2](assets/screenshots/prijava2.png)
+![main-page-guest](assets/screenshots/pocetna-stranica-gost.png)
+![main-page-teacher](assets/screenshots/pocetna-stranica-profesor.png)
+![add-class](assets/screenshots/dodavanje-casa.png)
+![user-profile](assets/screenshots/profil-korisnika.png)
+![main-page-student](assets/screenshots/pocetna-stranica-student.png)
+![scheduling-a-class](assets/screenshots/zakazivanje-casa.png)
+![main-page-admin](assets/screenshots/pocetna-stranica-admin.png)
+![schools](assets/screenshots/skole.png)
+![add-school](assets/screenshots/dodavanje-skole.png)
+![teachers](assets/screenshots/profesori.png)
+![add-teacher](assets/screenshots/dodavanje-profesora.png)
+![students](assets/screenshots/studenti.png)
+![classes](assets/screenshots/casovi.png)
