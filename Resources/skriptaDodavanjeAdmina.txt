@@ -1,0 +1,1 @@
+﻿insert into Administrator (Ime,Prezime,Jmbg,Email,Lozinka,AdresaId,Pol,TipKorisnika,Aktivan) values ('Jovan', 'Jovanic', '1526986532658', 'jovanjo@gmail.com','123456', 1, 'MUSKI','ADMINISTRATOR',1)

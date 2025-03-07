@@ -22,7 +22,7 @@
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Path=Prezime}" />
                 <DataGridTextColumn Header="Jmbg" Binding="{Binding Path=Jmbg}" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" />
-                <DataGridTextColumn Header="Lozinka" Binding="{Binding Path=Lozinka}" />
+                <DataGridTextColumn Header="Lozinka" Binding="{Binding Path=Lozinka}" Visibility="Collapsed" />
                 <DataGridTextColumn Header="Pol" Binding="{Binding Path=Pol}" />
                 <DataGridTextColumn Header="Adresa" Binding="{Binding Path=Adresa}" />
                 <DataGridTextColumn Header="Tip korisnika" Binding="{Binding Path=TipKorisnika}" />

@@ -1,2 +1,0 @@
-Nikola;Nikolic;65464654;MUSKI;2;nikola@gmail.com;12345;ADMINISTRATOR;True
-Milan;Markovic;56564;MUSKI;2;milan@gmail.com;6789;ADMINISTRATOR;True

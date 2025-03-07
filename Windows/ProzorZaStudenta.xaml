@@ -22,7 +22,7 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="Profesor" Binding="{Binding Path=Profesor}" />
-                <DataGridTextColumn Header="Datum odrzavanja" Binding="{Binding Path=DatumOdrzavanja}" />
+                <DataGridTextColumn Header="Datum odrzavanja" Binding="{Binding Path=DatumOdrzavanja, StringFormat='dd.MM.yyyy'}" />
                 <DataGridTextColumn Header="Vreme pocetka" Binding="{Binding Path=VremePocetka}" />
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Path=Trajanje}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" />

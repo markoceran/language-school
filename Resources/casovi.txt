@@ -1,2 +1,0 @@
-1;filip@gmail.com;27.12.2022. 00:00:00;13;60;SLOBODAN;ivan@gmail.com;False
-2;test2@gmail.com;30.12.2022. 00:00:00;16;50;SLOBODAN;ivan@gmail.com;False
